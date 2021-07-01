@@ -22,9 +22,13 @@ a Second-Hand Trading System for project practice
 
 ### github账号列表
 
-| 姓名   | github地址         |
-| ------ | ------------------ |
-| 王宇翔 | github.com/Fliskey |
+| 姓名   | github地址                                         |
+| ------ | -------------------------------------------------- |
+| 王宇翔 | [Fliskey](http://github.com/Fliskey)               |
+| 何赟   | [YueMing-github](http://github.com/YueMIng-github) |
+| 林纪元 |                                                    |
+| 刘云骢 |                                                    |
+| 王子夏 |                                                    |
 
 
 
