@@ -38,17 +38,13 @@ a Second-Hand Trading System for project practice
 
 数据库建表，服务器平台搭建，网页界面设计
 
-用户登录，包括管理员、用户 
-
-修改个人信息，电话，邮箱，密码等
+用户登录，包括管理员、用户；修改个人信息，电话，邮箱，密码等
 
 管理员可对用户进行管理：增加、修改、删除用户
 
 用户发布待转让物品信息
 
-1.物品名称 2.物品类型（书籍、生活用品、票券）
-
-3.物品数量  4 .物品单价  
+1.物品名称 2.物品类型（书籍、生活用品、票券）3.物品数量  4 .物品单价  
 
 用户浏览各类待转让物品信息，下单预订
 
@@ -88,10 +84,11 @@ MyBatis
 
 ### 第一批实现的表
 
-1. um_user
-2. 
+um_user
 
-### 数据库用户与权限
+### 数据库名web_mall_building
+
+#### 数据库用户与权限
 
 - admin
   - 全局增删改查权限
@@ -99,7 +96,14 @@ MyBatis
   - um_user表改查权限
   - gm_goods表增删改查user_id相同的记录
 
-### um:用户管理
+#### admin:管理员表
+
+- admin
+  - id
+  - tel_number
+  - password
+
+#### um:用户管理
 
 - um_user(第一批实现)
   - id
@@ -116,7 +120,7 @@ MyBatis
   - recip_tel
 - um_user_edit_record(未安排批次)
 
-### gm:二手商品管理
+#### gm:二手商品管理
 
 - gm_goods(第一批实现)
   - id
@@ -128,7 +132,7 @@ MyBatis
   - （creation_time）讨论有无必要
 - gm_goods_edit_record(未安排批次)
 
-### om:订单管理
+#### om:订单管理
 
 - om_order
   - id
