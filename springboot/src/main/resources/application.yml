@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://47.116.130.99:21551/web_mall_building
+    username: root
+    password: ZhuXue@0702
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/southwind/mapper/xml/*.xml
+server:
+  port: 8181
