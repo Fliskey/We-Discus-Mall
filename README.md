@@ -26,7 +26,7 @@ a Second-Hand Trading System for project practice
 | ------ | -------------------------------------------------- |
 | 王宇翔 | [Fliskey](http://github.com/Fliskey)               |
 | 何赟   | [YueMing-github](http://github.com/YueMIng-github) |
-| 林纪元 |                                                    |
+| 林纪元 | [纪元](https://github.com/JaneThis)                |
 | 刘云骢 |                                                    |
 | 王子夏 |                                                    |
 
