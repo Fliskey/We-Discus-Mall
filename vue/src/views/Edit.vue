@@ -62,6 +62,7 @@ export default {
         if (valid) {
           let _this = this
           axios.put('http://localhost:8181/umUser/update/',this.umUser).then(function (response) {
+            console.log(this.umUser.password)
             if(response.data){
               _this.$alert(_this.umUser.name+'修改成功！', '修改数据', {
                 confirmButtonText: '确定',
@@ -82,3 +83,68 @@ export default {
 <style scoped>
 
 </style>
+
+
+<script>
+  userName:
+  userAge:
+  userAddress:确定
+  import axios from "axios";
+  export default {
+    data() {
+      return {
+      userName: "",
+      userAge: "",
+      userAddress: ""
+      };
+    },
+
+    methods: {
+      getData() {
+        axios.get("http://localhost:8080/user/selectUserById", {
+          params: {id: this.$route.query.id}
+        }).then(response => {
+          this.userName = response.data.userName;
+          this.userAge = response.data.userAge;
+          this.userAddress = response.data.userAddress;
+          console.log(response);
+        })
+
+.catch(error => {
+console.log(errror);
+
+});
+
+},
+
+editData(){
+axios({
+method:'post',
+
+url: 'http://localhost:8080/user/updateUser',
+
+data: "&id=" + this.$route.query.id + "&userName=" + this.userName + "&userAge=" + this.userAge + "&userAddress=" + this.userAddress
+
+})
+
+.then(response => {
+console.log(response)
+
+this.$router.push({path : "/"})
+
+}).catch(error => {
+console.log(error)
+
+})
+
+}
+
+},
+
+created() {
+this.getData();
+
+}
+
+};
+</script>

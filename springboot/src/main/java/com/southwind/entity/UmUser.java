@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author admin
@@ -28,5 +28,8 @@ import lombok.EqualsAndHashCode;
 
     private String email;
 
-
+    @Override
+  public String toString(){
+      return id+name+password+telNumber+email;
+    }
 }
