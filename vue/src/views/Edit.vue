@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       UmUser: {
+        id: this.$route.query.id,
         name: '',
         password: '',
         telNumber: '',

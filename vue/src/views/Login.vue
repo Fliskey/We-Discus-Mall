@@ -48,7 +48,7 @@ export default {
               confirmButtonText: '确定',
               callback: action => {
                 //跳转到/table
-                _this.$router.push('/table')
+                _this.$router.push('/main')
               }
             })
         })
@@ -68,7 +68,7 @@ export default {
 <style>
 
 .demo-ruleForm{
-  background:url("../../public/imag/bg.jpg");
+  background:url("../../../../../../Downloads/ui(2)/public/imag/bg.jpg");
   width: 100%;
   height: 100%;
   position:fixed;
@@ -88,7 +88,7 @@ export default {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   box-shadow: 0 0 25px #909399;
-  background-image: url("../../public/imag/bg1.jpg");
+  background-image: url("../../../../../../Downloads/ui(2)/public/imag/bg1.jpg");
   width: 200%;
   height: 50%;
   position: center;
