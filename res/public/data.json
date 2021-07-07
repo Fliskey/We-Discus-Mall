@@ -1,0 +1,62 @@
+[
+  {
+    "time": "2021-06-30 08:56:32",
+    "name": "张三",
+    "no": "202100001",
+    "phone": "13211111111",
+    "status": 1,
+    "location": "思明校区",
+    "email": "test@163.com",
+    "statusName": "未审核"
+  },
+  {
+    "time": "2021-02-21 08:56:32",
+    "name": "李四",
+    "no": "202100002",
+    "phone": "13278964512",
+    "status": 2,
+    "location": "翔安校区",
+    "email": "test@163.com",
+    "statusName": "审核通过"
+  },
+  {
+    "time": "2021-02-25 08:56:32",
+    "name": "王阳",
+    "no": "202100003",
+    "phone": "18934672316",
+    "status": 1,
+    "location": "翔安校区",
+    "email": "test@163.com",
+    "statusName": "未审核"
+  },
+  {
+    "time": "2021-05-30 08:56:32",
+    "name": "李晓明",
+    "no": "202100132",
+    "phone": "15089674312",
+    "status": 1,
+    "location": "思明校区",
+    "email": "test@163.com",
+    "statusName": "未审核"
+  },
+  {
+    "time": "2021-06-05 08:56:32",
+    "name": "王强",
+    "no": "202100761",
+    "phone": "13276584940",
+    "status": 3,
+    "location": "翔安校区",
+    "email": "test@163.com",
+    "statusName": "审核退回"
+  },
+  {
+    "time": "2021-06-07 08:56:32",
+    "name": "刘颖",
+    "no": "202101354",
+    "phone": "18723461785",
+    "status": 1,
+    "location": "思明校区",
+    "email": "test@163.com",
+    "statusName": "未审核"
+  }
+]

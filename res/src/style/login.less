@@ -1,0 +1,148 @@
+.login-box{
+  height:100%;
+  width:100%;
+  background-image:url('/img/login/bg.svg');
+  background-size:cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.left {
+  border-top-left-radius:10px;
+  border-bottom-left-radius:10px;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  transform:translateX(0);
+  background:rgba(255,255,255,.25);
+  transition:all .3s;
+  padding-bottom:0 !important;
+}
+.right{
+  border-top-right-radius:10px;
+  border-bottom-right-radius:10px;
+  transition:all .3s;
+  transform:translateX(0);
+  background-color:#e9e9e9;
+}
+//注册激活
+.factive{
+  .left{
+    transform:translateX(100%);
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    border-top-right-radius:10px;
+    border-bottom-right-radius:10px;
+  }
+  .right{
+    transform:translateX(-100%);
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+  }
+}
+.form-box{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius:5px;
+  box-shadow: 0 15px 1.7rem rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+  .factive{
+    
+  }
+}
+.login-form{
+  h2{
+    font-size:24px;
+    text-align:center;
+    letter-spacing:5px;
+    margin:50px 0 20px;
+    font-weight:300;
+  }
+  width:379px;
+  padding:0 30px 50px;
+  .ant-input{
+    height:45px;
+    border:none !important;
+    font-size:16px;
+  }
+  .ant-btn-block{
+    height:45px;
+    border-radius:22.5px;
+    font-size:13px;
+    font-weight:800;
+    margin:0 auto;
+    width:160px;
+    background-image: linear-gradient( 90deg, @primary-color 0%,  @primary-light 74%);
+  }
+  .check{
+    color:#585858;
+    text-align:center;
+    margin-bottom:28px;
+  }
+}
+.register{
+  h2{
+    margin-top:20px;
+  }
+  padding-bottom:0;
+}
+
+
+.bg-box{
+  position:fixed;
+  height:100%;
+  width:100%;
+  overflow:hidden;
+  z-index:-1;
+}
+.bg{
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  opacity:0;
+  z-index:-3;
+  position:absolute;
+  transition:opacity 1s;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+.bg1{
+  background-image:url('/img/login/bg1.jpg');
+}
+.bg2{
+  background-image:url('/img/login/bg2.png');
+}
+.bg3{
+  background-image:url('/img/login/bk.jpg');
+}
+.active {
+  opacity:1;
+  animation: show 15s ease-in-out;
+  z-index:-2;
+}
+
+@keyframes show {
+    0% {
+        opacity:1;
+    }
+
+    100% {
+        opacity:0;
+    }
+}
+
+@keyframes show {
+    0% {
+        transform:scale(1.5);
+    }
+
+    100% {
+        transform:scale(1);
+    }
+}
