@@ -28,7 +28,7 @@ a Second-Hand Trading System for project practice
 | 何赟   | [YueMing-github](http://github.com/YueMIng-github) |
 | 林纪元 | [纪元](https://github.com/JaneThis)                |
 | 刘云骢 |                                                    |
-| 王子夏 |                                                    |
+| 王子夏 | [小鱼](https://github.com/kytzly)                  |
 
 
 
