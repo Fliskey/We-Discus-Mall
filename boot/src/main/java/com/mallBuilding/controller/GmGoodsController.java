@@ -1,6 +1,7 @@
 package com.mallBuilding.controller;
 
 
+import com.mallBuilding.dao.GoodsDao;
 import com.mallBuilding.entity.GmGoods;
 import com.mallBuilding.entity.UmUser;
 import com.mallBuilding.service.GmGoodsService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,6 +33,9 @@ public class GmGoodsController {
     @Autowired
     private GmGoodsService gmGoodsService;
 
+    @Autowired
+    private GoodsDao goodsDao;
+
     @GetMapping("/list")
     public List<GmGoods> list()
     {
@@ -39,6 +44,14 @@ public class GmGoodsController {
 
     @GetMapping("/find/{id}")
     public GmGoods find(@PathVariable("id") Integer id) {return this.gmGoodsService.getById(id);}
+
+    @GetMapping("/queryGoodsByType/{type}")
+    public List<GmGoods> queryGoodsByType(@PathVariable("type") String type){
+        List<GmGoods> lists = this.goodsDao.queryGoodsByType(type);
+        return lists;
+        //集合
+
+    }
 
 }
 

@@ -39,6 +39,7 @@
       return {
         wrapperCol: { span: 20 },
         UmUser: {
+          id:'',
           name: '',
           psw: '',
           psw1: '',
@@ -66,7 +67,7 @@
     mounted() {
       if(this.$cookies.isKey('vid') === false)
         this.$router.push('login')
-      let id = this.$route.query.id
+      let id = this.$cookies.get('vid')
       let _this = this
       axios.get('http://localhost:8181/umUser/find/'+id).then(function (response) {
         _this.UmUser = response.data
@@ -74,9 +75,13 @@
     },
     methods: {
       submit () {
-        this.$refs['form'].validate((valid) => {
-          if (valid) {
-            console.log(valid)
+        let _this = this
+        axios.put('http://localhost:8181/umUser/update/',this.UmUser).then(function (response) {
+          if(response.data){
+            alert('修改成功！')
+            _this.$router.push({
+              path: '/admin/center/info?id='+this.id
+            })
           }
         })
       }

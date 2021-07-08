@@ -5,9 +5,19 @@
         <a-row type='flex' justify='space-between'>
           <h1 class='title'>单号：{{id}}</h1>
           <div class='action'>
-            <a-button-group style="margin-right: 8px;">
+            <!--            <a-button-group style="margin-right: 8px;">-->
+            <!--              <a-button><a-icon type="star" />收藏</a-button>-->
+            <!--            </a-button-group>-->
+            <a-popover placement="bottom" @click="insertToLike" style="margin-right: 8px">
+              <template slot="content">
+                <p>Content</p>
+                <p>Content</p>
+              </template>
+              <template slot="title">
+                <span>Title</span>
+              </template>
               <a-button><a-icon type="star" />收藏</a-button>
-            </a-button-group>
+            </a-popover>
             <a-button type="primary" ><a-icon type="shopping" />立即购买</a-button>
           </div>
         </a-row>
@@ -57,6 +67,7 @@ export default {
   name:'',
   data(){
     return {
+      pageUserId: '',
       id:'',
       gooditem:{
         id: '',
@@ -67,12 +78,13 @@ export default {
         price:'',
         imageUrl:'',
         description:''
-      }
+      },
     }
   },
   mounted() {
     if(this.$cookies.isKey('vid') === false)
       this.$router.push('login')
+    this.pageUserId = this.$cookies.get('vid')
     this.getParams()
     let Gid = this.$route.params.id
     let _this = this
@@ -88,6 +100,17 @@ export default {
       //将数据放在当前组件的数据内
       this.id = this.$route.params.id
     },
+    insertToLike(){
+      var mylike = {id: 178,userId:this.pageUserId,goodsId:this.id}
+      alert("您已预定了"+mylike.goodsId)
+      axios.post('http://localhost:8181/wantGoods/add',mylike).then(function (response){
+        if (response.data){
+          alert("完成预定")
+        }
+        else
+          alert("收藏失败！")
+      })
+    }
   },
   watch:{
     //检测路由变化，只要变化了就调用获取路由组件参数方法将数据存储到本组件即可

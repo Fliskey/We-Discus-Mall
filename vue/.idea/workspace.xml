@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/login.vue" afterDir="false" />
-    </list>
+    <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +11,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -41,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/goods" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -115,7 +112,10 @@
       <workItem from="1625663341591" duration="1442000" />
       <workItem from="1625726740084" duration="1282000" />
       <workItem from="1625729135726" duration="2000" />
-      <workItem from="1625729177833" duration="7484000" />
+      <workItem from="1625729177833" duration="5195000" />
+      <workItem from="1625735644538" duration="2313000" />
+      <workItem from="1625745394803" duration="5811000" />
+      <workItem from="1625753317178" duration="6000" />
     </task>
     <servers />
   </component>
@@ -132,5 +132,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

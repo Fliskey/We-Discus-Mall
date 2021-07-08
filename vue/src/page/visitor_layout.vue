@@ -11,6 +11,10 @@
           <a-icon type="shopping" />
           <span>商品发布</span>
         </a-menu-item>
+        <a-menu-item key="/visitor/goods/reserve">
+          <a-icon type="shopping" />
+          <span>我的预定</span>
+        </a-menu-item>
         <a-menu-item key="/visitor/user/sell">
           <a-icon type="user" />
           <span>订单管理</span>
@@ -18,8 +22,8 @@
         <a-sub-menu key="sub1">
           <span slot="title"><a-icon type="user" /><span>个人中心</span></span>
           <a-menu-item-group key="g1">
-            <a-menu-item key="/admin/center/info">个人信息</a-menu-item>
-            <a-menu-item key="/admin/center/psw">修改密码</a-menu-item>
+            <a-menu-item key="/visitor/center/info">个人信息</a-menu-item>
+            <a-menu-item key="/visitor/center/psw">修改密码</a-menu-item>
           </a-menu-item-group>
         </a-sub-menu>
       </a-menu>
@@ -37,18 +41,6 @@
               首页
             </a-menu-item>
             <a-sub-menu>
-        <span slot="title" class="submenu-title-wrapper"
-        ><a-icon type="setting" />社区</span
-        >
-                <a-menu-item key="setting:1">
-                  全部
-                </a-menu-item>
-                <a-menu-item key="setting:2">
-                  思明
-                </a-menu-item>
-                <a-menu-item key="setting:3">
-                  翔安
-                </a-menu-item>
             </a-sub-menu>
             <a-menu-item key="alipay">
               <a href="https://antdv.com" target="_blank" rel="noopener noreferrer"
@@ -82,7 +74,7 @@
           cancelText: '取消',
           onOk: () => {
             this.$cookies.remove('vid')
-            
+
             this.$router.push({
               path: '/login'
             })

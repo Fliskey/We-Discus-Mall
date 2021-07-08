@@ -36,6 +36,10 @@ export default [
       {
         path: 'user/sell',
         component: () => import('@/views/user/sell')
+      },
+      {
+        path: 'goods/reserve',
+        component: () => import('@/views/goods/reserve')
       }
     ]
   }

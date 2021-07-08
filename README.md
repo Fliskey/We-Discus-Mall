@@ -33,7 +33,7 @@ a Second-Hand Trading System for project practice
 | 王宇翔 | [Fliskey](http://github.com/Fliskey)               |
 | 何赟   | [YueMing-github](http://github.com/YueMIng-github) |
 | 林纪元 | [纪元](https://github.com/JaneThis)                |
-| 刘云骢 |                                                    |
+| 刘云骢 | [ycsxh](https://github.com/ycsxh)                  |
 | 王子夏 | [小鱼](https://github.com/kytzly)                  |
 
 
@@ -42,35 +42,37 @@ a Second-Hand Trading System for project practice
 
 ### 第一阶段
 
-数据库建表，服务器平台搭建，网页界面设计
+- [x] 数据库建表，服务器平台搭建，网页界面设计
 
-用户登录，包括管理员、用户；**修改个人信息，电话，邮箱，密码等**
+- [x] 用户登录，包括管理员、用户；修改个人信息，电话，邮箱，密码等
 
-管理员可对用户进行管理：**增加、修改**、删除用户
+- [x] 管理员可对用户进行管理：增加、修改、删除用户
 
-**用户发布待转让物品信息**
+- [x] 用户发布待转让物品信息
 
-1.物品名称 2.物品类型（书籍、生活用品、票券）3.物品数量  4 .物品单价  
+  1.物品名称 2.物品类型（书籍、生活用品、票券）3.物品数量  4 .物品单价  
 
-#### 用户浏览各类待转让物品信息，下单预订
+- [x] 用户浏览各类待转让物品信息，下单预订
 
-待转让物品的修改、删除
+- [x] 待转让物品的修改、删除
 
-根据类型或关键字筛选相关物品
+- [ ] 根据类型或关键字筛选相关物品
+
 
 ### 第二阶段
 
-用户登录，选择物品加入购物车
+- [ ] 用户登录，选择物品加入购物车
 
-购物车物品数量的修改、删除
+- [ ] 购物车物品数量的修改、删除
 
-订单提交，库存数量修改
+- [ ] 订单提交，库存数量修改
 
-历史订单查询，根据用户号或者用户信息查询用户历史订单
+- [ ] 历史订单查询，根据用户号或者用户信息查询用户历史订单
 
-用户可以按分类查询待转让物品，可以按价格或者按数量等对物品进行排序
+- [ ] 用户可以按分类查询待转让物品，可以按价格或者按数量等对物品进行排序
 
-系统可显示物品图片
+- [ ] 系统可显示物品图片
+
 
 
 
@@ -88,19 +90,14 @@ MyBatis
 
 ## 数据库设计
 
-### 第一批实现的表
-
-um_user
-
 ### 数据库名web_mall_building
 
 #### 数据库用户与权限
 
 - admin
-  - 全局增删改查权限
-- normal_user
-  - um_user表改查权限
-  - gm_goods表增删改查user_id相同的记录
+  - id
+  - tel_number
+  - password
 
 #### admin:管理员表
 
@@ -111,32 +108,26 @@ um_user
 
 #### um:用户管理
 
-- um_user(第一批实现)
+- um_user
   - id
   - name
   - password
   - tel_number
   - email
-  - （creation_time）讨论有无必要
-- um_user_logistic(未安排批次)
+- um_login
   - id
-  - user_id
-  - recip_address
-  - recip_name
-  - recip_tel
-- um_user_edit_record(未安排批次)
+  - password
+  - salt
 
 #### gm:二手商品管理
 
-- gm_goods(第一批实现)
+- gm_goods
   - id
-  - user_id(外键)
+  - user_id
   - name
   - type
   - quantity
-  - unit_price
-  - （creation_time）讨论有无必要
-- gm_goods_edit_record(未安排批次)
+  - price
 
 #### om:订单管理
 
@@ -146,6 +137,3 @@ um_user
   - seller_id
   - buyer_id
   - actual_pay_amout
-  - （creation_time）讨论有无必要
-  - （payment_voucher）暂不记录
-

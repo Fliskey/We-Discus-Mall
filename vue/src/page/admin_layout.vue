@@ -29,20 +29,6 @@
             <a-menu-item key="/admin/home/home"> <a-icon type="home" />
               首页
             </a-menu-item>
-            <a-sub-menu>
-        <span slot="title" class="submenu-title-wrapper"
-        ><a-icon type="setting" />社区</span
-        >
-              <a-menu-item key="setting:1">
-                全部
-              </a-menu-item>
-              <a-menu-item key="setting:2">
-                思明
-              </a-menu-item>
-              <a-menu-item key="setting:3">
-                翔安
-              </a-menu-item>
-            </a-sub-menu>
             <a-menu-item key="alipay">
               <a href="https://antdv.com" target="_blank" rel="noopener noreferrer"
               >帮助</a
