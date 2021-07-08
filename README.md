@@ -6,6 +6,12 @@ a Second-Hand Trading System for project practice
 
 
 
+## 在线任务
+
+[在线任务清单 (qq.com)](https://docs.qq.com/sheet/DTUNQU3dMUWJBcWtU?tab=BB08J2)
+
+
+
 ## 项目组简介
 
 组名：咱讨论一下
