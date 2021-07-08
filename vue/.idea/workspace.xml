@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="" />
+    <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/UmLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/UmLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,6 +119,7 @@
       <workItem from="1625735644538" duration="2313000" />
       <workItem from="1625745394803" duration="5811000" />
       <workItem from="1625753317178" duration="6000" />
+      <workItem from="1625760307132" duration="978000" />
     </task>
     <servers />
   </component>

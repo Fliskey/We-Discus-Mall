@@ -28,7 +28,7 @@ public class UmLoginController {
 
     @Autowired
     private UmLoginDao umLoginDao;
-
+/*
     @PutMapping("/login")
     public boolean login(@RequestBody UmLogin umLogin){
         umLogin.setPassword(umLogin.getPassword());
@@ -53,7 +53,7 @@ public class UmLoginController {
                 throw new RuntimeException("digest fail!", var5);
             }
         }
-    }
+    }*/
 
 }
 
