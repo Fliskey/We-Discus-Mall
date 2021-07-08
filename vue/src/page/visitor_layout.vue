@@ -15,10 +15,6 @@
           <a-icon type="user" />
           <span>订单管理</span>
         </a-menu-item>
-        <a-menu-item key="/visitor/user/sell">
-          <a-icon type="user" />
-          <span>社区</span>
-        </a-menu-item>
         <a-sub-menu key="sub1">
           <span slot="title"><a-icon type="user" /><span>个人中心</span></span>
           <a-menu-item-group key="g1">
@@ -85,6 +81,8 @@
           okText: '确认',
           cancelText: '取消',
           onOk: () => {
+            this.$cookies.remove('vid')
+            
             this.$router.push({
               path: '/login'
             })

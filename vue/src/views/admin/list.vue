@@ -87,6 +87,8 @@ export default {
     userModal
   },
   mounted () {
+    if(this.$cookies.isKey('aid') === false)
+      this.$router.push('login')
     this.fetch()
   },
   methods: {

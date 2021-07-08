@@ -83,6 +83,10 @@
         imageUrl: ''
       }
     },
+    mounted() {
+      if(this.$cookies.isKey('vid') === false)
+        this.$router.push('login')
+    },
     methods: {
       handleChange(info) {
         if (info.file.status === 'uploading') {

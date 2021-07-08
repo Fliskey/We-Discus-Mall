@@ -78,6 +78,10 @@
         }
       }
     },
+    mounted() {
+      if(this.$cookies.isKey('vid') === false)
+        this.$router.push('login')
+    },
     methods: {
       onSubmit () {
         console.log('submit!', this.form)

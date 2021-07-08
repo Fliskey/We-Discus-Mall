@@ -16,12 +16,6 @@
     <a-form-model-item prop='password'>
       <a-input v-model='umUser.password' block type='password' placeholder='密码' />
     </a-form-model-item>
-    <a-form-model-item style='margin-bottom:10px'>
-        <a-radio-group v-model="umUser.type">
-          <a-radio :style="radioStyle" :value="1">思明</a-radio>
-          <a-radio :style="radioStyle" :value="2">翔安</a-radio>
-        </a-radio-group>
-    </a-form-model-item>
     <a-form-model-item class='center'>
       <a-button type="primary" block @click='onSubmit'>注册</a-button>
     </a-form-model-item>
@@ -67,11 +61,12 @@
     methods: {
       onSubmit(){
             let _this = this
+        console.log(this.umUser)
             axios.post('http://localhost:8181/umUser/add',this.umUser).then(function (response) {
               if(response.data){
                 alert('注册成功！')
                 this.$router.push({
-                  path: '/admin/user'
+                  path: '/visitor/user'
                 })
               }
               else

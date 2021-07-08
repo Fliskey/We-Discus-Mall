@@ -163,6 +163,10 @@
       onChange (a, b, c) {
         console.log(a, b, c)
       }
+    },
+    mounted() {
+      if(this.$cookies.isKey('vid') === false)
+        this.$router.push('login')
     }
   }
 </script>

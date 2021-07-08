@@ -52,6 +52,8 @@ export default {
     };
   },
   mounted() {
+    if(this.$cookies.isKey('aid') === false)
+      this.$router.push('login')
     let id = this.$route.query.id
     let _this = this
     axios.get('http://localhost:8181/umUser/find/'+id).then(function (response) {

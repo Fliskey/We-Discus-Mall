@@ -71,6 +71,8 @@ export default {
     }
   },
   mounted() {
+    if(this.$cookies.isKey('vid') === false)
+      this.$router.push('login')
     this.getParams()
     let Gid = this.$route.params.id
     let _this = this

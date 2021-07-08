@@ -56,6 +56,10 @@
         }
       }
     },
+    mounted() {
+      if(this.$cookies.isKey('vid') === false)
+        this.$router.push('login')
+    },
     methods: {
       submit () {
         this.$refs['form'].validate((valid) => {

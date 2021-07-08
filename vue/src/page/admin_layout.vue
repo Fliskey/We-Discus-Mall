@@ -74,6 +74,7 @@ export default {
         okText: '确认',
         cancelText: '取消',
         onOk: () => {
+          this.$cookies.remove('aid')
           this.$router.push({
             path: '/login'
           })

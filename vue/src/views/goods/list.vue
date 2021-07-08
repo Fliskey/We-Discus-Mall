@@ -5,7 +5,7 @@
             :data-source="data">
       <a-row type='flex' align='middle' justify='space-between'>
         <a-input-search class="search-ipt" style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
-        <a href='/#/admin/goods/public'>立即发布闲置</a>
+        <a href='/#/visitor/goods/public'>立即发布闲置</a>
       </a-row>
       <a-list itemLayout="vertical" >
         <a-list-item v-for="(v,n) in data" :key="v.id">
@@ -35,7 +35,7 @@
           <span slot="actions"><a-icon style="margin-right: 8px" type="eye" />1563</span>
           <span slot="actions"><a-icon style="margin-right: 8px" type="star" />112</span>
           <span slot="actions"><a-icon style="margin-right: 8px" type="message" />4</span>
-          {{v.id}}
+
         </a-list-item>
       </a-list>
     </a-card>
@@ -56,6 +56,9 @@
 export default {
   name: 'ArticleList',
   mounted () {
+    if(this.$cookies.isKey('vid') === false)
+      this.$router.push('login')
+    console.log(this.$cookies.get('vid'))
     this.getList()
     //this.num = this.data.length
   },

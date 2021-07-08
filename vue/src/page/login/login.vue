@@ -53,6 +53,12 @@
         },
       }
     },
+    mounted() {
+      if(this.$cookies.isKey('vid') === true)
+        this.$router.push('/visitor/center/info')
+      if(this.$cookies.isKey('aid') === true)
+        this.$router.push('/admin/list')
+    },
     methods: {
       userLogin () {
       //  console.log(this.ident)
@@ -67,8 +73,11 @@
               _this.http.get('http://localhost:8181/umUser/list/').then(() => {
                 // 路由注册
                 alert('登录成功！')
+                this.$cookies.set('vid',_this.umUser.id)
+
                 _this.$router.push({
-                  path: '/visitor/center/info?id='+_this.umUser.id
+                  //path: '/visitor/center/info?id='+_this.umUser.id
+                  path: '/visitor/center/info'
                 })
               })
             //await this.$router.push('/table')
@@ -85,6 +94,8 @@
               _this.http.get('http://localhost:8181/admin/list/').then(() => {
                 // 路由注册
                 alert('登录成功！')
+                _this.$cookies.set('aid',_this.umUser.id)
+
                 _this.$router.push({
                   path: '/admin/list'
                 })

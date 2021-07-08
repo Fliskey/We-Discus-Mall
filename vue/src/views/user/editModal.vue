@@ -27,6 +27,10 @@
         rules: {}
       }
     },
+    mounted() {
+      if(this.$cookies.isKey('vid') === false)
+        this.$router.push('login')
+    },
     methods: {
       show () {
         this.visible = !this.visible
