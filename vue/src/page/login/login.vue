@@ -73,7 +73,7 @@
               _this.http.get('http://localhost:8181/umUser/list/').then(() => {
                 // 路由注册
                 alert('登录成功！')
-                this.$cookies.set('vid',_this.umUser.id)
+                _this.$cookies.set('vid',_this.umUser.id)
 
                 _this.$router.push({
                   //path: '/visitor/center/info?id='+_this.umUser.id

@@ -3,23 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/admin_layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/admin_layout.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/login/register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/visitor_layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/visitor_layout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/editMessage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/editMessage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/list.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/center/info.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/center/info.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/center/psw.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/center/psw.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/list.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/public.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/public.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/home/home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/home/home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/user/editModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/editModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/user/sell.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/sell.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +115,7 @@
       <workItem from="1625663341591" duration="1442000" />
       <workItem from="1625726740084" duration="1282000" />
       <workItem from="1625729135726" duration="2000" />
-      <workItem from="1625729177833" duration="5195000" />
+      <workItem from="1625729177833" duration="7484000" />
     </task>
     <servers />
   </component>
