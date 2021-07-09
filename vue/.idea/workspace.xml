@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/UmUserApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/MallApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/test/java/com/mallBuilding/UmUserApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/test/java/com/mallBuilding/MallApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,17 +69,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -132,6 +119,7 @@
       <workItem from="1625745394803" duration="5811000" />
       <workItem from="1625753317178" duration="6000" />
       <workItem from="1625760307132" duration="13314000" />
+      <workItem from="1625799952453" duration="496000" />
     </task>
     <servers />
   </component>
