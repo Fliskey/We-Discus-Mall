@@ -1,14 +1,20 @@
 import Vue from 'vue'
-import './plugins/axios'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-import './plugins/element.js'
+import router from './router/'
+import VueCookies from 'vue-cookies'
+import './plugins/axios'
 
-Vue.config.productionTip = false
+Vue.use(VueCookies)
+
+// eslint-disable-next-line
+import elem from './elem/'
+import 'ant-design-vue/dist/antd.css'
+import 'normalize.css/normalize.css'
+import './style/common.less'
+import http from './axios'
+Vue.prototype.http = http
 
 new Vue({
   router,
-  store,
   render: h => h(App)
 }).$mount('#app')

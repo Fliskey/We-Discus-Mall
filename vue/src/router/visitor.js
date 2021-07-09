@@ -1,0 +1,46 @@
+/**
+ * @authors Your Name (you@example.org)
+ * @date    2021-07-02 15:29:16
+ * @version $Id$ 管理员登录
+ */
+import visitor_layout from '@/page/visitor_layout'
+export default [
+  {
+    path: '/visitor',
+    component: visitor_layout,
+    children: [
+      {
+        path: 'center/psw',
+        component: () => import('@/views/center/psw')
+      },
+      {
+        path: 'center/info',
+        component: () => import('@/views/center/info')
+      },
+      {
+        path: 'goods/list',
+        component: () => import('@/views/goods/list')
+      },
+      {
+        path: 'goods/detail/:id',
+        component: () => import('@/views/goods/edit')
+      },
+      {
+        path: 'goods/public',
+        component: () => import('@/views/goods/public')
+      },
+      {
+        path: 'home/home',
+        component: () => import('@/views/home/home')
+      },
+      {
+        path: 'user/sell',
+        component: () => import('@/views/user/sell')
+      },
+      {
+        path: 'goods/reserve',
+        component: () => import('@/views/goods/reserve')
+      }
+    ]
+  }
+]
