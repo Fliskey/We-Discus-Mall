@@ -101,7 +101,7 @@ export default {
       this.id = this.$route.params.id
     },
     insertToLike(){
-      var mylike = {id: 178,userId:this.pageUserId,goodsId:this.id}
+      var mylike = {id:0,userId:this.pageUserId,goodsId:this.id}
       alert("您已预定了"+mylike.goodsId)
       axios.post('http://localhost:8181/wantGoods/add',mylike).then(function (response){
         if (response.data){

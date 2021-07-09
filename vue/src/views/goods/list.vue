@@ -5,6 +5,19 @@
             :data-source="data">
       <a-row type='flex' align='middle' justify='space-between'>
         <a-input-search class="search-ipt" style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
+
+        <a-select
+          v-model="selected"
+          placeholder='商品类别'
+          style="width: 120px"
+          :defaultActiveFirstOption = 'true'
+          notFoundContent = '下拉列表为空,检查数据库type'
+          @change = 'selectList'
+        >
+          <a-select-option v-for="item in lists" :key="item.value">{{item.label}}</a-select-option>
+        </a-select>
+
+
         <a href='/#/visitor/goods/public'>立即发布闲置</a>
       </a-row>
       <a-list itemLayout="vertical" >
@@ -71,6 +84,35 @@ export default {
       current: 4,
     };
   },
+
+  created () {
+    this.lists = [
+      {
+        label: '办公文具',
+        value: 1
+      },
+      {
+        label: '蔬菜水果',
+        value: 2
+      },
+      {
+        label: '电子产品',
+        value: 3
+      },
+      {
+        label: '日常杂货',
+        value: 4
+      },
+      {
+        label: '家具',
+        value: 5
+      },
+      {
+        label: '健身器材',
+        value: 6
+      }
+    ]
+  },
   watch: {
     pageSize(val) {
       console.log('pageSize', val);
@@ -86,6 +128,16 @@ export default {
         console.log(res)
         this.loading = false
         this.data = res.data
+      })
+    },
+    selectList (val) {
+      this.loading = true
+      val = val-1  //保留
+      this.http.get(`http://localhost:8181/gmGoods/queryGoodsByType/${this.lists[val].label}`).then(res => {
+        console.log(res)
+        this.loading = false
+        this.data = res.data
+        console.log(this.data)
       })
     },
     onShowSizeChange(current, pageSize) {

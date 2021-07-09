@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import java.security.MessageDigest;
+import java.util.UUID;
 
 /**
  * <p>
@@ -28,11 +29,25 @@ public class UmLoginController {
 
     @Autowired
     private UmLoginDao umLoginDao;
+
 /*
     @PutMapping("/login")
     public boolean login(@RequestBody UmLogin umLogin){
-        umLogin.setPassword(umLogin.getPassword());
+        return true;
+    }*/
+
+    @GetMapping("/getSalt")
+    public String getSalt(){
+        String salt = UUID.randomUUID().toString();
+        return salt;
     }
+
+    @PostMapping("/addUser")
+    public Integer addUser(@RequestBody UmLogin umLogin){
+        this.umLoginService.save(umLogin);
+        return this.umLoginDao.queryLoginByPassword(umLogin.getPassword());
+    }
+
 
     public class DigestUtil {
         private String DEFAULT_ENCODING = "UTF-8";
@@ -43,17 +58,28 @@ public class UmLoginController {
         }
     }
 
-    public class Digest {
-        public String digest(String str, String alg, String charencoding) {
+    public static class Digest {
+        public static String digest(String str, String alg, String charEncoding) {
             try {
-                byte[] data = str.getBytes(charencoding);
+                byte[] data = str.getBytes(charEncoding);
                 MessageDigest md = MessageDigest.getInstance(alg);
-                return Hex.toHex(md.digest(data));
+
+                StringBuffer sb = new StringBuffer(data.length);
+                String sTemp;
+                byte[] bArray = md.digest(data);
+                for (int i = 0; i < bArray.length; i++)
+                {
+                    sTemp = Integer.toHexString(0xFF & bArray[i]);
+                    if (sTemp.length() < 2)
+                        sb.append(0);
+                    sb.append(sTemp.toUpperCase());
+                }
+                return sb.toString();
             } catch (Exception var5) {
                 throw new RuntimeException("digest fail!", var5);
             }
         }
-    }*/
+    }
 
 }
 

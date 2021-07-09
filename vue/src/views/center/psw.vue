@@ -61,6 +61,7 @@
         this.$router.push('login')
     },
     methods: {
+      //似乎并没有实现
       submit () {
         this.$refs['form'].validate((valid) => {
           if (valid) {

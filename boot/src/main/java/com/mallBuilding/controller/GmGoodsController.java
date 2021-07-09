@@ -50,7 +50,6 @@ public class GmGoodsController {
         List<GmGoods> lists = this.goodsDao.queryGoodsByType(type);
         return lists;
         //集合
-
     }
 
 }

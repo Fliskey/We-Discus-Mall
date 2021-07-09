@@ -95,7 +95,6 @@
                 // 路由注册
                 alert('登录成功！')
                 _this.$cookies.set('aid',_this.umUser.id)
-
                 _this.$router.push({
                   path: '/admin/list'
                 })

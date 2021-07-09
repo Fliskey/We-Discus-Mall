@@ -56,7 +56,7 @@ a Second-Hand Trading System for project practice
 
 - [x] 待转让物品的修改、删除
 
-- [ ] 根据类型或关键字筛选相关物品
+- [x] 根据类型或关键字筛选相关物品
 
 
 ### 第二阶段

@@ -12,7 +12,8 @@
     "core-js": "^3.6.5",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
-    "vue-cookies": "^1.7.4"
+    "vue-cookies": "^1.7.4",
+    "webpack-dev-server": "^2.6.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
