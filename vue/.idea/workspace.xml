@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/login/register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/UmUserApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/MallApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/test/java/com/mallBuilding/UmUserApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/test/java/com/mallBuilding/MallApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +131,7 @@
       <workItem from="1625735644538" duration="2313000" />
       <workItem from="1625745394803" duration="5811000" />
       <workItem from="1625753317178" duration="6000" />
-      <workItem from="1625760307132" duration="12414000" />
+      <workItem from="1625760307132" duration="13314000" />
     </task>
     <servers />
   </component>

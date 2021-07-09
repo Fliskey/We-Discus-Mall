@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("com.mallBuilding.mapper")
 @MapperScan("com.mallBuilding.dao")
-public class UmUserApplication {
+public class MallApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UmUserApplication.class, args);
+        SpringApplication.run(MallApplication.class, args);
     }
 
 }
