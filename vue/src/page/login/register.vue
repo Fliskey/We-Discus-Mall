@@ -1,9 +1,9 @@
 <template>
   <a-form-model ref='umUser' :model="umUser" :rules='rules' class='login-form register'>
-    <h2>注册(加密测试)</h2>
-<!--    <a-form-model-item prop='id'>
+    <h2>注册</h2>
+    <a-form-model-item prop='id'>
       <a-input placeholder='学号' block v-model='umUser.id' />
-    </a-form-model-item>-->
+    </a-form-model-item>
     <a-form-model-item prop='name'>
       <a-input placeholder='姓名' block v-model='umUser.name' />
     </a-form-model-item>
@@ -14,7 +14,7 @@
       <a-input placeholder='电话' block v-model='umUser.telNumber' />
     </a-form-model-item>
     <a-form-model-item prop='password'>
-      <a-input v-model='umLogin.password' block type='password' placeholder='密码' />
+      <a-input v-model='umUser.password' block type='password' placeholder='密码' />
     </a-form-model-item>
     <a-form-model-item class='center'>
       <a-button type="primary" block @click='onSubmit'>注册</a-button>
@@ -45,11 +45,11 @@
           lineHeight: '30px'
         },
         rules: {
-          /*id: {
+          id: {
             required: true,
             message: '请输入学号',
             trigger: 'blur'
-          },*/
+          },
           name: {
             required: true,
             message: '请输入姓名',
