@@ -54,7 +54,7 @@ a Second-Hand Trading System for project practice
 
 - [x] 用户浏览各类待转让物品信息，下单预订
 
-- [x] 待转让物品的修改、删除
+- [ ] 待转让物品的修改、删除
 
 - [x] 根据类型或关键字筛选相关物品
 
