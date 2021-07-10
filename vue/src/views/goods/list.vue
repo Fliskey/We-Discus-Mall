@@ -5,16 +5,32 @@
             :data-source="data">
       <a-row type='flex' align='middle' justify='space-between'>
         <a-input-search class="search-ipt" style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
-
         <a-select
           v-model="selected"
-          placeholder='商品类别'
+          placeholder='所有类别'
           style="width: 120px"
-          :defaultActiveFirstOption = 'true'
-          notFoundContent = '下拉列表为空,检查数据库type'
-          @change = 'selectList'
+          :defaultActiveFirstOption='true'
+          notFoundContent='下拉列表为空,检查数据库type'
+          @change='selectList'
         >
-          <a-select-option v-for="item in lists" :key="item.value">{{item.label}}</a-select-option>
+          <a-select-option v-for="item in lists" :key="item.value">{{ item.label }}</a-select-option>
+        </a-select>
+
+        <a-select
+          placeholder='排序'
+          style="width: 120px"
+          :defaultActiveFirstOption='true'
+          @change="priceSort"
+        >
+          <a-select-option value='upSort'>
+            价格升序
+          </a-select-option>
+          <a-select-option value='downSort'>
+            价格降序
+          </a-select-option>
+          <a-select-option value='cancelSort'>
+            默认排序
+          </a-select-option>
         </a-select>
 
 
@@ -110,6 +126,10 @@ export default {
       {
         label: '健身器材',
         value: 6
+      },
+      {
+        label: '所有类型',
+        value: 7
       }
     ]
   },
@@ -130,19 +150,52 @@ export default {
         this.data = res.data
       })
     },
-    selectList (val) {
-      this.loading = true
-      val = val-1  //保留
-      this.http.get(`http://localhost:8181/gmGoods/queryGoodsByType/${this.lists[val].label}`).then(res => {
-        console.log(res)
-        this.loading = false
-        this.data = res.data
-        console.log(this.data)
-      })
+    selectList(val) {
+      if (val == 7) { // todo 此处没有做到对getList的复用 之后可以改进
+        this.loading = true
+        console.log('展示所有商品类型');
+        this.http.get('http://localhost:8181/gmGoods/list').then(res => {
+          console.log(res)
+          this.loading = false
+          this.data = res.data
+          return;
+        })
+      } else {
+        this.loading = true
+        val = val - 1  //保留
+        this.http.get(`http://localhost:8181/gmGoods/queryGoodsByType/${this.lists[val].label}`).then(res => {
+          console.log(res)
+          this.loading = false
+          this.data = res.data
+          console.log(this.data[1])
+        })
+      }
     },
     onShowSizeChange(current, pageSize) {
       console.log(current, pageSize);
     },
+    onChange(checked) {
+      console.log(`a-switch to ${checked}`);
+    },
+    priceSort(value) {
+      console.log(value);
+      console.log(this.data[1].price);
+      if(value=="upSort"){
+        this.data.sort((a,b)=>{
+          return a.price - b.price
+        })
+      }
+      else if(value=="downSort"){
+        this.data.sort((a,b)=>{
+          return b.price-a.price
+        })
+      }
+      else if(value=="cancelSort"){
+        this.data.sort((a,b)=>{
+          return a.id-b.id
+        })
+      }
+    }
   }
 }
 </script>

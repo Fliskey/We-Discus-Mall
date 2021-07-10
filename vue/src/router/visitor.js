@@ -23,7 +23,7 @@ export default [
       },
       {
         path: 'goods/detail/:id',
-        component: () => import('@/views/goods/edit')
+        component: () => import('@/views/goods/detail')
       },
       {
         path: 'goods/public',
@@ -40,6 +40,10 @@ export default [
       {
         path: 'goods/reserve',
         component: () => import('@/views/goods/reserve')
+      },
+      {
+        path: 'goods/change/:id',
+        component: () => import('@/views/goods/change')
       }
     ]
   }

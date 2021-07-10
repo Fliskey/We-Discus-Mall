@@ -15,7 +15,7 @@
               <a-icon key="setting" type="exclamation-circle"/>
             </router-link>
             <a-icon key="edit" type="shopping" />
-            <a-icon key="ellipsis" type="close-circle" @click="delLike(v.id)"/>
+            <a-icon key="ellipsis" type="close-circle" @click="delLike(uid,v.id)"/>
           </template>
           <a-card-meta :title=v.name :description=v.description>
           </a-card-meta>
@@ -33,6 +33,7 @@ export default {
     if(this.$cookies.isKey('vid') === false)
       this.$router.push('login')
     let id = this.$cookies.get('vid')
+    this.uid = id;
     this.getList(id)
 
     //this.num = this.data.length
@@ -42,8 +43,14 @@ export default {
       data: [],
       index: 0,
       num: 10,
+      uid: '',
       pageSize: 5,
       current: 4,
+      user_goods:
+        {
+          Uid: '',
+          Gid: ''
+        },
     };
   },
   watch: {
@@ -67,20 +74,22 @@ export default {
     onShowSizeChange(current, pageSize) {
       console.log(current, pageSize);
     },
-    delLike(Gid){
+    delLike(uid,gid){
       //删除请求,对象为用户-货物数值对
-     //var user_good = {Uid:1,Gid:Gid}
       let _this = this
       this.$confirm({
-        title: '确定删除'+Gid+'吗?',
+        title: '确定删除货物编号:'+gid+' 你的编号:'+uid+"吗？",
         okText:'确定',
         okType:'danger',
         cancelText:'取消',
         onOk(){
           //axios删除
-          axios.delete('http://localhost:8181/wantGoods/delete/'+Gid).then(function (response){
+          alert("开始删除！")
+          axios.delete('http://localhost:8181/wantGoods/delete/'+{uid,gid}).then(function (response){
+
+            alert("正在删除。。。")
             if(response)
-                alert('删除成功！')
+              alert('删除成功！')
             location.reload()
           })
         }

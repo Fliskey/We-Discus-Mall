@@ -3,13 +3,12 @@ package com.mallBuilding.controller;
 
 import com.mallBuilding.dao.UmLoginDao;
 import com.mallBuilding.entity.UmLogin;
+import com.mallBuilding.entity.UmUser;
+import com.mallBuilding.mapper.UmLoginMapper;
 import com.mallBuilding.service.UmLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-
-import java.security.MessageDigest;
 import java.util.UUID;
 
 /**
@@ -30,6 +29,8 @@ public class UmLoginController {
     @Autowired
     private UmLoginDao umLoginDao;
 
+    @Autowired
+    private UmLoginMapper umLoginMapper;
 /*
     @PutMapping("/login")
     public boolean login(@RequestBody UmLogin umLogin){
@@ -44,10 +45,68 @@ public class UmLoginController {
 
     @PostMapping("/addUser")
     public Integer addUser(@RequestBody UmLogin umLogin){
-        this.umLoginService.save(umLogin);
-        return this.umLoginDao.queryLoginByPassword(umLogin.getPassword());
+        try{
+            boolean ret = this.umLoginService.save(umLogin);
+            System.out.println("\nret:"+ret);
+            System.out.println("\npassword:"+umLogin.getPassword());
+            int getId = this.umLoginDao.queryLoginIdByPassword(umLogin.getPassword());
+            System.out.printf("\nid:%d\n",getId);
+            if(getId > 0){
+                return getId;
+            }
+            else{
+                return -1;
+            }
+        }
+        catch (Exception e){
+            //do nothing
+        }
+        return -1;
     }
 
+    @PostMapping("/querySalt")
+    public String querySalt(@RequestBody String id){
+        try {
+            int intId = Integer.valueOf(id.substring(0,id.indexOf('=')));
+            String salt = this.umLoginDao.querySaltById(intId);
+            return salt;
+        }
+        catch (Exception e){
+            System.out.println("404");
+            return "";
+        }
+    }
+
+    @PutMapping("/login")//登录接口
+    public boolean login(@RequestBody UmLogin umLogin)
+    {
+        try {
+            UmLogin queryUser = umLoginDao.queryUmLoginByIdAndPassword(umLogin.getId(), umLogin.getPassword());
+            // System.out.println(queryUser.getName()+queryUser.getPassword());
+            if (queryUser == null) {
+                System.out.println("404");
+                return false;
+            } else {
+                System.out.println("200");
+                return true;
+            }
+        }
+        catch (Exception e){
+            System.err.println("404");
+            //do nothing
+        }
+        return false;
+    }
+
+    @PostMapping("/update")
+    public boolean update(@RequestBody UmLogin umLogin){
+        System.out.println("\numLogin:"+umLogin);
+        return !(umLoginMapper.updateById(umLogin) == 0);
+
+    }
+
+
+/*
 
     public class DigestUtil {
         private String DEFAULT_ENCODING = "UTF-8";
@@ -79,7 +138,7 @@ public class UmLoginController {
                 throw new RuntimeException("digest fail!", var5);
             }
         }
-    }
+    }*/
 
 }
 

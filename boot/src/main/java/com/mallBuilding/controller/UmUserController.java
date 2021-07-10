@@ -59,18 +59,21 @@ public class UmUserController {
     @PutMapping("/login")//登录接口
     public boolean login(@RequestBody UmUser umUser)
     {
-        UmUser queryUser = userDao.queryUserByName(umUser.getId(),umUser.getPassword());
-       // System.out.println(queryUser.getName()+queryUser.getPassword());
-        if(queryUser==null)
-        {
-            System.out.println("404");
-            return false;
+        try {
+            UmUser queryUser = userDao.queryUserByName(umUser.getId(), umUser.getPassword());
+            // System.out.println(queryUser.getName()+queryUser.getPassword());
+            if (queryUser == null) {
+                System.out.println("404");
+                return false;
+            } else {
+                System.out.println("200");
+                return true;
+            }
         }
-        else
-        {
-            System.out.println("200");
-            return true;
+        catch (Exception e){
+            //do nothing
         }
+        return false;
 
     }
 

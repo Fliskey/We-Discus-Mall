@@ -7,12 +7,9 @@ import com.mallBuilding.entity.UmUser;
 import com.mallBuilding.service.GmGoodsService;
 import com.mallBuilding.service.UmUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,7 +47,24 @@ public class GmGoodsController {
         List<GmGoods> lists = this.goodsDao.queryGoodsByType(type);
         return lists;
         //集合
+
     }
+
+    @PutMapping("/update")
+    public boolean update(@RequestBody GmGoods gmGoods)
+    {
+        return this.gmGoodsService.updateById(gmGoods);
+    }
+
+    @GetMapping("/findByUserId/{id}")
+    public List<GmGoods> findByUserId(@PathVariable("id") String id) {return this.goodsDao.queryGoodsByUserId(id);}
+
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable("id") String id )
+    {
+        return this.gmGoodsService.removeById(id);
+    }
+
 
 }
 
