@@ -14,7 +14,7 @@
           </a-input>
         </a-form-model-item>
         <a-form-model-item  prop='telNumber'>
-          <a-input v-model='UmUser.telNumber' block type='password' placeholder='请输入手机号'>
+          <a-input v-model='UmUser.telNumber' block type='手机号' placeholder='请输入手机号'>
             <a-icon slot="prefix" type="telNumber" style="color:rgba(0,0,0,.25)" />
           </a-input>
         </a-form-model-item>

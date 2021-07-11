@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router/'
 import VueCookies from 'vue-cookies'
 import './plugins/axios'
+import { sha256 } from 'js-sha256'
+Vue.prototype.$sha256 = sha256
 
 Vue.use(VueCookies)
 

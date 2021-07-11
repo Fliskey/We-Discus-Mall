@@ -1,4 +1,4 @@
-<template >
+<template>
   <a-form-model ref='form' :model="umUser" :rules='rules' class='login-form' :wrapper-col="wrapperCol">
     <h2>登录</h2>
     <a-form-model-item prop='account'>
@@ -16,6 +16,7 @@
         v-model="ident">
         <a-radio :style="radioStyle" :value="1">用户</a-radio>
         <a-radio :style="radioStyle" :value="2">管理员</a-radio>
+        <a-radio :style="radioStyle" :value="3">加密用户</a-radio>
       </a-radio-group>
     </a-form-model-item>
     <a-form-model-item class='center'>
@@ -34,6 +35,11 @@
           id: '',
           password: ''
         },
+        umLogin:{
+          id:'',
+          password:''
+        },
+        salt:'',
         rules: {
           id: {
             required: true,
@@ -95,13 +101,35 @@
                 // 路由注册
                 alert('登录成功！')
                 _this.$cookies.set('aid',_this.umUser.id)
-
                 _this.$router.push({
                   path: '/admin/list'
                 })
               })
             //await this.$router.push('/table')
           })
+        }
+        else if(this.ident === 3){
+          //加密用户登录
+          let _this = this
+          axios.post('http://localhost:8181/umLogin/querySalt/',this.umUser.id).then(function (response){
+            _this.salt = response.data
+            _this.umLogin.id = _this.umUser.id
+            _this.umLogin.password = _this.$sha256(_this.umUser.password + _this.salt)
+
+            axios.put('http://localhost:8181/umLogin/login/',_this.umLogin).then(function (response){
+              if(!response.data)
+                alert('用户名或密码错误，请重新输入！')
+              else{
+                // 路由注册
+                alert('登录成功！')
+                _this.$cookies.set('vid',_this.umUser.id)
+                _this.$router.push({
+                  path: '/visitor/center/info'
+                })
+              }
+            })
+          })
+
         }
 
       },

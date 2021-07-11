@@ -48,7 +48,7 @@ a Second-Hand Trading System for project practice
 
 - [x] 管理员可对用户进行管理：增加、修改、删除用户
 
-- [x] 用户发布待转让物品信息
+- [ ] 用户发布待转让物品信息
 
   1.物品名称 2.物品类型（书籍、生活用品、票券）3.物品数量  4 .物品单价  
 
@@ -56,7 +56,7 @@ a Second-Hand Trading System for project practice
 
 - [x] 待转让物品的修改、删除
 
-- [ ] 根据类型或关键字筛选相关物品
+- [x] 根据类型或关键字筛选相关物品
 
 
 ### 第二阶段

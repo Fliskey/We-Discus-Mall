@@ -25,7 +25,6 @@ import java.util.List;
 @RestController
 @RequestMapping("//wantGoods")
 public class WantGoodsController {
-
     @Autowired
     private WantGoodsService wantGoodsService;
 
@@ -43,11 +42,6 @@ public class WantGoodsController {
         return this.wantGoodsService.save(wantGoods);
     }
 
-    //@DeleteMapping("/delete/{id}")
-    //public boolean delete(@PathVariable("id") Integer id )
-    //{
-     //   return this.wantGoodsService.removeById(id);
-  //  }
 
     @GetMapping("/queryWant/{id}")
     public List<GmGoods> queryWant(@PathVariable("id") String id){
@@ -57,11 +51,11 @@ public class WantGoodsController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public boolean deleteWant(@PathVariable("id") String id){
-        String w_id = this.wantDao.removeById(id);
-        return this.wantGoodsService.removeById(w_id);
-        //集合
+    public boolean delete(@PathVariable("id") String id )
+    {
+        return this.wantGoodsService.removeById(id);
     }
+
 
 }
 

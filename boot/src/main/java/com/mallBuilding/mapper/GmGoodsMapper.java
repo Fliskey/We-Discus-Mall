@@ -2,6 +2,7 @@ package com.mallBuilding.mapper;
 
 import com.mallBuilding.entity.GmGoods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
