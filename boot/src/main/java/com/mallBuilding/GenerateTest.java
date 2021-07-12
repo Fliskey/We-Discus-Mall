@@ -18,7 +18,7 @@ public class GenerateTest {
         dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
         dataSourceConfig.setUsername("root");
         dataSourceConfig.setPassword("HuaWei@0706");
-        dataSourceConfig.setUrl("jdbc:mysql://mall.fliskey.top:3306/web_mall_building");
+        dataSourceConfig.setUrl("jdbc:mysql://mall.fliskey.top:3306/web_mall_sky");
         autoGenerator.setDataSource(dataSourceConfig);
         //全局配置
         GlobalConfig globalConfig = new GlobalConfig();

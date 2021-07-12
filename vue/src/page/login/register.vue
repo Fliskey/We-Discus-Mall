@@ -26,6 +26,16 @@
 <script>
   export default {
     data () {
+
+      const validatorName = (rule,value,callback) =>{
+        if(!value){
+          callback(new Error('请输入姓名！'))
+        }
+        else{
+          callback()
+        }
+      }
+
       const validatorPhone = (rule,value,callback) =>{
         if (!value){
           callback(new Error('请输入手机号码！'))
@@ -88,7 +98,7 @@
             {required: true, validator:validatorEmail, trigger: 'blur'}
           ],
           name: [
-            {required: true, msg: '请输入姓名',trigger: 'blur'}
+            {required: true, validator:validatorName,trigger: 'blur'}
           ],
           password: [
             {required:true ,validator:validatorPsw,trigger:'blur'}
@@ -109,24 +119,26 @@
           _this.umLogin.salt = response.data
           _this.pageData.password = _this.$sha256(_this.pageData.password+_this.umLogin.salt)
           _this.umLogin.password = _this.pageData.password
-        })
-        axios.post('http://localhost:8181/umLogin/addUser',this.umLogin).then(function (response){
-          _this.umUser.id = response.data
-          _this.umUser.id = _this.umUser.id+1 //我也不知道为什么要+1
-          _this.umUser.name = _this.pageData.name
-          _this.umUser.telNumber = _this.pageData.telNumber
-          _this.umUser.email = _this.pageData.email
-        })
-        axios.post('http://localhost:8181/umUser/add',this.umUser).then(function (response) {
-          if(response.data){
-            alert('注册成功！')
-            _this.$router.push({
-              path: '/login'
+          axios.post('http://localhost:8181/umLogin/addUser',_this.umLogin).then(function (response){
+            _this.umLogin.id = response.data
+            _this.umUser.id = _this.umLogin.id
+            _this.umUser.name = _this.pageData.name
+            _this.umUser.telNumber = _this.pageData.telNumber
+            _this.umUser.email = _this.pageData.email
+            axios.post('http://localhost:8181/umUser/add',_this.umUser).then(function (response) {
+              if(response.data){
+                alert('注册成功！')
+                _this.$router.push({
+                  path: '/login'
+                })
+              }
+              else
+                alert('注册失败！')
             })
-          }
-          else
-            alert('注册失败！')
+          })
         })
+
+
       },
       change (type) {
         this.$emit('changeType', type)

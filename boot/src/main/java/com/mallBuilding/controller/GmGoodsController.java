@@ -52,7 +52,6 @@ public class GmGoodsController {
         List<GmGoods> lists = this.goodsDao.queryGoodsByType(type);
         return lists;
         //集合
-
     }
 
     @PutMapping("/update")
@@ -62,10 +61,10 @@ public class GmGoodsController {
     }
 
     @GetMapping("/findByUserId/{id}")
-    public List<GmGoods> findByUserId(@PathVariable("id") String id) {return this.goodsDao.queryGoodsByUserId(id);}
+    public List<GmGoods> findByUserId(@PathVariable("id") Integer id) {return this.goodsDao.queryGoodsByUserId(id);}
 
     @DeleteMapping("/delete/{id}")
-    public boolean delete(@PathVariable("id") String id )
+    public boolean delete(@PathVariable("id") Integer id )
     {
         return this.gmGoodsService.removeById(id);
     }

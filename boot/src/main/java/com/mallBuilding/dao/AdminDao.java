@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdminDao {
 
-    @Select("select * from web_mall_building.admin where id=#{id} and password=#{password}")
+    @Select("select * from web_mall_sky.admin where id=#{id} and password=#{password}")
     Admin queryAdminById(Integer id, String password);
 
 }

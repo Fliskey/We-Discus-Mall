@@ -13,7 +13,7 @@ import java.util.List;
 public interface WantDao {
 
     @Select("select g.* from gm_goods g,want_goods w where w.user_id = #{u_id} and w.goods_id = g.id" )
-    List<GmGoods> queryByUserId(String u_id);
+    List<GmGoods> queryByUserId(Integer u_id);
 
     @Select("select id from want_goods w where w.goods_id = #{g_id} and w.user_id = #{u_id}" )
     String queryId(Integer u_id,Integer g_id);

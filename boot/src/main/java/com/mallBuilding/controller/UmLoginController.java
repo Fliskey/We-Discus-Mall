@@ -31,11 +31,6 @@ public class UmLoginController {
 
     @Autowired
     private UmLoginMapper umLoginMapper;
-/*
-    @PutMapping("/login")
-    public boolean login(@RequestBody UmLogin umLogin){
-        return true;
-    }*/
 
     @GetMapping("/getSalt")
     public String getSalt(){
@@ -47,10 +42,7 @@ public class UmLoginController {
     public Integer addUser(@RequestBody UmLogin umLogin){
         try{
             boolean ret = this.umLoginService.save(umLogin);
-            System.out.println("\nret:"+ret);
-            System.out.println("\npassword:"+umLogin.getPassword());
             int getId = this.umLoginDao.queryLoginIdByPassword(umLogin.getPassword());
-            System.out.printf("\nid:%d\n",getId);
             if(getId > 0){
                 return getId;
             }
@@ -65,7 +57,7 @@ public class UmLoginController {
     }
 
     @PostMapping("/querySalt")
-    public String querySalt(@RequestBody String id){
+    public String querySalt(@RequestBody String id){    //换了int就报错 by@Fliskey
         try {
             int intId = Integer.valueOf(id.substring(0,id.indexOf('=')));
             String salt = this.umLoginDao.querySaltById(intId);
@@ -82,7 +74,6 @@ public class UmLoginController {
     {
         try {
             UmLogin queryUser = umLoginDao.queryUmLoginByIdAndPassword(umLogin.getId(), umLogin.getPassword());
-            // System.out.println(queryUser.getName()+queryUser.getPassword());
             if (queryUser == null) {
                 System.out.println("404");
                 return false;
@@ -104,41 +95,6 @@ public class UmLoginController {
         return !(umLoginMapper.updateById(umLogin) == 0);
 
     }
-
-
-/*
-
-    public class DigestUtil {
-        private String DEFAULT_ENCODING = "UTF-8";
-        private String SHA_256 = "SHA-256";
-
-        public String sha256Digest(String str) {
-            return Digest.digest(str, SHA_256, DEFAULT_ENCODING);
-        }
-    }
-
-    public static class Digest {
-        public static String digest(String str, String alg, String charEncoding) {
-            try {
-                byte[] data = str.getBytes(charEncoding);
-                MessageDigest md = MessageDigest.getInstance(alg);
-
-                StringBuffer sb = new StringBuffer(data.length);
-                String sTemp;
-                byte[] bArray = md.digest(data);
-                for (int i = 0; i < bArray.length; i++)
-                {
-                    sTemp = Integer.toHexString(0xFF & bArray[i]);
-                    if (sTemp.length() < 2)
-                        sb.append(0);
-                    sb.append(sTemp.toUpperCase());
-                }
-                return sb.toString();
-            } catch (Exception var5) {
-                throw new RuntimeException("digest fail!", var5);
-            }
-        }
-    }*/
 
 }
 
