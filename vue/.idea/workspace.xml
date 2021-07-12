@@ -2,30 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/goods/change.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/GmGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/GmGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/UmLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/UmLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/UmUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/UmUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/WantGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/WantGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/GoodsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/GoodsDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/UmLoginDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/UmLoginDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/WantDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/WantDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/GmGoodsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/GmGoodsMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/UmLoginMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/UmLoginMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/login/register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/visitor_layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/visitor_layout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/visitor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/visitor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/center/psw.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/center/psw.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/detail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/list.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/reserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/reserve.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/user/sell.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/sell.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/public.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/public.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +126,8 @@
       <workItem from="1625839574775" duration="9372000" />
       <workItem from="1625911354630" duration="11468000" />
       <workItem from="1625941372250" duration="81000" />
+      <workItem from="1625996806236" duration="603000" />
+      <workItem from="1626019494968" duration="3704000" />
     </task>
     <servers />
   </component>

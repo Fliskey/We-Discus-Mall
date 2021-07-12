@@ -33,6 +33,11 @@ public class GmGoodsController {
     @Autowired
     private GoodsDao goodsDao;
 
+    @PostMapping("/add")  //填写商品信息接口
+    public boolean add(@RequestBody GmGoods gmGoods){
+        return this.gmGoodsService.save(gmGoods);
+    }
+
     @GetMapping("/list")
     public List<GmGoods> list()
     {

@@ -9,7 +9,7 @@
       <a-input placeholder='姓名' block v-model='pageData.name' />
     </a-form-model-item>
     <a-form-model-item prop='email'>
-      <a-input placeholder='邮箱' block v-model='pageData.email' />
+      <a-input placeholder='邮箱' block v-model='pageData.email' type="email"/>
     </a-form-model-item>
     <a-form-model-item prop='telNumber'>
       <a-input placeholder='电话' block v-model='pageData.telNumber' />
@@ -17,7 +17,7 @@
     <a-form-model-item prop='password'>
       <a-input v-model='pageData.password' block type='password' placeholder='密码' />
     </a-form-model-item>
-    <a-form-model-item class='center'>
+    <a-form-model-item class='center' style="margin: 0px auto 80px auto">
       <a-button type="primary" block @click='onSubmit'>注册</a-button>
     </a-form-model-item>
   </a-form-model>
@@ -26,6 +26,39 @@
 <script>
   export default {
     data () {
+      const validatorPhone = (rule,value,callback) =>{
+        if (!value){
+          callback(new Error('请输入手机号码！'))
+        } else{
+          if (!/^1\d{10}$/.test(value)) {
+            callback(new Error('手机号码格式不正确！'))
+          } else {
+            callback()
+          }
+        }
+      }
+      const validatorPsw = (rule,value,callback) =>{
+        if (!value){
+          callback(new Error('请输入密码！'))
+        } else{
+          if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/.test(value)) {
+            callback(new Error('手机号码格式不正确！'))
+          } else {
+            callback()
+          }
+        }
+      }
+      const validatorEmail = (rule,value,callback) =>{
+        if (!value){
+          callback(new Error('请输入邮箱！'))
+        } else{
+          if (!/^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}$/.test(value)) {
+            callback(new Error('邮箱格式不正确！'))
+          } else {
+            callback()
+          }
+        }
+      }
       return {
         pageData:{
           id: 0,
@@ -51,28 +84,21 @@
           lineHeight: '30px'
         },
         rules: {
-          email: {
-            required: true,
-            message: '请输入邮箱',
-            trigger: 'blur'
-          },
-          name: {
-            required: true,
-            message: '请输入姓名',
-            trigger: 'blur'
-          },
-          password: {
-            required: true,
-            message: '请输入登录密码',
-            trigger: 'blur'
-          },
-          telNumber: {
-            required: true,
-            message: '请输入手机号',
-            trigger: 'blur'
-          }
-        }
+          email: [
+            {required: true, validator:validatorEmail, trigger: 'blur'}
+          ],
+          name: [
+            {required: true, msg: '请输入姓名',trigger: 'blur'}
+          ],
+          password: [
+            {required:true ,validator:validatorPsw,trigger:'blur'}
+          ],
+          telNumber: [
+            {required:true ,validator:validatorPhone,trigger:'blur'}
+          ]
+        },
       }
+
     },
     methods: {
       onSubmit(){

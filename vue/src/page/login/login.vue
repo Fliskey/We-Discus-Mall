@@ -10,16 +10,16 @@
     <a-form-model-item class='check'>
         <span @click='change("forget")'>忘记密码</span>
     </a-form-model-item>
-    <a-form-model-item style='margin-bottom:10px'>
+    <a-form-model-item style='margin-bottom:0px'>
       <a-radio-group
-        :default-value="1"
+        :value="1"
         v-model="ident">
         <a-radio :style="radioStyle" :value="1">用户</a-radio>
         <a-radio :style="radioStyle" :value="2">管理员</a-radio>
         <a-radio :style="radioStyle" :value="3">加密用户</a-radio>
       </a-radio-group>
     </a-form-model-item>
-    <a-form-model-item class='center'>
+    <a-form-model-item class='center' style="margin: 5px auto 29px auto">
       <a-button type="primary" block @click='userLogin()'>登录</a-button>
     </a-form-model-item>
   </a-form-model>
@@ -29,7 +29,7 @@
   export default {
     data () {
       return {
-        ident: '',
+        ident: 1,
         wrapperCol: { span: 24 },
         umUser: {
           id: '',

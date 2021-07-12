@@ -1,8 +1,7 @@
 <template>
   <div>
     <!-- <search-form /> -->
-    <a-card :bordered="false"
-            :data-source="data">
+    <a-card :bordered="false">
       <a-row type='flex' align='middle' justify='space-between'>
         <a-input-search class="search-ipt" style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
         <a-select
@@ -36,7 +35,7 @@
 
         <a href='/#/visitor/goods/public'>立即发布闲置</a>
       </a-row>
-      <a-list itemLayout="vertical" >
+      <a-list itemLayout="vertical" :data-source="data" :pagination="pagination">
         <a-list-item v-for="(v,n) in data" :key="v.id">
           <router-link :to="'/visitor/goods/detail/'+v.id">
             <a-list-item-meta >
@@ -68,15 +67,19 @@
         </a-list-item>
       </a-list>
     </a-card>
-    <div>
-      <a-pagination
-        show-size-changer
-        :default-current="3"
-        :total="5"
-        :hideOnSinglePage="true"
-        @showSizeChange="onShowSizeChange"
-      />
-    </div>
+<!--    <a-pagination-->
+<!--      v-model="current"-->
+<!--      :page-size-options="pageSizeOptions"-->
+<!--      :total="total"-->
+<!--      show-size-changer-->
+<!--      :page-size="pageSize"-->
+<!--      @showSizeChange="onShowSizeChange"-->
+<!--    >-->
+<!--      <template slot="buildOptionText" slot-scope="props">-->
+<!--        <span v-if="props.value !== '50'">{{ props.value }}条/页</span>-->
+<!--        <span v-if="props.value === '50'">全部</span>-->
+<!--      </template>-->
+<!--    </a-pagination>-->
   </div>
 </template>
 
@@ -84,23 +87,6 @@
 
 export default {
   name: 'ArticleList',
-  mounted () {
-    if(this.$cookies.isKey('vid') === false)
-      this.$router.push('login')
-    console.log(this.$cookies.get('vid'))
-    this.getList()
-    //this.num = this.data.length
-  },
-  data() {
-    return {
-      data: [],
-      index: 0,
-      num: 10,
-      pageSize: 5,
-      current: 4,
-    };
-  },
-
   created () {
     this.lists = [
       {
@@ -133,13 +119,37 @@ export default {
       }
     ]
   },
+  mounted () {
+    if(this.$cookies.isKey('vid') === false)
+      this.$router.push('login')
+    console.log(this.$cookies.get('vid'))
+    this.getList()
+    //this.num = this.data.length
+  },
+  data() {
+    let self = this
+    return {
+      data: [],
+      index: 0,
+      num: 10,
+      pageSizeOptions: ['10', '20', '30', '40', '50'],
+      // defaultCurrent: 1,
+      // pageSize: 10,
+      // total: 50,
+      pagination: {
+        pageNo: 1,
+        pageSize: 10, // 默认每页显示数量
+        showSizeChanger: true, // 显示可改变每页数量
+        pageSizeOptions: ['10', '20', '50', '100'], // 每页数量选项
+        showTotal: total => `Total ${total} items`, // 显示总数
+        onShowSizeChange: (current, pageSize) => this.pageSize = pageSize, // 改变每页数量时更新显示
+        onChange:(page,pageSize)=>self.changePage(page,pageSize),//点击页码事件
+        total:0 //总条数
+      }
+    };
+  },
+
   watch: {
-    pageSize(val) {
-      console.log('pageSize', val);
-    },
-    current(val) {
-      console.log('current', val);
-    },
   },
   methods: {
     getList () {
@@ -148,6 +158,7 @@ export default {
         console.log(res)
         this.loading = false
         this.data = res.data
+        this.pagination.total = res.data.length
       })
     },
     selectList(val) {
@@ -170,12 +181,6 @@ export default {
           console.log(this.data[1])
         })
       }
-    },
-    onShowSizeChange(current, pageSize) {
-      console.log(current, pageSize);
-    },
-    onChange(checked) {
-      console.log(`a-switch to ${checked}`);
     },
     priceSort(value) {
       console.log(value);
