@@ -5,20 +5,12 @@
         <img style="width:140px;height:120px" slot="imageUrl" :slot-scope="text" :src=text />
       </span>
       <span slot="operation" slot-scope="text, record,index">
-  <!--        <a-button type="primary" style="margin-right: 8px" @click="edit(record.key)">修改</a-button>-->
           <a-button type="primary" @click="showDrawer(record)" style="margin-right: 1px"> 修改 </a-button>
-          <a-divider type="vertical"></a-divider>
-          <router-link :to="'/visitor/goods/change/'+record.id">
-            <a-button style="margin-right: 1px">详情</a-button>
-          </router-link>
           <a-divider type="vertical"></a-divider>
           <a-button margin type="danger" @click="showDeleteConfirm(record.id)">删除</a-button>
           <div class="editable-row-operations">
             <span v-if="record.editable">
               <a @click="() => save(record.key)">Save</a>
-            </span>
-            <span v-else>
-              <a :disabled="editingKey !== ''" @click="() => edit(record.key)">Edit</a>
             </span>
           </div>
       </span>
@@ -138,23 +130,6 @@
             <a-form-model-item label="商品数量">
               <a-input-number id="inputNumber" v-model="form.quantity" :min="1" :max="10" @change="onChange" />
               当前值：{{ form.quantity }}
-<!--              <a-select-->
-<!--                v-model="form.quantity"-->
-<!--                v-decorator="[-->
-<!--                  'approver',-->
-<!--                  {-->
-<!--                    rules: [{ required: true, message: 'Please choose the approver' }],-->
-<!--                  },-->
-<!--                ]"-->
-<!--                placeholder="Please choose the approver"-->
-<!--              >-->
-<!--                <a-select-option value="jack">-->
-<!--                  Jack Ma-->
-<!--                </a-select-option>-->
-<!--                <a-select-option value="tom">-->
-<!--                  Tom Liu-->
-<!--                </a-select-option>-->
-<!--              </a-select>-->
             </a-form-model-item>
           </a-col>
           <a-col :span="12">
@@ -166,17 +141,6 @@
                 @change="onChange"
               />
               总价：{{ totalPrice }}
-<!--              <a-input-->
-<!--                prefix="￥" suffix="RMB" v-model="form.price"-->
-<!--                v-decorator="[-->
-<!--                  'dateTime',-->
-<!--                  {-->
-<!--                    rules: [{ required: true, message: 'Please choose the dateTime' }],-->
-<!--                  },-->
-<!--                ]"-->
-<!--                style="width: 100%"-->
-<!--                :get-popup-container="trigger => trigger.parentNode"-->
-<!--              />-->
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -317,15 +281,11 @@ export default {
       //   _this.loading = false
       //   _this.data = res.data
       // })
-      此处以获取订阅列表来测试显示
+      //此处以获取订阅列表来测试显示
       axios.get('http://localhost:8181/gmGoods/findByUserId/'+vid).then(function (response){
         _this.loading = false
         _this.data = response.data
       })
-      // axios.get('http://localhost:8181/wantGoods/queryWant/'+vid).then(function (response){
-      //   _this.loading = false
-      //   _this.data = response.data
-      // })
     },
     //说明：全量更新
     saveChange(){

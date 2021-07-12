@@ -43,14 +43,11 @@ export default {
       data: [],
       index: 0,
       num: 10,
-      uid: '',
+      wantId: '',
       pageSize: 5,
       current: 4,
-      user_goods:
-        {
-          Uid: '',
-          Gid: ''
-        },
+      Uid: '',
+      Gid: ''
     };
   },
   watch: {
@@ -84,10 +81,7 @@ export default {
         cancelText:'取消',
         onOk(){
           //axios删除
-          alert("开始删除！")
-          axios.delete('http://localhost:8181/wantGoods/delete/'+{uid,gid}).then(function (response){
-
-            alert("正在删除。。。")
+          axios.get('http://localhost:8181/wantGoods/delete/'+uid+'/'+gid).then(function (response){
             if(response)
               alert('删除成功！')
             location.reload()

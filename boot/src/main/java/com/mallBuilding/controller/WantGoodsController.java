@@ -50,11 +50,14 @@ public class WantGoodsController {
         //集合
     }
 
-    @DeleteMapping("/delete/{id}")
-    public boolean delete(@PathVariable("id") String id )
-    {
-        return this.wantGoodsService.removeById(id);
+    @GetMapping("/delete/{uid}/{gid}")
+    public boolean queryWantBy(@PathVariable("uid") String uid,@PathVariable("gid") String gid){
+        String id = this.wantDao.queryId(Integer.valueOf(uid),Integer.valueOf(gid));
+
+        return this.wantDao.removeById(Integer.valueOf(id));
+        //集合
     }
+
 
 
 }
