@@ -76,15 +76,25 @@ a Second-Hand Trading System for project practice
 
 
 
-## 使用技术
+## 开发环境与技术栈
 
-Springboot
+开发环境
+- IDE：IntelliJ IDEA
+- 数据库环境：DataGrip
+- 云主机：华为云
+- 域名解析：阿里云
 
-Vue
+后端
+- 框架：Springboot 2.5.2
+- 数据库查询：MyBatis-plus 3.4.2
 
-MySQL
+前端
+- 框架：Vue3
+- UI组件：Ant Design Vue
+- 调用后端接口：axois
 
-MyBatis
+数据库：MySQL 8.0
+
 
 
 

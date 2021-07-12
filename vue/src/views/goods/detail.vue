@@ -1,54 +1,81 @@
 <template>
   <div :data-source="gooditem" :loading="loading">
     <div class="detail">
-      <div class="main">
-        <a-row type='flex' justify='space-between'>
-          <h1 class='title'>单号：{{id}}</h1>
-          <div class='action'>
-            <!--            <a-button-group style="margin-right: 8px;">-->
-            <!--              <a-button><a-icon type="star" />收藏</a-button>-->
-            <!--            </a-button-group>-->
-            <a-popover placement="bottom" @click="insertToLike" style="margin-right: 8px">
-              <template slot="content">
-                <p>Content</p>
-                <p>Content</p>
-              </template>
-              <template slot="title">
-                <span>Title</span>
-              </template>
-              <a-button><a-icon type="star" />收藏</a-button>
-            </a-popover>
-            <a-button type="primary" ><a-icon type="shopping" />立即购买</a-button>
+      <a-page-header :title="gooditem.name" :sub-title="'商品单号'+id" @back="() => $router.go(-1)" >
+        <template slot="tags">
+          <a-tag color="blue">
+            {{gooditem.type}}
+          </a-tag>
+        </template>
+        <template slot="extra">
+<!--          <a-button key="3">-->
+<!--            Operation-->
+<!--          </a-button>-->
+          <a-popover placement="bottom" trigger="click">
+            <template slot="content">
+              <p>单号：{{gooditem.id}}</p>
+              <p>商品：{{gooditem.name}}</p>
+            </template>
+            <template slot="title">
+              <span>您已预订了该商品</span>
+            </template>
+            <a-button key="2" @click="insertToLike">
+              <a-icon type="star" />
+              收藏
+            </a-button>
+          </a-popover>
+          <a-button key="1" type="primary">
+            <a-icon type="shopping" />
+            立即购买
+          </a-button>
+        </template>
+        <div class="content">
+          <div class="main">
+            <a-descriptions size="small" :column="2">
+              <a-descriptions-item label="创建人">
+                {{ gooditem.userId }}
+              </a-descriptions-item>
+              <a-descriptions-item label="创建时间">
+<!--                <a>421421</a>-->
+              </a-descriptions-item>
+              <a-descriptions-item label="商品标题">
+                {{gooditem.name}}
+              </a-descriptions-item>
+              <a-descriptions-item label="商品类型">
+                {{gooditem.type}}
+              </a-descriptions-item>
+              <a-descriptions-item label="备注">
+                {{gooditem.description}}
+              </a-descriptions-item>
+            </a-descriptions>
           </div>
-        </a-row>
-        <div class="detail-list">
-          <a-row class='detail-item'>
-            <a-col :span='12'><span>创建人：</span>{{gooditem.userId}}</a-col>
-            <a-col :span='12'><span>创建时间：</span>{{releasetime}}</a-col>
-          </a-row>
-          <a-row class='detail-item'>
-            <a-col :span='12'><span>商品标题：</span>{{gooditem.name}}</a-col>
-            <a-col :span='12'><span>物品类型：</span>{{gooditem.type}}</a-col>
-          </a-row>
-          <a-row class='detail-item'>
-            <a-col :span='24'><span>备注：</span>{{gooditem.description}}</a-col>
-          </a-row>
+          <div class="extra">
+            <div
+              :style="{
+              display: 'flex',
+              width: 'max-content',
+              justifyContent: 'flex-end',
+            }"
+            >
+              <a-statistic
+                title="状态"
+                value="在售"
+                :style="{
+                marginRight: '64px'
+              }"
+                valueStyle="color:#faad14"
+              />
+              <a-statistic title="单价" prefix="￥" :style="{marginRight: '64px'}" :value="gooditem.price" />
+              <a-statistic title="数量" prefix="" :style="{marginRight: '64px'}" :value="gooditem.quantity" />
+              <a-statistic title="预订数量" :value="1128" style="margin-right: 50px">
+                <template #suffix>
+                  <a-icon type="like" />
+                </template>
+              </a-statistic>
+            </div>
+          </div>
         </div>
-        <a-row type='flex'>
-          <div class="head-info">
-            <span>状态</span>
-            <p style='color:#faad14'>在售</p>
-          </div>
-          <div class="head-info">
-            <span>单价</span>
-            <p>￥{{gooditem.price}}</p>
-          </div>
-          <div class="head-info">
-            <span>数量</span>
-            <p>{{gooditem.quantity}}</p>
-          </div>
-        </a-row>
-      </div>
+      </a-page-header>
     </div>
     <a-row  class='img-box' type='flex'>
       <span>商品图片：</span>
@@ -102,13 +129,13 @@ export default {
     },
     insertToLike(){
       var mylike = {id:0,userId:this.pageUserId,goodsId:this.id}
-      alert("您已预定了"+mylike.goodsId)
+      // alert("您已预定了"+mylike.goodsId)
       axios.post('http://localhost:8181/wantGoods/add',mylike).then(function (response){
-        if (response.data){
-          alert("完成预定")
-        }
-        else
-          alert("收藏失败！")
+        // if (response.data){
+        //   alert("完成预定")
+        // }
+        // else
+        //   alert("收藏失败！")
       })
     }
   },
@@ -175,6 +202,32 @@ export default {
     color: #333;
     font-size: 24px;
     margin: 0;
+  }
+  tr:last-child td {
+    padding-bottom: 0;
+  }
+  #components-page-header-demo-responsive .content {
+    display: flex;
+  }
+  #components-page-header-demo-responsive .ant-statistic-content {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  @media (max-width: 576px) {
+    #components-page-header-demo-responsive .content {
+      display: block;
+    }
+
+    #components-page-header-demo-responsive .main {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    #components-page-header-demo-responsive .extra {
+      width: 100%;
+      margin-left: 0;
+      text-align: left;
+    }
   }
 }
 </style>

@@ -36,7 +36,7 @@
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
             @click="() => (collapsed = !collapsed)"
           />
-          <a-menu v-model="current" mode="horizontal" :default-selected-keys="[$route.path]" @select='jumpTo'>
+          <a-menu v-model="current" mode="horizontal" :default-selected-keys="[$route.path]" @click='jumpTo'>
             <a-menu-item key="/visitor/home/home"> <a-icon type="home" />
               首页
             </a-menu-item>
