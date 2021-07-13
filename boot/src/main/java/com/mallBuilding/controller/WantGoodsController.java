@@ -44,17 +44,20 @@ public class WantGoodsController {
 
 
     @GetMapping("/queryWant/{id}")
-    public List<GmGoods> queryWant(@PathVariable("id") String id){
+    public List<GmGoods> queryWant(@PathVariable("id") Integer id){
         List<GmGoods> lists = this.wantDao.queryByUserId(id);
         return lists;
         //集合
     }
 
-    @DeleteMapping("/delete/{id}")
-    public boolean delete(@PathVariable("id") String id )
-    {
-        return this.wantGoodsService.removeById(id);
+    @GetMapping("/delete/{uid}/{gid}")
+    public boolean queryWantBy(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid){
+        String id = this.wantDao.queryId(Integer.valueOf(uid),Integer.valueOf(gid));
+
+        return this.wantDao.removeById(Integer.valueOf(id));
+        //集合
     }
+
 
 
 }

@@ -41,7 +41,6 @@ public class AdminController {
     public boolean login(@RequestBody Admin admin)
     {
         Admin queryUser = adminDao.queryAdminById(admin.getId(),admin.getPassword());
-        // System.out.println(queryUser.getName()+queryUser.getPassword());
         if(queryUser==null)
         {
             System.out.println("404");

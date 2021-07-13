@@ -10,9 +10,9 @@ import java.util.List;
 
 @Repository
 public interface GoodsDao {
-    @Select("select * from web_mall_building.gm_goods where type=#{type}")
+    @Select("select * from web_mall_sky.gm_goods where type=#{type}")
     List<GmGoods> queryGoodsByType(String type);
 
-    @Select("select * from web_mall_building.gm_goods where user_id=#{userId}")
-    List<GmGoods> queryGoodsByUserId(String userId);
+    @Select("select * from web_mall_sky.gm_goods where user_id=#{userId}")
+    List<GmGoods> queryGoodsByUserId(Integer userId);
 }

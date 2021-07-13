@@ -27,6 +27,18 @@ public class UmUserController {
     @Autowired
     private UserDao userDao;
 
+    @PostMapping("/telToId")
+    public Integer telToId(@RequestBody String tel){
+        try {
+            int ret = this.userDao.queryIdByTel(tel.substring(0,tel.indexOf('=')));
+            return ret;
+        }
+        catch(Exception e){
+            System.err.println("404");
+        }
+        return 0;
+    }
+
     @GetMapping("/list")
     public List<UmUser> list()
     {
@@ -54,27 +66,6 @@ public class UmUserController {
     @PostMapping("/add")
     public boolean add(@RequestBody UmUser umUser){
         return this.umUserService.save(umUser);
-    }
-
-    @PutMapping("/login")//登录接口
-    public boolean login(@RequestBody UmUser umUser)
-    {
-        try {
-            UmUser queryUser = userDao.queryUserByName(umUser.getId(), umUser.getPassword());
-            // System.out.println(queryUser.getName()+queryUser.getPassword());
-            if (queryUser == null) {
-                System.out.println("404");
-                return false;
-            } else {
-                System.out.println("200");
-                return true;
-            }
-        }
-        catch (Exception e){
-            //do nothing
-        }
-        return false;
-
     }
 
 
