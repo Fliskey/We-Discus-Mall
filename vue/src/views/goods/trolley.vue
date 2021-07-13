@@ -173,20 +173,26 @@ export default {
 
 
     showDeleteConfirm(c){
-      this.$confirm({
+      this.$confirm(/*axios.post('http://localhost:8181/purchaseGoods/GtoP/'+c).then(res => {
+
+          })*/{
         title: '确定要删除'+c+'吗？',
         okText: '确定',
         okType: 'danger',
         cancelText: '取消',
         onOk(){
           //alert("删除"+Gid)
-          axios.post('http://localhost:8181/purchaseGoods/delete/'+c).then(res =>{
-            console.log(res)
-            if (res){
-              alert('删除成功！')
-              location.reload()
-            }
+          axios.get('http://localhost:8181/purchaseGoods/GtoP/'+c).then(res =>{
+            c = res.data
+            axios.post('http://localhost:8181/purchaseGoods/delete/'+c).then(res =>{
+              console.log(res)
+              if (res){
+                alert('删除成功！')
+                location.reload()
+              }
+            })
           })
+
         }
       })
     },

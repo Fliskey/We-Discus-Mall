@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
-      <change afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/PurchaseGoodsDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/GenerateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/GenerateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/PurchaseGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/PurchaseGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/PurchaseGoodsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/PurchaseGoodsDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/visitor_layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/visitor_layout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/visitor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/visitor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/detail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/trolley.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/trolley.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +133,7 @@
       <workItem from="1626073082634" duration="2189000" />
       <workItem from="1626094869972" duration="5986000" />
       <workItem from="1626134813688" duration="4898000" />
+      <workItem from="1626142199971" duration="2622000" />
     </task>
     <servers />
   </component>

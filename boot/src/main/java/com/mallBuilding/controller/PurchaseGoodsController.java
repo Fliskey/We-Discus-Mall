@@ -45,5 +45,8 @@ public class PurchaseGoodsController {
         return this.purchaseGoodsMapper.deleteById(id);
     }
 
+    @GetMapping("/GtoP/{id}")
+    public int GtoP(@PathVariable("id") Integer id)  { return this.purchaseGoodsDao.queryPidByGid(id); }
+
 }
 

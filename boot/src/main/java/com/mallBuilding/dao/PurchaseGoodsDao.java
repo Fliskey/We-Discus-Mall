@@ -23,4 +23,9 @@ public interface PurchaseGoodsDao {
             "from web_mall_sky.gm_goods g, web_mall_sky.purchase_goods p " +
             "where p.user_id=#{userId} and p.goods_id = g.id")
     List<GmGoods> queryGMGoodsByUserId(Integer userid);
+
+    @Select("select p.id " +
+            "from web_mall_sky.gm_goods g, web_mall_sky.purchase_goods p " +
+            "where g.id = #{id} and g.id = p.goods_id")
+    Integer queryPidByGid(Integer id);
 }
