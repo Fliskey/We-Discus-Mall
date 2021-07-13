@@ -15,6 +15,10 @@
           <a-icon type="shopping" />
           <span>我的预定</span>
         </a-menu-item>
+        <a-menu-item key="/visitor/goods/trolley">
+          <a-icon type="user" />
+          <span>购物车</span>
+        </a-menu-item>
         <a-menu-item key="/visitor/user/sell">
           <a-icon type="user" />
           <span>我的发布</span>

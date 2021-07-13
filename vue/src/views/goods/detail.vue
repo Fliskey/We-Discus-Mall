@@ -24,10 +24,20 @@
               收藏
             </a-button>
           </a-popover>
-          <a-button key="1" type="primary">
-            <a-icon type="shopping" />
-            立即购买
-          </a-button>
+          <a-popover placement="bottom" trigger="click">
+            <template slot="content">
+              <p>单号：{{gooditem.id}}</p>
+              <p>商品：{{gooditem.name}}</p>
+            </template>
+            <template slot="title">
+              <span>该商品已加入购物车</span>
+            </template>
+            <a-button key="1" @click="insertTrolley">
+              <a-icon type="shopping" />
+              加入购物车
+            </a-button>
+          </a-popover>
+
         </template>
         <div class="content">
           <div class="main">
@@ -122,6 +132,17 @@ export default {
     })
   },
   methods:{
+    insertTrolley(){
+      var myTrolley = {
+        id:0,
+        userId:this.pageUserId,
+        goodsId:this.id,
+        quantity:1
+      }
+      axios.post('http://localhost:8181/purchaseGoods/add',myTrolley).then(function (response){
+
+      })
+    },
     getParams(){
       //取到路由传过来的参数
       //将数据放在当前组件的数据内
