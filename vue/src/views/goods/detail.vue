@@ -46,7 +46,7 @@
           <div class="main">
             <a-descriptions size="small" :column="2">
               <a-descriptions-item label="创建人">
-                {{ gooditem.userId }}
+                {{ this.userName }}
               </a-descriptions-item>
               <a-descriptions-item label="创建时间">
 <!--                <a>421421</a>-->

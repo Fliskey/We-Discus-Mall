@@ -2,12 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/GenerateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/GenerateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/GmGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/GmGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/PurchaseGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/PurchaseGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/UmUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/UmUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/WantGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/WantGoodsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/WantDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/WantDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/entity/PurchaseGoods.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/entity/PurchaseGoods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/PurchaseGoodsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/PurchaseGoodsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/xml/PurchaseGoodsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/xml/PurchaseGoodsMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/service/PurchaseGoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/service/PurchaseGoodsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/service/impl/PurchaseGoodsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/service/impl/PurchaseGoodsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/login/register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/visitor_layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/visitor_layout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/visitor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/visitor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/goods/detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/detail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/list.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/goods/public.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/public.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/trolley.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/trolley.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +54,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TODO_SCOPE" value="所有位置" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views/user" />
@@ -136,6 +148,7 @@
       <workItem from="1626094869972" duration="5986000" />
       <workItem from="1626134813688" duration="4898000" />
       <workItem from="1626142199971" duration="4987000" />
+      <workItem from="1626187096029" duration="10000" />
     </task>
     <servers />
   </component>

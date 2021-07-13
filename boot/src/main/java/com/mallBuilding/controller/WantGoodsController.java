@@ -39,7 +39,11 @@ public class WantGoodsController {
 
     @PostMapping("/add")
     public boolean add(@RequestBody WantGoods wantGoods){
-        return this.wantGoodsService.save(wantGoods);
+        if(this.wantDao.queryByGoodsId(Integer.valueOf(wantGoods.getGoodsId()),Integer.valueOf(wantGoods.getUserId())).isEmpty())
+        {
+            return this.wantGoodsService.save(wantGoods);
+        }
+        return false;
     }
 
 

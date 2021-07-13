@@ -3,15 +3,10 @@ package com.mallBuilding.controller;
 
 import com.mallBuilding.dao.GoodsDao;
 import com.mallBuilding.entity.GmGoods;
-import com.mallBuilding.entity.UmUser;
 import com.mallBuilding.service.GmGoodsService;
-import com.mallBuilding.service.UmUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-
-import java.util.Collections;
 import java.util.List;
 
 /**

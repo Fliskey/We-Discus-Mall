@@ -24,4 +24,7 @@ public interface WantDao {
     @Select("select count(*)  likeQuantity from want_goods w where w.goods_id = #{g_id}")
     Integer countLike(Integer g_id);
 
+    @Select("select * from want_goods w where w.goods_id = #{g_id} and w.user_id = #{u_id}")
+    List<GmGoods> queryByGoodsId(Integer g_id,Integer u_id);
+
 }
