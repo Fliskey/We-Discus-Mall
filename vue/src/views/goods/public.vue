@@ -34,10 +34,11 @@
                       block v-model='gmGoods.description'/>
         </a-form-item>
         <a-form-item
+
           label="商品类型"
           :labelCol="{span: 7}"
           :wrapperCol="{span: 10}">
-          <a-select v-model='gmGoods.type'>
+          <a-select placeholder = "商品类型" v-model='gmGoods.type'>
             <a-select-option v-for="item in lists" :key="item.value">{{ item.label }}</a-select-option>
           </a-select>
         </a-form-item>
@@ -70,7 +71,7 @@ export default {
         id:'0',
         userId:this.$cookies.get('vid'),
         name:'',
-        type:'',
+        type:undefined,
         quantity:'',
         price:'',
         imageUrl:'',
@@ -122,10 +123,6 @@ export default {
         if(response.data){
           alert('商品信息提交成功！')
           location.reload()
-          // this.$router.push({
-          //   path: '/admin/goods/list'
-          // })
-
         }
         else
           alert('商品信息提交失败！')

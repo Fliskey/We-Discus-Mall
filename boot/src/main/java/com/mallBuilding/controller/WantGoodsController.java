@@ -58,6 +58,11 @@ public class WantGoodsController {
         //集合
     }
 
+    @GetMapping("/countLike/{gid}")
+    public Integer countLike(@PathVariable("gid") Integer gid){
+        Integer countLikeToGoods = this.wantDao.countLike(gid);
+        return countLikeToGoods;
+    }
 
 
 }

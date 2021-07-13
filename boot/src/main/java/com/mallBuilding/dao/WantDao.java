@@ -21,4 +21,7 @@ public interface WantDao {
     @Delete("delete from want_goods where want_goods.id = #{id}" )
     Boolean removeById(Integer id);
 
+    @Select("select count(*)  likeQuantity from want_goods w where w.goods_id = #{g_id}")
+    Integer countLike(Integer g_id);
+
 }

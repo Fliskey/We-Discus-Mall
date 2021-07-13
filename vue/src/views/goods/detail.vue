@@ -12,13 +12,16 @@
 <!--            Operation-->
 <!--          </a-button>-->
           <a-popover placement="bottom" trigger="click">
-            <template slot="content">
-              <p>单号：{{gooditem.id}}</p>
-              <p>商品：{{gooditem.name}}</p>
-            </template>
-            <template slot="title">
-              <span>您已预订了该商品</span>
-            </template>
+            <div v-if="this.isSame == 0">
+              <template slot="content">
+                <p>单号：{{gooditem.id}}</p>
+                <p>商品：{{gooditem.name}}</p>
+              </template>
+              <template slot="title">
+                <span>您已预订了该商品</span>
+              </template>
+            </div>
+<!--todo 同用户预定，小气泡消除-->
             <a-button key="2" @click="insertToLike">
               <a-icon type="star" />
               收藏
@@ -77,7 +80,7 @@
               />
               <a-statistic title="单价" prefix="￥" :style="{marginRight: '64px'}" :value="gooditem.price" />
               <a-statistic title="数量" prefix="" :style="{marginRight: '64px'}" :value="gooditem.quantity" />
-              <a-statistic title="预订数量" :value="1128" style="margin-right: 50px">
+              <a-statistic title="预订数量" :value="likeQuantity" style="margin-right: 50px">
                 <template #suffix>
                   <a-icon type="like" />
                 </template>
@@ -116,6 +119,8 @@ export default {
         imageUrl:'',
         description:''
       },
+      likeQuantity:'',
+      isSame:0,
     }
   },
   mounted() {
@@ -130,6 +135,12 @@ export default {
       _this.gooditem = response.data
       // alert("正确的"+response.data.userId)
     })
+    axios.get('http://localhost:8181/wantGoods/countLike/'+Gid).then(function (response){
+      console.log("测试预定数量接口")
+      console.log(response)
+      _this.likeQuantity = response.data
+    })
+
   },
   methods:{
     insertTrolley(){
@@ -149,7 +160,16 @@ export default {
       this.id = this.$route.params.id
     },
     insertToLike(){
+      console.log("当前浏览者的id是  "+this.pageUserId);
+      console.log("该商品发布者的id是  "+this.gooditem.userId);
+      if(this.pageUserId==this.gooditem.userId){
+        console.log("我预定我自己：error！")
+        alert("这个是您自己发布的商品哦，不可以预定哦~")
+        this.isSame = 1
+        return;
+      }
       var mylike = {id:0,userId:this.pageUserId,goodsId:this.id}
+      //assert.notEqual(this.pageUserId, this.gooditem.userId, '预期二者不相等')
       // alert("您已预定了"+mylike.goodsId)
       axios.post('http://localhost:8181/wantGoods/add',mylike).then(function (response){
         // if (response.data){
