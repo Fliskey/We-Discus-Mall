@@ -28,7 +28,7 @@
   export default {
     data () {
       return {
-        ident: 1,
+        ident: 3,
         wrapperCol: { span: 24 },
         umUser:{
           id:'',
@@ -36,6 +36,10 @@
           password:'',
         },
         umLogin:{
+          id:'',
+          password:''
+        },
+        adminLogin:{
           id:'',
           password:''
         },
@@ -68,20 +72,28 @@
     methods: {
       userLogin () {
         if(this.ident === 2){
-          // 登录前校验
-          // 发起登录请求
           let _this = this
-          axios.put('http://localhost:8181/admin/login/',this.umUser).then(function (response){
-            if(!response.data)
-              alert('用户名或密码错误，请重新输入！')
-            else
-              _this.http.get('http://localhost:8181/admin/list/').then(() => {
-                alert('登录成功！')
-                _this.$cookies.set('aid',_this.umUser.id)
-                _this.$router.push({
-                  path: '/admin/list'
-                })
+          axios.post('http://localhost:8181/admin/telToId/',this.umUser.tel).then(function (response){
+            _this.umUser.id = response.data
+
+            axios.post('http://localhost:8181/admin/querySalt/',_this.umUser.id).then(function (response){
+              _this.salt = response.data
+              _this.adminLogin.id = _this.umUser.id
+              _this.adminLogin.password = _this.$sha256(_this.umUser.password + _this.salt)
+
+              axios.put('http://localhost:8181/admin/login/',_this.adminLogin).then(function (response){
+                if(!response.data)
+                  alert('用户名或密码错误，请重新输入！')
+                else{
+                  // 路由注册
+                  alert('登录成功！')
+                  _this.$cookies.set('aid',_this.umUser.id)
+                  _this.$router.push({
+                    path: '/admin/list'
+                  })
+                }
               })
+            })
           })
         }
         else if(this.ident === 3){

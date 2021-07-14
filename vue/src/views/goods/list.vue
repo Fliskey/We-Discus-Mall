@@ -56,7 +56,7 @@
             <p>{{v.description}}</p>
             <div class="author">
               <a-avatar size="small" src="/img/user.png" />
-              <a>于丽丽</a>发布于
+              <a>{{userName[n]}}</a>发布于
               <em>2018-08-05 22:23</em>
             </div>
           </div>
@@ -67,19 +67,6 @@
         </a-list-item>
       </a-list>
     </a-card>
-<!--    <a-pagination-->
-<!--      v-model="current"-->
-<!--      :page-size-options="pageSizeOptions"-->
-<!--      :total="total"-->
-<!--      show-size-changer-->
-<!--      :page-size="pageSize"-->
-<!--      @showSizeChange="onShowSizeChange"-->
-<!--    >-->
-<!--      <template slot="buildOptionText" slot-scope="props">-->
-<!--        <span v-if="props.value !== '50'">{{ props.value }}条/页</span>-->
-<!--        <span v-if="props.value === '50'">全部</span>-->
-<!--      </template>-->
-<!--    </a-pagination>-->
   </div>
 </template>
 
@@ -136,6 +123,7 @@ export default {
       // defaultCurrent: 1,
       // pageSize: 10,
       // total: 50,
+      userName: [],
       pagination: {
         pageNo: 1,
         pageSize: 10, // 默认每页显示数量
@@ -152,14 +140,45 @@ export default {
   watch: {
   },
   methods: {
-    getList () {
+    async getList () {
+      let _this = this;
       this.loading = true
-      this.http.get('http://localhost:8181/gmGoods/list').then(res => {
+      await this.axios.get('http://localhost:8181/gmGoods/list').then(res => {
         console.log(res)
-        this.loading = false
-        this.data = res.data
-        this.pagination.total = res.data.length
+        _this.data = res.data
+        _this.pagination.total = res.data.length
+        _this.num = res.data.length
+        //alert(_this.data[0].userId)
+        //this.loading = false
       })
+     // alert(this.num)
+      for (var i=0; i<this.num; i++){
+        let I = i
+        //alert(_this.data[0].userId)
+        await this.axios.get('http://localhost:8181/umUser/findName/'+_this.data[i].userId).then(res=>{
+          //_this.userName.setItem(_this.data[i].userId,res.data)
+          //alert(res.data)
+          _this.userName.push(res.data)
+          //console.log(_this.userName[I])
+        })
+      }
+    },
+
+    async getUserName(uid)
+    {
+      var name
+      let _this = this
+      await this.axios.get('http://localhost:8181/umUser/findName/'+uid).then(function (response) {
+        return response.data
+
+      })
+
+    },
+    change(uid)
+    {
+      this.getUserName(uid).then(res => {
+          console.log(res.data);
+        })
     },
     selectList(val) {
       if (val == 7) { // todo 此处没有做到对getList的复用 之后可以改进

@@ -39,7 +39,11 @@ public class WantGoodsController {
 
     @PostMapping("/add")
     public boolean add(@RequestBody WantGoods wantGoods){
-        return this.wantGoodsService.save(wantGoods);
+        if(this.wantDao.queryByGoodsId(Integer.valueOf(wantGoods.getGoodsId()),Integer.valueOf(wantGoods.getUserId())).isEmpty())
+        {
+            return this.wantGoodsService.save(wantGoods);
+        }
+        return false;
     }
 
 
@@ -58,6 +62,11 @@ public class WantGoodsController {
         //集合
     }
 
+    @GetMapping("/countLike/{gid}")
+    public Integer countLike(@PathVariable("gid") Integer gid){
+        Integer countLikeToGoods = this.wantDao.countLike(gid);
+        return countLikeToGoods;
+    }
 
 
 }

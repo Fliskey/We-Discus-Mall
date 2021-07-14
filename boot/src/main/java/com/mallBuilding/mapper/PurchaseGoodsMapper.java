@@ -1,6 +1,6 @@
 package com.mallBuilding.mapper;
 
-import com.mallBuilding.entity.Admin;
+import com.mallBuilding.entity.PurchaseGoods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
  * </p>
  *
  * @author Fliskey
- * @since 2021-07-07
+ * @since 2021-07-13
  */
 @Repository
-public interface AdminMapper extends BaseMapper<Admin> {
+public interface PurchaseGoodsMapper extends BaseMapper<PurchaseGoods> {
 
 }

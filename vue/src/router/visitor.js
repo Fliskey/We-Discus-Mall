@@ -38,6 +38,10 @@ export default [
         component: () => import('@/views/user/sell')
       },
       {
+        path: 'goods/trolley',
+        component: () => import('@/views/goods/trolley')
+      },
+      {
         path: 'goods/reserve',
         component: () => import('@/views/goods/reserve')
       },

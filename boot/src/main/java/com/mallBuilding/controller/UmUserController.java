@@ -57,6 +57,12 @@ public class UmUserController {
         return this.umUserService.getById(id);
     }
 
+    @GetMapping("/findName/{id}")
+    public String findName(@PathVariable("id") Integer id)
+    {
+        return this.umUserService.getById(id).getName();
+    }
+
     @PutMapping("/update")
     public boolean update(@RequestBody UmUser umUser)
     {

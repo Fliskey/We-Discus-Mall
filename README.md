@@ -61,9 +61,9 @@ a Second-Hand Trading System for project practice
 
 ### 第二阶段
 
-- [ ] 用户登录，选择物品加入购物车
+- [x] 用户登录，选择物品加入购物车
 
-- [ ] 购物车物品数量的修改、删除
+- [x] 购物车物品数量的修改、删除
 
 - [ ] 订单提交，库存数量修改
 
@@ -94,56 +94,3 @@ a Second-Hand Trading System for project practice
 - 调用后端接口：axois
 
 数据库：MySQL 8.0
-
-
-
-
-## 数据库设计
-
-### 数据库名web_mall_building
-
-#### 数据库用户与权限
-
-- admin
-  - id
-  - tel_number
-  - password
-
-#### admin:管理员表
-
-- admin
-  - id
-  - tel_number
-  - password
-
-#### um:用户管理
-
-- um_user
-  - id
-  - name
-  - password
-  - tel_number
-  - email
-- um_login
-  - id
-  - password
-  - salt
-
-#### gm:二手商品管理
-
-- gm_goods
-  - id
-  - user_id
-  - name
-  - type
-  - quantity
-  - price
-
-#### om:订单管理
-
-- om_order
-  - id
-  - goods_id
-  - seller_id
-  - buyer_id
-  - actual_pay_amout

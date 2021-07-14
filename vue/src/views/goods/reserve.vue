@@ -14,7 +14,7 @@
             <router-link :to="'/visitor/goods/detail/'+v.id">
               <a-icon key="setting" type="exclamation-circle"/>
             </router-link>
-            <a-icon key="edit" type="shopping" />
+            <a-icon key="edit" type="shopping" @click="insertTrolley(v.id)"/>
             <a-icon key="ellipsis" type="close-circle" @click="delLike(uid,v.id)"/>
           </template>
           <a-card-meta :title=v.name :description=v.description>
@@ -59,6 +59,15 @@ export default {
     },
   },
   methods: {
+    insertTrolley(gid){
+      var myTrolley = {
+        id:0,userId:this.uid,goodsId:gid,quantity: '1'
+      }
+      axios.post('http://localhost:8181/purchaseGoods/add',myTrolley).then(function (response){
+        if(response.data)
+          alert("成功添加到购物车！")
+      })
+    },
     //获取预订列表
     getList (id) {
       this.loading = true
