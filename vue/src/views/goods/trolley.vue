@@ -1,14 +1,17 @@
 <template>
   <div>
-  <a-button margin type="primary" @click="showConfirm">结算购物车</a-button>
+    <a-button margin type="primary" @click="showConfirm">结算购物车</a-button>
     <a-table :columns="columns" :data-source="data" :align="center">
       <span slot="imageUrl" slot-scope="text,record">
         <img style="width:140px;height:120px" slot="imageUrl" :slot-scope="text" :src=text />
       </span>
+      <span slot="quantity" slot-scope="text,record,index" >
+         <a-input-number id="quantity" v-model="record.quantity" :min="1" :max="10" @change="onChange" />
+      </span>
       <span slot="operation" slot-scope="text, record,index">
-          <a-button type="primary" @click="showDrawer(record)" style="margin-right: 1px"> 修改 </a-button>
+          <a-button type="primary" @click="handleSubmit(record.id,vid)" style="margin-right: 1px"> 确认 </a-button>
           <a-divider type="vertical"></a-divider>
-          <a-button margin type="danger" @click="showDeleteConfirm(record.id)">删除</a-button>
+          <a-button margin type="danger" @click="showDeleteConfirm()">删除</a-button>
           <div class="editable-row-operations">
             <span v-if="record.editable">
               <a @click="() => save(record.key)">Save</a>
@@ -16,23 +19,7 @@
           </div>
       </span>
 
-      <template
-        v-for="col in ['name', 'type', 'quantity','price']"
-        :slot="col"
-        slot-scope="text, record, index"
-      >
-        <div :key="col">
-          <a-input
-            v-if="record.editable"
-            style="margin: -5px 0"
-            :value="text"
-            @change="e => handleChange(e.target.value, record.key, col)"
-          />
-          <template v-else>
-            {{ text }}
-          </template>
-        </div>
-      </template>
+
     </a-table>
   </div>
 </template>
@@ -102,18 +89,22 @@ export default {
       data,
       columns,
       editingKey: '',
+      vid: '',
+      quantityValue: ''
     };
   },
   mounted() {
     if(this.$cookies.isKey('vid') === false)
       this.$router.push('login')
     let id = this.$cookies.get('vid')
+    this.vid = id
     this.getList(id)
   },
   //获取已发布的商品
   methods: {
     onChange(value) {
       console.log('changed', value);
+      this.quantityValue = value
     },
     getList (vid) {
       this.loading = true
@@ -170,28 +161,34 @@ export default {
         this.data = newData;
       }
     },
+    handleSubmit(gid,vid) {
+      let _this = this
+      axios.get('http://localhost:8181/purchaseGoods/update/'+vid+'/'+gid+'/'+this.quantityValue).then(function (response) {
+        if(response.data){
+          alert('修改成功！')
+
+        }
+      })
+
+    },
 
 
-    showDeleteConfirm(c){
-      this.$confirm(/*axios.post('http://localhost:8181/purchaseGoods/GtoP/'+c).then(res => {
-
-          })*/{
-        title: '确定要删除'+c+'吗？',
+    showDeleteConfirm(gid,vid){
+      this.$confirm({
+        title: '确定要删除'+gid+'吗？',
         okText: '确定',
         okType: 'danger',
         cancelText: '取消',
         onOk(){
-          //alert("删除"+Gid)
-          axios.get('http://localhost:8181/purchaseGoods/GtoP/'+c).then(res =>{
-            c = res.data
-            axios.post('http://localhost:8181/purchaseGoods/delete/'+c).then(res =>{
-              console.log(res)
-              if (res){
-                alert('删除成功！')
-                location.reload()
-              }
-            })
+          axios.get('http://localhost:8181/purchaseGoods/delete/'+vid+'/'+gid+'/').then(res =>{
+            //console.log(res)
+            if (res){
+              alert('删除成功！')
+              location.reload()
+            }
           })
+
+
         }
       })
     },

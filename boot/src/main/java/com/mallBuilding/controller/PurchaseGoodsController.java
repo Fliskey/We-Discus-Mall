@@ -39,14 +39,29 @@ public class PurchaseGoodsController {
 
     @GetMapping("/findByUserId/{id}")
     public List<GmGoods> findByUserId(@PathVariable("id") Integer id) {return this.purchaseGoodsDao.queryGMGoodsByUserId(id);}
+/*
 
     @PostMapping("/delete/{id}")
     public int delete(@PathVariable("id") Integer id){
         return this.purchaseGoodsMapper.deleteById(id);
     }
+*/
+
 
     @GetMapping("/GtoP/{id}")
     public int GtoP(@PathVariable("id") Integer id)  { return this.purchaseGoodsDao.queryPidByGid(id); }
 
+
+    @GetMapping("/delete/{uid}/{gid}")
+    public boolean queryWantBy(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid){
+        return this.purchaseGoodsDao.deleteByUserId(uid,gid);
+        //集合
+    }
+
+    @GetMapping("/update/{uid}/{gid}/{quantity}")
+    public boolean update(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid,@PathVariable("quantity") Integer quantity)
+    {
+        return this.purchaseGoodsDao.updateByUserId(uid,gid,quantity);
+    }
 }
 
