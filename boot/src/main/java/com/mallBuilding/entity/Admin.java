@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author Fliskey
@@ -25,6 +25,8 @@ import lombok.EqualsAndHashCode;
     private String telNumber;
 
     private String password;
+
+    private String salt;
 
 
 }

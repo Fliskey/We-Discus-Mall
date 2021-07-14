@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
-      <change beforePath="$PROJECT_DIR$/../boot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/PurchaseGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/PurchaseGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/PurchaseGoodsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/PurchaseGoodsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/AdminDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/dao/AdminDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/entity/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/entity/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/AdminMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/AdminMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/reserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/reserve.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/goods/trolley.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/trolley.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/visitor_layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/visitor_layout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/list.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +140,8 @@
       <workItem from="1626134813688" duration="4898000" />
       <workItem from="1626142199971" duration="4987000" />
       <workItem from="1626187096029" duration="1601000" />
-      <workItem from="1626221083795" duration="604000" />
+      <workItem from="1626221083795" duration="7047000" />
+      <workItem from="1626228501456" duration="667000" />
     </task>
     <servers />
   </component>

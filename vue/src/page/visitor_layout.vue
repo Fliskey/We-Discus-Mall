@@ -4,19 +4,19 @@
       <div class="logo">二手交易市场</div>
       <a-menu theme="dark" mode="inline" :default-selected-keys="[$route.path]" @select='jumpTo'>
         <a-menu-item key="/visitor/goods/list">
-          <a-icon type="user" />
+          <a-icon type="shop" />
           <span>集贸市场</span>
         </a-menu-item>
         <a-menu-item key="/visitor/goods/public">
-          <a-icon type="shopping" />
+          <a-icon type="plus-square" />
           <span>商品发布</span>
         </a-menu-item>
         <a-menu-item key="/visitor/goods/reserve">
-          <a-icon type="shopping" />
+          <a-icon type="star" />
           <span>我的预定</span>
         </a-menu-item>
         <a-menu-item key="/visitor/goods/trolley">
-          <a-icon type="user" />
+          <a-icon type="shopping-cart" />
           <span>购物车</span>
         </a-menu-item>
         <a-menu-item key="/visitor/user/sell">

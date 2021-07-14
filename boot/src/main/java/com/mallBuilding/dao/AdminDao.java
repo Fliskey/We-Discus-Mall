@@ -11,4 +11,10 @@ public interface AdminDao {
     @Select("select * from web_mall_sky.admin where id=#{id} and password=#{password}")
     Admin queryAdminById(Integer id, String password);
 
+    @Select("select id from web_mall_sky.admin where tel_number = #{tel}")
+    Integer queryIdByTel(String tel);
+
+    @Select("select salt from web_mall_sky.admin where id=#{id}")
+    String querySaltById(Integer id);
+
 }

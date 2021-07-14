@@ -2,6 +2,7 @@ package com.mallBuilding.mapper;
 
 import com.mallBuilding.entity.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Fliskey
  * @since 2021-07-07
  */
+@Repository
 public interface AdminMapper extends BaseMapper<Admin> {
 
 }
