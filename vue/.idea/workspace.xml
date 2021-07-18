@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
-      <change beforePath="$PROJECT_DIR$/../boot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/configuration/MyBatisPlusConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/configuration/MyBatisPlusConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/GmGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/GmGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/WantGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/WantGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/entity/GmGoods.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/entity/GmGoods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/GmGoodsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/GmGoodsMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/list.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +141,8 @@
       <workItem from="1626187096029" duration="1601000" />
       <workItem from="1626221083795" duration="7047000" />
       <workItem from="1626228501456" duration="667000" />
-      <workItem from="1626400385487" duration="617000" />
+      <workItem from="1626400385487" duration="2763000" />
+      <workItem from="1626614331146" duration="5192000" />
     </task>
     <servers />
   </component>

@@ -121,7 +121,7 @@ export default {
       num: 10,
       pageSizeOptions: ['10', '20', '30', '40', '50'],
       // defaultCurrent: 1,
-      // pageSize: 10,
+      pageSize: 4,
       // total: 50,
       userName: [],
       pagination: {
@@ -143,13 +143,15 @@ export default {
     async getList () {
       let _this = this;
       this.loading = true
-      await this.axios.get('http://localhost:8181/gmGoods/list').then(res => {
+      // await this.axios.get('http://localhost:8181/gmGoods/list/').then(res => {
+      await this.axios.get('http://localhost:8181/gmGoods/selectPage/'+this.pageSize).then(res => {
+        console.log(this.pageSize)
         console.log(res)
         _this.data = res.data
+        _this.pageNo= res.current
+        _this.pageSize =res.size
         _this.pagination.total = res.data.length
         _this.num = res.data.length
-        //alert(_this.data[0].userId)
-        //this.loading = false
       })
      // alert(this.num)
       for (var i=0; i<this.num; i++){

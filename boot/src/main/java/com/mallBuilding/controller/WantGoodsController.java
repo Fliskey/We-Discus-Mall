@@ -22,6 +22,8 @@ import java.util.List;
  * @author root
  * @since 2021-07-08
  */
+
+
 @RestController
 @RequestMapping("//wantGoods")
 public class WantGoodsController {
@@ -67,7 +69,6 @@ public class WantGoodsController {
         Integer countLikeToGoods = this.wantDao.countLike(gid);
         return countLikeToGoods;
     }
-
 
 }
 
