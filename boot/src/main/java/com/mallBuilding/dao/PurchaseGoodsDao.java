@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface PurchaseGoodsDao {
@@ -21,7 +22,7 @@ public interface PurchaseGoodsDao {
     @Select("select * from web_mall_sky.gm_goods where id=#{id}")
     GmGoods queryEachGoodsByGid(Integer id);
 
-    @Select("select g.* " +
+    @Select("select g.id,g.user_id,g.name,g.type,p.quantity,g.price,g.image_url,g.description " +
             "from web_mall_sky.gm_goods g, web_mall_sky.purchase_goods p " +
             "where p.user_id=#{userId} and p.goods_id = g.id")
     List<GmGoods> queryGMGoodsByUserId(Integer userid);
@@ -36,5 +37,8 @@ public interface PurchaseGoodsDao {
 
     @Update("update purchase_goods p set p.quantity = #{quantity} where user_id = #{uid} and goods_id = #{gid}")
     Boolean updateByUserId(Integer uid,Integer gid, Integer quantity);
+
+    @Select("select id from purchase_goods p where p.user_id = #{uid} and p.goods_id = #{gid}")
+    int findId(Integer uid,Integer gid);//根据用户id和商品id查找购物车商品数量
 
 }

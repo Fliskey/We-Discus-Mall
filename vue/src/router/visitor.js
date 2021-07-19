@@ -48,6 +48,14 @@ export default [
       {
         path: 'goods/change/:id',
         component: () => import('@/views/goods/change')
+      },
+      {
+        path: 'goods/purchase/:id',
+        component: ()=> import('@/views/goods/purchase')
+      },
+      {
+        path: 'goods/settlement',
+        component: ()=> import('@/views/goods/settlement')
       }
     ]
   }
