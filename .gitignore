@@ -1,4 +1,7 @@
 .DS_Store
-vue/.idea/workspace.xml
-workspace.xml
-vue/.idea/workspace.xml
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
