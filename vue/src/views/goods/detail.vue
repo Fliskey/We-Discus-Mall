@@ -8,25 +8,11 @@
           </a-tag>
         </template>
         <template slot="extra">
-<!--          <a-button key="3">-->
-<!--            Operation-->
-<!--          </a-button>-->
-          <a-popover placement="bottom" trigger="click">
-            <div v-if="this.isSame == 0">
-              <template slot="content">
-                <p>单号：{{gooditem.id}}</p>
-                <p>商品：{{gooditem.name}}</p>
-              </template>
-              <template slot="title">
-                <span>您已预订了该商品</span>
-              </template>
-            </div>
-<!--todo 同用户预定，小气泡消除-->
-            <a-button key="2" @click="insertToLike">
-              <a-icon type="star" />
-              收藏
-            </a-button>
-          </a-popover>
+
+          <a-button  @click='insertToLike' >
+            <a-icon type="star" />
+            预定
+          </a-button>
           <a-popover placement="bottom" trigger="click">
             <template slot="content">
               <p>单号：{{gooditem.id}}</p>
@@ -35,11 +21,15 @@
             <template slot="title">
               <span>该商品已加入购物车</span>
             </template>
-            <a-button key="1" @click="insertTrolley">
+            <a-button type="primary" key="1" @click="insertTrolley">
               <a-icon type="shopping" />
               加入购物车
             </a-button>
           </a-popover>
+          <a-button type="primary" @click='buyNow(gooditem.id)' >
+            <a-icon type="shopping" />
+            立即购买
+          </a-button>
 
         </template>
         <div class="content">
@@ -49,7 +39,7 @@
                 {{ this.userName }}
               </a-descriptions-item>
               <a-descriptions-item label="创建时间">
-<!--                <a>421421</a>-->
+                <!--                <a>421421</a>-->
               </a-descriptions-item>
               <a-descriptions-item label="商品标题">
                 {{gooditem.name}}
@@ -166,24 +156,32 @@ export default {
         console.log("我预定我自己：error！")
         alert("这个是您自己发布的商品哦，不可以预定哦~")
         this.isSame = 1
+
         return;
       }
       var mylike = {id:0,userId:this.pageUserId,goodsId:this.id}
       //assert.notEqual(this.pageUserId, this.gooditem.userId, '预期二者不相等')
       // alert("您已预定了"+mylike.goodsId)
       axios.post('http://localhost:8181/wantGoods/add',mylike).then(function (response){
-        // if (response.data){
-        //   alert("完成预定")
-        // }
-        // else
-        //   alert("收藏失败！")
+         if (response.data){
+           alert("完成预定")
+         }
+         else
+           alert("您已经预定了该商品！")
       })
+    },
+    buyNow(gid)
+    {
+      this.$router.push('/visitor/goods/purchase/'+gid)
     }
+
   },
+
   watch:{
     //检测路由变化，只要变化了就调用获取路由组件参数方法将数据存储到本组件即可
     '$route':'getParams'
   }
+
 }
 </script>
 

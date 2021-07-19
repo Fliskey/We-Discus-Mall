@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/login/register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/login/register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/detail.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +136,8 @@
       <workItem from="1626187096029" duration="1601000" />
       <workItem from="1626221083795" duration="7047000" />
       <workItem from="1626228501456" duration="667000" />
-      <workItem from="1626397322336" duration="2323000" />
+      <workItem from="1626340062000" duration="912000" />
+
     </task>
     <servers />
   </component>

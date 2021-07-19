@@ -7,6 +7,7 @@ import com.mallBuilding.service.GmGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,17 @@ public class GmGoodsController {
 
     @GetMapping("/find/{id}")
     public GmGoods find(@PathVariable("id") Integer id) {return this.gmGoodsService.getById(id);}
+
+    @GetMapping("/findList/{id}")
+    public List<GmGoods> findByGoodsId(@PathVariable("id") Integer[] id)
+    {
+        List<GmGoods> list = new ArrayList<>();
+        for(int i = 0; i < id.length; i++)
+        {
+            list.add(this.goodsDao.queryGoodsByGoodsId(id[i]));
+        }
+        return list;
+    }
 
     @GetMapping("/queryGoodsByType/{type}")
     public List<GmGoods> queryGoodsByType(@PathVariable("type") String type){
