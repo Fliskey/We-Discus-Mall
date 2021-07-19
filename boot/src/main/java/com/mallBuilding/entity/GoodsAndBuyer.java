@@ -16,27 +16,28 @@ import lombok.EqualsAndHashCode;
  * @since 2021-07-18
  */
 @Data
-  @EqualsAndHashCode(callSuper = false)
-    public class OmOrder implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class GoodsAndBuyer implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "id", type = IdType.AUTO)
-      private Integer id;
+    private String imageUrl;
 
-    private String goodsId;
-
-    private String buyerId;
-
-    private BigDecimal actualPayAmount;
-
-    private String buyerAddress;
-
-    private String buyerPhone;
+    private String name;
 
     private String buyerName;
 
-    private boolean hasPayed;
+    private String buyerPhone;
+
+    private String buyerAddress;
+
+    private BigDecimal actualPayAmount;
+
+
+
+
+
+
 
 
 }

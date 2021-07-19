@@ -22,7 +22,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--分页插件-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>

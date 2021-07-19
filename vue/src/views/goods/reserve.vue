@@ -79,8 +79,6 @@ export default {
     },
     onShowSizeChange(current, pageSize) {
       console.log(current, pageSize);
-
-
     },
     delLike(uid,gid){
       //删除请求,对象为用户-货物数值对
