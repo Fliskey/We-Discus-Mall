@@ -1,9 +1,17 @@
 package com.mallBuilding.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mallBuilding.dao.GoodsDao;
 import com.mallBuilding.entity.GmGoods;
+import com.mallBuilding.mapper.GmGoodsMapper;
 import com.mallBuilding.service.GmGoodsService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +37,9 @@ public class GmGoodsController {
     @Autowired
     private GoodsDao goodsDao;
 
+    @Autowired
+    private GmGoodsMapper gmGoodsMapper;
+
     @PostMapping("/add")  //填写商品信息接口
     public boolean add(@RequestBody GmGoods gmGoods){
         return this.gmGoodsService.save(gmGoods);
@@ -38,6 +49,16 @@ public class GmGoodsController {
     public List<GmGoods> list()
     {
         return this.gmGoodsService.list();
+    }
+
+    @GetMapping("/selectPage/{current}/{pageSize}")
+    public Page<GmGoods> selectPage(@PathVariable("current") Integer current,@PathVariable("pageSize") Integer pageSize) //@Param(Constants.WRAPPER) Wrapper<GmGoods> queryWrapper
+    {
+        LambdaQueryWrapper<GmGoods> gmGoodsLambdaQueryWrapper = Wrappers.lambdaQuery();
+
+        Page<GmGoods> goodsPage = new Page<>(current ,pageSize);
+        IPage<GmGoods> goodsIPage = gmGoodsMapper.selectPage(goodsPage , gmGoodsLambdaQueryWrapper);
+        return goodsPage;
     }
 
     @GetMapping("/find/{id}")

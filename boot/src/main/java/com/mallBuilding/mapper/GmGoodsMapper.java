@@ -2,16 +2,11 @@ package com.mallBuilding.mapper;
 
 import com.mallBuilding.entity.GmGoods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import com.mallBuilding.entity.GmGoods;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author admin
- * @since 2021-07-06
- */
+@Component
 public interface GmGoodsMapper extends BaseMapper<GmGoods> {
 
 }
