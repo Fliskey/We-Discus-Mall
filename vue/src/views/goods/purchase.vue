@@ -155,7 +155,7 @@
           >
             <a-statistic
               title="状态"
-              value="支付中"
+              value="正在创建订单"
               :style="{
                 marginRight: '32px',
               }"
@@ -178,7 +178,7 @@
                     zIndex: 1,
                   }"
     >
-      <a-button type="primary" @click="addOrder">
+      <a-button type="primary" @click="addOrder()">
         <a-icon type="shopping" />
         创建订单
       </a-button>
@@ -309,7 +309,31 @@ export default {
     },
     addOrder()
     {
-
+      let gid = this.gid
+      let aid = this.addId
+      var myOrder =
+        {
+          id: 0,
+          goodsId: this.gid,
+          buyerId: this.uid,
+          actualPayAmount: this.price,
+          buyerAddress: this.form.address,
+          buyerPhone: this.form.telNumber,
+          buyerName: this.form.name
+        }
+        if(this.form.name.length==0||this.form.telNumber.length==0||this.form.address.length==0)
+        {
+          alert("姓名，地址和电话不能为空！" +
+            "请重新填写！")
+          return
+        }
+        let _this = this
+        this.axios.post('http://localhost:8181/omOrder/add',myOrder).then(function (response){
+          if(response.data)
+            alert("创建订单成功！")
+            alert("正在转向结算页面...")
+            _this.$router.push('/visitor/goods/pay/'+gid+'/'+aid)
+        })
     }
   },
 };

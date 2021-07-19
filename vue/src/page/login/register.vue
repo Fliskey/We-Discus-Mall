@@ -17,10 +17,7 @@
     <a-form-model-item prop='password'>
       <a-input v-model='pageData.password' block type='password' placeholder='密码' />
     </a-form-model-item>
-    <a-form-model-item prop='reconfirmPsw'>
-      <a-input v-model='pageData.reconfirmPsw' block type='password' placeholder='确认密码' />
-    </a-form-model-item>
-    <a-form-model-item class='center' style="margin: 0 auto 80px auto">
+    <a-form-model-item class='center' style="margin: 0px auto 80px auto">
       <a-button type="primary" block @click='onSubmit'>注册</a-button>
     </a-form-model-item>
   </a-form-model>
@@ -72,25 +69,13 @@
           }
         }
       }
-      const validatorReconfirm = (rule,value,callback) =>{
-        if (!value){
-          callback(new Error('请再次输入密码！'))
-        } else {
-          if (value !== this.pageData.password){
-            callback(new Error('两次输入的密码不一致！'))
-          }else {
-            callback()
-          }
-        }
-      }
       return {
         pageData:{
           id: 0,
           name: '',
           password: '',
           telNumber: '',
-          email: '',
-          reconfirmPsw:'',
+          email: ''
         },
         umUser: {
           id: '',
@@ -120,9 +105,6 @@
           ],
           telNumber: [
             {required:true ,validator:validatorPhone,trigger:'blur'}
-          ],
-          reconfirmPsw: [
-            {require:true ,validator:validatorReconfirm,trigger:'blur'}
           ]
         },
       }
@@ -130,23 +112,13 @@
     },
     methods: {
       onSubmit(){
-        this.$refs.umUser.validate(valid =>{
-          if (valid){
-            // alert('submit!');
-            this.addNewUser();
-          }else {
-            // alert('error submit!');
-            return false;
-          }
-        })
-      },
-      addNewUser(){
         //加盐哈希注册，By@Fliskey
         let _this = this
 
         axios.get('http://localhost:8181/umLogin/getSalt').then(function (response){
           _this.umLogin.salt = response.data
-          _this.umLogin.password = _this.$sha256(_this.pageData.password+_this.umLogin.salt)
+          _this.pageData.password = _this.$sha256(_this.pageData.password+_this.umLogin.salt)
+          _this.umLogin.password = _this.pageData.password
           axios.post('http://localhost:8181/umLogin/addUser',_this.umLogin).then(function (response){
             _this.umLogin.id = response.data
             _this.umUser.id = _this.umLogin.id
@@ -165,6 +137,8 @@
             })
           })
         })
+
+
       },
       change (type) {
         this.$emit('changeType', type)

@@ -72,12 +72,10 @@
 
 <script>
 
-import page from "../../router/page";
-
 export default {
   name: 'ArticleList',
   created () {
-      this.lists = [
+    this.lists = [
       {
         label: '办公文具',
         value: 1
@@ -113,6 +111,7 @@ export default {
       this.$router.push('login')
     console.log(this.$cookies.get('vid'))
     this.getList()
+    //this.num = this.data.length
   },
   data() {
     let self = this
@@ -120,15 +119,18 @@ export default {
       data: [],
       index: 0,
       num: 10,
+      pageSizeOptions: ['10', '20', '30', '40', '50'],
+      // defaultCurrent: 1,
+      // pageSize: 10,
+      // total: 50,
       userName: [],
-      selected: '',
       pagination: {
         pageNo: 1,
         pageSize: 10, // 默认每页显示数量
         showSizeChanger: true, // 显示可改变每页数量
-        pageSizeOptions: ['3', '5', '10', '13'], // 每页数量选项
+        pageSizeOptions: ['10', '20', '50', '100'], // 每页数量选项
         showTotal: total => `Total ${total} items`, // 显示总数
-        onShowSizeChange: (current, pageSize) => self.onShowSizeChange(current, pageSize), // 改变每页数量时更新显示
+        onShowSizeChange: (current, pageSize) => this.pageSize = pageSize, // 改变每页数量时更新显示
         onChange:(page,pageSize)=>self.changePage(page,pageSize),//点击页码事件
         total:0 //总条数
       }
@@ -137,22 +139,17 @@ export default {
 
   watch: {
   },
-
   methods: {
     async getList () {
       let _this = this;
       this.loading = true
-      console.log("每页数量  "+this.pageSize)
-      // await this.axios.get('http://localhost:8181/gmGoods/list/').then(res => {
-      await this.axios.get('http://localhost:8181/gmGoods/selectPage/'+ this.pagination.pageNo + '/' + this.pagination.pageSize).then(res => {
-        // console.log(this.pageSize)
+      await this.axios.get('http://localhost:8181/gmGoods/list').then(res => {
         console.log(res)
-
-        _this.data = res.data.records;
-        _this.pagination.pageNo= res.data.current
-        _this.pagination.pageSize =res.data.size
-        _this.pagination.total = res.data.total
-        // _this.num = res.data.total.length
+        _this.data = res.data
+        _this.pagination.total = res.data.length
+        _this.num = res.data.length
+        //alert(_this.data[0].userId)
+        //this.loading = false
       })
      // alert(this.num)
       for (var i=0; i<this.num; i++){
@@ -187,16 +184,11 @@ export default {
       if (val == 7) { // todo 此处没有做到对getList的复用 之后可以改进
         this.loading = true
         console.log('展示所有商品类型');
-        this.pagination.pageNo = 1;
-        this.axios.get('http://localhost:8181/gmGoods/selectPage/'+ this.pagination.pageNo + '/' + this.pagination.pageSize).then(res => {
-          // console.log(this.pageSize)
+        this.http.get('http://localhost:8181/gmGoods/list').then(res => {
           console.log(res)
-
-          _this.data = res.data.records;
-          _this.pagination.pageNo= res.data.current
-          _this.pagination.pageSize =res.data.size
-          _this.pagination.total = res.data.total
-          // _this.num = res.data.total.length
+          this.loading = false
+          this.data = res.data
+          return;
         })
       } else {
         this.loading = true
@@ -227,36 +219,8 @@ export default {
           return a.id-b.id
         })
       }
-    },
-    onShowSizeChange(current, pageSize){
-        console.log("进入这个onshowSizeChange！", current, pageSize)
-        this.axios.get('http://localhost:8181/gmGoods/selectPage/'+current+'/'+pageSize+'/').then(res => {
-        console.log(this.pageSize)
-        console.log(res)
-        this.data = res.data.records;
-        this.pagination.pageNo= res.data.current
-        this.pagination.pageSize =res.data.size
-        this.pagination.total = res.data.total
-        // this.num = res.data.length
-      })
-    },
-    changePage(page,pageSize){
-      // console.log("进入onChange函数")
-      // page = 2 //调试
-      // console.log("page = "+page)
-      // pageSize = 4  //调试
-      // console.log("pageSize = "+pageSize)
-      this.axios.get('http://localhost:8181/gmGoods/selectPage/'+page+'/'+pageSize).then(res => {
-        console.log(pageSize)
-        console.log(res.data)
-        this.data = res.data.records;
-        this.pagination.pageNo= res.data.current
-        this.pagination.pageSize =res.data.size
-        this.pagination.total = res.data.total
-        // this.num = res.data.records.length
-      })
     }
-  },
+  }
 }
 </script>
 

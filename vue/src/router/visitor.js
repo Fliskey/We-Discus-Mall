@@ -56,6 +56,14 @@ export default [
       {
         path: 'goods/settlement',
         component: ()=> import('@/views/goods/settlement')
+      },
+      {
+        path: 'user/sellOut',
+        component: ()=> import('@/views/user/sellOut')
+      },
+      {
+        path: 'goods/pay/:gid/:aid',
+        component: ()=> import('@/views/goods/pay')
       }
     ]
   }

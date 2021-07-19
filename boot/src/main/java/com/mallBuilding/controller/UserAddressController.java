@@ -35,6 +35,13 @@ public class UserAddressController {
         return this.userAddressService.list();
     }
 
+    @GetMapping("/getAddress/{id}")
+    public UserAddress queryById(@PathVariable("id") Integer id)
+    {
+        return this.userAddressService.getById(id);
+
+    }
+
     @PostMapping("/add")
     public boolean add(@RequestBody UserAddress userAddress){
         return this.userAddressService.save(userAddress);
