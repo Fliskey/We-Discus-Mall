@@ -64,6 +64,10 @@ export default [
       {
         path: 'goods/pay/:gid/:aid',
         component: ()=> import('@/views/goods/pay')
+      },
+      {
+        path: 'user/buyShow',
+        component: ()=>import('@/views/user/buyShow' )
       }
     ]
   }

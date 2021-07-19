@@ -23,6 +23,10 @@
           <a-icon type="user" />
           <span>我的发布</span>
         </a-menu-item>
+        <a-menu-item key="/visitor/user/buyShow">
+          <a-icon type="dollar" />
+          <span>我的购买</span>
+        </a-menu-item>
         <a-menu-item key="/visitor/user/sellOut">
           <a-icon type="shopping" />
           <span>我的卖出</span>
