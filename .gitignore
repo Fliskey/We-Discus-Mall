@@ -5,3 +5,4 @@
 *.iws
 *.iml
 *.ipr
+vue/package-lock.json
