@@ -1,10 +1,6 @@
 <template>
-<!--  <a-form-model ref='umUser' :model="umUser" :rules='rules' class='login-form register'>-->
   <a-form-model ref='umUser' :model="pageData" :rules='rules' class='login-form register'>
     <h2>注册</h2>
-<!--    <a-form-model-item prop='id'>
-      <a-input placeholder='学号' block v-model='umUser.id' />
-    </a-form-model-item>-->
     <a-form-model-item prop='name'>
       <a-input placeholder='姓名' block v-model='pageData.name' />
     </a-form-model-item>
@@ -132,10 +128,8 @@
       onSubmit(){
         this.$refs.umUser.validate(valid =>{
           if (valid){
-            // alert('submit!');
             this.addNewUser();
           }else {
-            // alert('error submit!');
             return false;
           }
         })
