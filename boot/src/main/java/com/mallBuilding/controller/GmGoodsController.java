@@ -50,12 +50,12 @@ public class GmGoodsController {
         return this.gmGoodsService.list();
     }
 
-    @GetMapping("/selectPage/{pageSize}")
-    public Page<GmGoods> selectPage(@PathVariable("pageSize") Integer pageSize) //@Param(Constants.WRAPPER) Wrapper<GmGoods> queryWrapper
+    @GetMapping("/selectPage/{current}/{pageSize}")
+    public Page<GmGoods> selectPage(@PathVariable("current") Integer current,@PathVariable("pageSize") Integer pageSize) //@Param(Constants.WRAPPER) Wrapper<GmGoods> queryWrapper
     {
         LambdaQueryWrapper<GmGoods> gmGoodsLambdaQueryWrapper = Wrappers.lambdaQuery();
 
-        Page<GmGoods> goodsPage = new Page<>(1 ,pageSize);
+        Page<GmGoods> goodsPage = new Page<>(current ,pageSize);
         IPage<GmGoods> goodsIPage = gmGoodsMapper.selectPage(goodsPage , gmGoodsLambdaQueryWrapper);
         return goodsPage;
     }

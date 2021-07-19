@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="">
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/configuration/MyBatisPlusConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/configuration/MyBatisPlusConfig.java" afterDir="false" />
+    <list default="true" id="0bdeac60-ed0f-4caf-92cb-876e87b2cb62" name="默认变更列表" comment="商品展示页的page接口写好 前后端交互尚未实现">
       <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/GmGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/GmGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/WantGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/controller/WantGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/entity/GmGoods.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/entity/GmGoods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/GmGoodsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../boot/src/main/java/com/mallBuilding/mapper/GmGoodsMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/goods/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/list.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/reserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/reserve.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,8 +139,18 @@
       <workItem from="1626221083795" duration="7047000" />
       <workItem from="1626228501456" duration="667000" />
       <workItem from="1626400385487" duration="2763000" />
-      <workItem from="1626614331146" duration="5192000" />
+      <workItem from="1626614331146" duration="8367000" />
+      <workItem from="1626654294267" duration="10361000" />
+      <workItem from="1626676777481" duration="464000" />
     </task>
+    <task id="LOCAL-00001" summary="商品展示页的page接口写好 前后端交互尚未实现">
+      <created>1626624460906</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1626624460906</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,5 +167,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="商品展示页的page接口写好 前后端交互尚未实现" />
+    <option name="LAST_COMMIT_MESSAGE" value="商品展示页的page接口写好 前后端交互尚未实现" />
   </component>
 </project>
