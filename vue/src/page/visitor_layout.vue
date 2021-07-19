@@ -23,6 +23,10 @@
           <a-icon type="user" />
           <span>我的发布</span>
         </a-menu-item>
+        <a-menu-item key="/visitor/user/sellOut">
+          <a-icon type="shopping" />
+          <span>我的卖出</span>
+        </a-menu-item>
         <a-sub-menu key="sub1">
           <span slot="title"><a-icon type="user" /><span>个人中心</span></span>
           <a-menu-item-group key="g1">

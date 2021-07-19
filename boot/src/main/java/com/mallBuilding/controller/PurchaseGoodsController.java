@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -39,13 +40,13 @@ public class PurchaseGoodsController {
 
     @GetMapping("/findByUserId/{id}")
     public List<GmGoods> findByUserId(@PathVariable("id") Integer id) {return this.purchaseGoodsDao.queryGMGoodsByUserId(id);}
-/*
 
-    @PostMapping("/delete/{id}")
-    public int delete(@PathVariable("id") Integer id){
-        return this.purchaseGoodsMapper.deleteById(id);
+
+    @GetMapping("/list")
+    public List<PurchaseGoods> list()
+    {
+        return this.purchaseGoodsService.list();
     }
-*/
 
 
     @GetMapping("/GtoP/{id}")
@@ -54,6 +55,7 @@ public class PurchaseGoodsController {
 
     @GetMapping("/delete/{uid}/{gid}")
     public boolean queryWantBy(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid){
+
         return this.purchaseGoodsDao.deleteByUserId(uid,gid);
         //集合
     }
