@@ -41,5 +41,11 @@ public class OmOrderController {
         return this.omOrderService.save(omOrder);
     }
 
+//    @GetMapping("/list/{uid}/{gid}")
+//    public List<GoodsAndBuyer> listById(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid)
+//    {
+//        return this
+//    }
+
 }
 
