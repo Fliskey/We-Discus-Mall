@@ -220,6 +220,7 @@ export default {
         '/'+new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds(),
       price: 0,
       allPrice,
+      orderId: '',
 
     };
   },
@@ -283,6 +284,7 @@ export default {
       this.axios.post('http://localhost:8181/userAddress/add',add).then(function (response) {
         if(response.data)
           alert("插入地址成功！")
+
       })
       this.visible = false;
     },
@@ -328,6 +330,7 @@ export default {
     {
       let gid = this.gid
       let aid = this.addId
+
       var i = 0
       var flag = 1
       let _this = this
@@ -366,13 +369,15 @@ export default {
           return
 
         await this.axios.post('http://localhost:8181/omOrder/add',myOrder).then(function (response){
+          _this.orderId = response.data
         })
       }
-      await alert("创建订单成功！")
+      await alert("创建订单成功！订单号为："+this.orderId)
       await alert("正在转向结算页面...")
+      let oid = this.orderId
 
       await this.reduceStock()
-      await this.$router.push('/visitor/goods/pay/'+gid+'/'+aid)
+      await this.$router.push('/visitor/goods/pay/'+gid+'/'+aid+'/'+oid)
 
 
     },
@@ -385,9 +390,9 @@ export default {
         let _this = this
         let I = i
         await this.axios.get('http://localhost:8181/gmGoods/find/'+this.ids[i]).then(async function (response){
-          alert(response.data.quantity)
+          //alert(response.data.quantity)
           response.data.quantity-=_this.quantity[I]
-          alert(response.data.quantity)
+          //alert(response.data.quantity)
           await _this.axios.put('http://localhost:8181/gmGoods/update',response.data).then(function(res){
              alert("更新库存成功！")
 

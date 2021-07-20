@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.net.SocketOption;
 import java.util.List;
 
 /**
@@ -37,15 +38,25 @@ public class OmOrderController {
     }
 
     @PostMapping("/add")
-    public boolean add(@RequestBody OmOrder omOrder){
-        return this.omOrderService.save(omOrder);
+    public Integer add(@RequestBody OmOrder omOrder){
+
+
+        this.omOrderService.save(omOrder);
+
+        return omOrder.getId();
     }
 
-//    @GetMapping("/list/{uid}/{gid}")
-//    public List<GoodsAndBuyer> listById(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid)
-//    {
-//        return this
-//    }
+    @PutMapping("/updatePay/{id}")
+    public boolean updatePay(@PathVariable("id") Integer id)
+    {
+        return this.omOrderDao.updatePay(id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable("id") Integer id)
+    {
+        return this.omOrderService.removeById(id);
+    }
 
 }
 
