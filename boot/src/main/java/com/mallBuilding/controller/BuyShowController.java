@@ -1,6 +1,7 @@
 package com.mallBuilding.controller;
 
 import com.mallBuilding.dao.OmOrderDao;
+import com.mallBuilding.entity.BuyShow;
 import com.mallBuilding.entity.GoodsAndBuyer;
 import com.mallBuilding.entity.OmOrder;
 import com.mallBuilding.entity.UmUser;
@@ -14,34 +15,21 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author root
- * @since 2021-07-18
- */
 @RestController
-@RequestMapping("//omOrder")
-public class OmOrderController {
+@RequestMapping("//buyShow")
+
+public class BuyShowController {
     @Autowired
     private OmOrderService omOrderService;
 
     @Autowired
     private OmOrderDao omOrderDao;
 
-    @GetMapping("/list/{id}")
-    public List<GoodsAndBuyer> listBySellerId(@PathVariable("id") Integer sellerId)
+    @GetMapping("/buylist/{id}/{hasPayed}/{hasShipped}/{hasConfirmed}")
+    public List<BuyShow> listByBuyerId(@PathVariable("id") Integer buyerId,@PathVariable("hasPayed") Integer hasPayed,  @PathVariable("hasShipped") Integer hasShipped, @PathVariable("hasConfirmed") Integer hasConfirmed)
     {
-        return this.omOrderDao.queryBySellerId(sellerId);
+        return this.omOrderDao.queryByBuyerId(buyerId, hasPayed,hasShipped, hasConfirmed);
     }
 
-
-    @PostMapping("/add")
-    public boolean add(@RequestBody OmOrder omOrder){
-        return this.omOrderService.save(omOrder);
-    }
 
 }
-
