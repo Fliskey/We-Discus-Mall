@@ -141,7 +141,6 @@ export default {
         quantity:1
       }
       axios.post('http://localhost:8181/purchaseGoods/add',myTrolley).then(function (response){
-
       })
     },
     getParams(){
@@ -152,7 +151,7 @@ export default {
     insertToLike(){
       console.log("当前浏览者的id是  "+this.pageUserId);
       console.log("该商品发布者的id是  "+this.gooditem.userId);
-      if(this.pageUserId==this.gooditem.userId){
+      if(this.pageUserId===this.gooditem.userId){
         console.log("我预定我自己：error！")
         alert("这个是您自己发布的商品哦，不可以预定哦~")
         this.isSame = 1
@@ -160,8 +159,6 @@ export default {
         return;
       }
       var mylike = {id:0,userId:this.pageUserId,goodsId:this.id}
-      //assert.notEqual(this.pageUserId, this.gooditem.userId, '预期二者不相等')
-      // alert("您已预定了"+mylike.goodsId)
       axios.post('http://localhost:8181/wantGoods/add',mylike).then(function (response){
          if (response.data){
            alert("完成预定")
