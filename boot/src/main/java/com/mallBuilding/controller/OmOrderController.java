@@ -41,11 +41,12 @@ public class OmOrderController {
         return this.omOrderService.save(omOrder);
     }
 
-//    @GetMapping("/list/{uid}/{gid}")
-//    public List<GoodsAndBuyer> listById(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid)
-//    {
-//        return this
-//    }
+    @GetMapping("/delete/{gid}/{bid}")
+    public boolean queryWantBy(@PathVariable("gid") Integer gid,@PathVariable("bid") Integer bid){
+
+        return this.omOrderDao.deleteByUserId(gid,bid);
+        //集合
+    }
 
 }
 

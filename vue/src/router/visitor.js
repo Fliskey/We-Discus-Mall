@@ -62,8 +62,8 @@ export default [
         component: ()=> import('@/views/user/sellOut')
       },
       {
-        path: 'goods/pay/:gid/:aid',
-        component: ()=> import('@/views/goods/pay')
+        path: 'user/order/:name/:add/:pho/:na',
+        component: ()=> import('@/views/user/order')
       }
     ]
   }

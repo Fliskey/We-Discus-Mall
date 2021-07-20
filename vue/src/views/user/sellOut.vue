@@ -123,6 +123,23 @@ export default {
   },
   //获取已发布的商品
   methods: {
+    showDeleteConfirm(Gid){
+      this.$confirm({
+        title: '确定要取消交易吗？',
+        okText: '确定',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk(){
+          //alert("删除"+Gid)
+          axios.delete('http://localhost:8181/omOrder/delete/'+Gid).then(res =>{
+            if (res){
+              alert('删除成功！')
+              location.reload()
+            }
+          })
+        }
+      })
+    },
     getList (vid) {
       this.loading = true
       let _this = this
@@ -134,8 +151,13 @@ export default {
     },
     toDeliverGoods(record)
     {
-      alert("现在就去发货吧！")
-      alert("发货人信息："+record.buyerName+" "+record.buyerAddress+" "+record.buyerPhone)
+      //alert("现在就去发货吧！")
+      //alert("发货人信息："+record.buyerName+" "+record.buyerAddress+" "+record.buyerPhone)
+
+      //勾选的编号存放砸selectedRowKeys中
+      alert("您要出售：" + record.name)
+      this.$router.push('/visitor/user/order/'+record.name+'/'+record.buyerAddress+'/'+record.buyerPhone+'/'+record.buyerName)
+
     }
 
 

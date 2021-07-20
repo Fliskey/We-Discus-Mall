@@ -5,6 +5,7 @@
       <a-row type='flex' align='middle' justify='space-between'>
         <a-input-search class="search-ipt" style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
         <a-select
+          v-model="selected"
           placeholder='所有类别'
           style="width: 120px"
           :defaultActiveFirstOption='true'
@@ -32,44 +33,38 @@
         </a-select>
 
 
-      <a href='/#/visitor/goods/public'>立即发布闲置</a>
+        <a href='/#/visitor/goods/public'>立即发布闲置</a>
       </a-row>
-        <br/>
-      <a-list :grid="{ gutter:16, column: 2 }" itemLayout="vertical" :data-source="data" :pagination="pagination" bordered>
-        <div>
-          <a-list-item v-for="(v,n) in data" :key="v.id" style="height: 5cm; margin-top: 22px" bordered >
-            <div class="content">
-              <a-row class="detail" style="width: 12cm; height: 3.4cm">
-                <img width='120px' height='120px' style="float: left; border-radius: 7px" :src=v.imageUrl>
-                <router-link :to="'/visitor/goods/detail/'+v.id">
-                  <a-list-item-meta>
-                    <div slot="title" style="height: 2px;font-size: large">{{v.name}}
-                    <a-tag color="red" style="font-weight: normal">
-                      {{v.type}}
-                    </a-tag>
-                    <a-tag color="red" style="font-weight: normal">全新</a-tag>
-                    <a-tag color="red" style="font-weight: normal">自提</a-tag>
-                    </div>
-                  </a-list-item-meta>
-                </router-link>
-                <p style="
-                height: 40px">{{v.description}}</p>
-                <a-list-item-meta>
-                  <div slot="title" style="height: 0;color: #dc5c47">价格：￥{{v.price}}</div>
-                </a-list-item-meta>
-              </a-row>
-              <div class="author" style="width: 9cm; height: 18px">
-                <a-avatar size="small" src="/img/user.png"/>
-                <a>{{userName[n]}}</a>发布于
-                <em>2018-08-05 22:23</em>
+      <a-list itemLayout="vertical" :data-source="data" :pagination="pagination">
+        <a-list-item v-for="(v,n) in data" :key="v.id">
+          <router-link :to="'/visitor/goods/detail/'+v.id">
+            <a-list-item-meta >
+              <div slot="title">商品名：{{v.name}}&nbsp;&nbsp;&nbsp;&nbsp;价格：￥{{v.price}}</div>
+              <div slot="description">
+                <a-tag >
+                  {{v.type}}
+                </a-tag>
+                <a-tag >全新</a-tag>
+                <a-tag >自提</a-tag>
               </div>
+            </a-list-item-meta>
+          </router-link>
+          <div class="content">
+            <a-row class="detail" type='flex' style="width: 4cm; height: 4cm">
+              <img width='10%' height='120px' :src=v.imageUrl>
+            </a-row>
+            <p>{{v.description}}</p>
+            <div class="author">
+              <a-avatar size="small" src="/img/user.png" />
+              <a>{{userName[n]}}</a>发布于
+              <em>2018-08-05 22:23</em>
             </div>
-            <span slot="actions"><a-icon style="margin-right: 8px" type="eye" />1563</span>
-            <span slot="actions"><a-icon style="margin-right: 8px" type="star" />112</span>
-            <span slot="actions"><a-icon style="margin-right: 8px" type="message" />{{likeQuantity[n]}}</span>
-          </a-list-item>
-        </div>
-        <a-divider></a-divider>
+          </div>
+          <span slot="actions"><a-icon style="margin-right: 8px" type="eye" />1563</span>
+          <span slot="actions"><a-icon style="margin-right: 8px" type="star" />112</span>
+          <span slot="actions"><a-icon style="margin-right: 8px" type="message" />4</span>
+
+        </a-list-item>
       </a-list>
     </a-card>
   </div>
@@ -110,21 +105,24 @@ export default {
         value: 7
       }
     ]
+  },
+  mounted () {
     if(this.$cookies.isKey('vid') === false)
       this.$router.push('login')
     console.log(this.$cookies.get('vid'))
     this.getList()
-  },
-  mounted () {
+    //this.num = this.data.length
   },
   data() {
     let self = this
     return {
       data: [],
-      likeQuantity: [],
       index: 0,
       num: 10,
       pageSizeOptions: ['10', '20', '30', '40', '50'],
+      // defaultCurrent: 1,
+      // pageSize: 10,
+      // total: 50,
       userName: [],
       pagination: {
         pageNo: 1,
@@ -150,24 +148,25 @@ export default {
         _this.data = res.data
         _this.pagination.total = res.data.length
         _this.num = res.data.length
+        //alert(_this.data[0].userId)
+        //this.loading = false
       })
-      for (let i=0; i<this.num; i++){
-        // await axios.get('http://localhost:8181/wantGoods/countLike/'+_this.data[i].id).then(function (response){
-        //   console.log("测试预定数量接口")
-        //   console.log(response)
-        //   _this.likeQuantity.push(response.data)
-        // })
+     // alert(this.num)
+      for (var i=0; i<this.num; i++){
+        let I = i
+        //alert(_this.data[0].userId)
         await this.axios.get('http://localhost:8181/umUser/findName/'+_this.data[i].userId).then(res=>{
-          console.log(_this.data[i].userId+"\n")
+          //_this.userName.setItem(_this.data[i].userId,res.data)
+          //alert(res.data)
           _this.userName.push(res.data)
-          //_this.userName[i] = res.data
+          //console.log(_this.userName[I])
         })
       }
     },
 
     async getUserName(uid)
     {
-      let name
+      var name
       let _this = this
       await this.axios.get('http://localhost:8181/umUser/findName/'+uid).then(function (response) {
         return response.data
@@ -182,14 +181,14 @@ export default {
         })
     },
     selectList(val) {
-      if (val === 7) { // todo 此处没有做到对getList的复用 之后可以改进
+      if (val == 7) { // todo 此处没有做到对getList的复用 之后可以改进
         this.loading = true
         console.log('展示所有商品类型');
         this.http.get('http://localhost:8181/gmGoods/list').then(res => {
           console.log(res)
           this.loading = false
           this.data = res.data
-          return false;
+          return;
         })
       } else {
         this.loading = true
@@ -205,17 +204,17 @@ export default {
     priceSort(value) {
       console.log(value);
       console.log(this.data[1].price);
-      if(value==="upSort"){
+      if(value=="upSort"){
         this.data.sort((a,b)=>{
           return a.price - b.price
         })
       }
-      else if(value==="downSort"){
+      else if(value=="downSort"){
         this.data.sort((a,b)=>{
           return b.price-a.price
         })
       }
-      else if(value==="cancelSort"){
+      else if(value=="cancelSort"){
         this.data.sort((a,b)=>{
           return a.id-b.id
         })
@@ -226,11 +225,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.extra{
+  width: 272px;
+  height: 1px;
+}
 .content {
   .detail {
-    line-height: 16px;
+    line-height: 22px;
     max-width: 720px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     > img{
       flex: 1;
       margin-right: 15px;
@@ -247,7 +250,7 @@ export default {
   }
   .author {
     color: #999;
-    margin-top: 2px;
+    margin-top: 16px;
     line-height: 22px;
     & > :global(.ant-avatar) {
       vertical-align: top;
@@ -255,7 +258,7 @@ export default {
       width: 20px;
       height: 20px;
       position: relative;
-      top: 0;
+      top: 1px;
     }
     & > a{
       padding:0 10px;

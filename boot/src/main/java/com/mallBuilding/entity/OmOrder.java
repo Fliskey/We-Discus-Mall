@@ -36,7 +36,5 @@ import lombok.EqualsAndHashCode;
 
     private String buyerName;
 
-    private boolean hasPayed;
-
 
 }

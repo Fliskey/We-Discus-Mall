@@ -35,28 +35,11 @@ public class PurchaseGoodsController {
 
     @PostMapping("/add")
     public boolean add(@RequestBody PurchaseGoods purchaseGoods){
-        PurchaseGoods p = this.purchaseGoodsDao.findQuantityById(purchaseGoods.getUserId(),purchaseGoods.getGoodsId());
-        if(!p.equals(null))
-        {
-            p.setQuantity(p.getQuantity()+1);
-            this.purchaseGoodsService.updateById(p);
-            return true;
-        }
-        else
-        {
-            return this.purchaseGoodsService.save(purchaseGoods);
-        }
-
+        return this.purchaseGoodsService.save(purchaseGoods);
     }
 
     @GetMapping("/findByUserId/{id}")
     public List<GmGoods> findByUserId(@PathVariable("id") Integer id) {return this.purchaseGoodsDao.queryGMGoodsByUserId(id);}
-
-    @GetMapping("/findQuantity/{uid}/{gid}")
-    public Integer findQuantity(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid)
-    {
-        return this.purchaseGoodsDao.findQuantity(uid,gid);
-    }
 
 
     @GetMapping("/list")
