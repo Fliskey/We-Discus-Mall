@@ -15,4 +15,7 @@ public interface GoodsDao {
 
     @Select("select * from web_mall_sky.gm_goods where user_id=#{userId}")
     List<GmGoods> queryGoodsByUserId(Integer userId);
+
+    @Select("select * from web_mall_sky.gm_goods where id=#{goodsId}")
+    GmGoods queryGoodsByGoodsId(Integer goodsId);
 }
