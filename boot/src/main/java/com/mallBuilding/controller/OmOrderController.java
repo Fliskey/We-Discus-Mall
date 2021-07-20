@@ -1,13 +1,14 @@
 package com.mallBuilding.controller;
 
-
 import com.mallBuilding.dao.OmOrderDao;
 import com.mallBuilding.entity.GoodsAndBuyer;
 import com.mallBuilding.entity.OmOrder;
 import com.mallBuilding.entity.UmUser;
+
 import com.mallBuilding.service.OmOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 import org.springframework.stereotype.Controller;
 
@@ -35,6 +36,7 @@ public class OmOrderController {
     {
         return this.omOrderDao.queryBySellerId(sellerId);
     }
+
 
     @PostMapping("/add")
     public boolean add(@RequestBody OmOrder omOrder){
