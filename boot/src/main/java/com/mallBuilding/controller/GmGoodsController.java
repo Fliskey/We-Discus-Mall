@@ -76,6 +76,19 @@ public class GmGoodsController {
         return this.gmGoodsService.removeById(id);
     }
 
+    @GetMapping("/findQuantity/{id}")
+    public Integer findQuantity(@PathVariable("id") Integer id)
+    {
+        return this.goodsDao.findQuantityById(id);
+    }
+
+//    @PutMapping("/reduceStock")
+//    public boolean reduceStock(@RequestBody GmGoods gmGoods)
+//    {
+//        return this.gmGoodsService.updateById(gmGoods);
+//    }
+
+
 
 }
 

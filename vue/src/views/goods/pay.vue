@@ -14,15 +14,11 @@
         <a-button key="1" type="primary" @click="goToPay()">
           立即支付
         </a-button>
+        <a-modal v-model="visible" title="请选择支付方式" @ok="handleOk">
+          <p>您将立即支付：{{this.price}} </p>
+          <p>请确认！</p>
+        </a-modal>
       </template>
-      <a-descriptions size="small" :column="2">
-        <a-descriptions-item label="订单创建者">
-          {{this.createrName}}
-        </a-descriptions-item>
-        <a-descriptions-item label="创建时间">
-          {{ this.currentTime }}
-        </a-descriptions-item>
-      </a-descriptions>
       <div class="extra">
         <div
           :style="{
@@ -69,6 +65,8 @@
 const data = [];
 const addressData = [];
 const ids = [];
+const allPrice = [];
+const quantity = [];
 export default {
   data() {
     return {
@@ -87,6 +85,8 @@ export default {
       gid: '',
       uid: '',
       aid: '',
+      allPrice,
+      quantity,
       data,
       addressData,
       currentTime: new Date().getFullYear()+'/'+new Date().getMonth()+'/'+new Date().getDate()+
@@ -95,7 +95,7 @@ export default {
 
     };
   },
-  mounted()
+  async mounted()
   {
     if(this.$cookies.isKey('vid') === false)
       this.$router.push('login')
@@ -106,10 +106,20 @@ export default {
     this.ids = this.gid.split(',')
     let _this = this
     var i = 0
-    this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response) {
+    await this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response) {
       _this.data = response.data
-      for (i; i < response.data.length; i++) {
-        _this.price += response.data[i].price
+      for(i;i<response.data.length;i++){
+
+        let res = response
+        let I = i
+        let __this = _this
+        //alert(_this.uid+response.data[i].id)
+        _this.axios.get('http://localhost:8181/purchaseGoods/findQuantity/'+_this.uid+'/'+response.data[i].id).then(function (response) {
+          __this.quantity[I]  =response.data
+          __this.data[I].quantity = response.data
+          __this.price += res.data[I].price*response.data
+          __this.allPrice[I] = res.data[I].price*response.data
+        })
       }
     })
     this.axios.get('http://localhost:8181/userAddress/getAddress/'+this.aid). then(function (response){
@@ -119,6 +129,14 @@ export default {
 
   },
   methods: {
+    goToPay()
+    {
+      this.visible = true;
+    },
+    handleOk(e) {
+      console.log(e);
+      this.visible = false;
+    },
 
 
 
