@@ -12,9 +12,9 @@
 
           <a-card title="收货人信息" style="width: 100%; height: 100%">
             <div>
-              <p>收货人姓名：{{form.name}}</p>
-              <p>收货人电话：{{form.telNumber}}</p>
-              <p>收货人地址：{{form.address}}</p>
+              <p>收货人姓名：{{order.buyerName}}</p>
+              <p>收货人电话：{{order.buyerPhone}}</p>
+              <p>收货人地址：{{order.buyerAddress}}</p>
             </div>
           </a-card>
 
@@ -24,19 +24,21 @@
 
         </div>
       </div>
+      <template>
+        <a-form-model :model="courierNumber" :label-col="labelCol" :wrapper-col="wrapperCol">
+          <a-form-model-item label="请输入快递单号">
+            <a-input  placeholder="快递单号"
+            v-model="courierNumber"/>
+          </a-form-model-item>
+        </a-form-model>
+      </template>
     </a-page-header>
-    <template>
-    <a-form-model :model="form2" :label-col="labelCol" :wrapper-col="wrapperCol">
-      <a-form-model-item label="请输入快递单号">
-        <a-input  placeholder="快递单号" />
-      </a-form-model-item>
-    </a-form-model>
-    </template>
+
     <div
       :style="{
                     position: 'absolute',
                     left: '17%',
-                    bottom: 0,
+                    bottom: 5,
                     width: '80.5%',
                     borderTop: '1px solid #e9e9e9',
                     padding: '10px 32px',
@@ -45,7 +47,7 @@
                     zIndex: 1,
                   }"
     >
-      <a-button type="primary" @click="addOrder()">
+      <a-button type="primary" @click="hasShipped()">
         <a-icon type="like" />
         完成发货
       </a-button>
@@ -69,10 +71,24 @@ export default {
           address: ''
         },
       ids,
+      courierNumber: '',
       addId: '',
       value: '',
       visible: false,
-      createrName: '',
+      oid: '',
+      order:
+        {
+          id: '',
+          goodsId: '',
+          buyerId: '',
+          actualPayAmount: '',
+          buyerAddress: '',
+          buyerPhone: '',
+          buyerName: '',
+          hasPaid: '',
+          hasShipped: '',
+          hasConfirmed: ''
+        },
       gid: '',
       uid: '',
       data,
@@ -91,14 +107,14 @@ export default {
     let id = this.$cookies.get('vid')
     this.uid = id
     let _this = this
-    this.axios.get('http://localhost:8181/umUser/findName/'+id).then(function (response){
-      _this.createrName = response.data
-    })
-    this.gid = this.$route.params.id
-    this.form.address = this.$route.params.add
-    this.form.name=this.$route.params.na
-    this.form.telNumber=this.$route.params.pho
-    this.ids = this.gid.split(',')
+    // this.axios.get('http://localhost:8181/umUser/findName/'+id).then(function (response){
+    //   _this.createrName = response.data
+    // })
+    this.oid = this.$route.params.id
+    this.axios.get('http://localhost:8181/omOrder/order/'+this.oid).then(function (response){
+        _this.order = response.data
+         })
+
     this.loading = true
     var i = 0
     this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response){
@@ -117,91 +133,43 @@ export default {
 
   },
   methods: {
-    afterVisibleChange(val) {
-      console.log('visible', val);
-    },
-    showDrawer() {
-      this.visible = true;
-    },
-    addAddress(uid) {
-      let _this = this
-      var add =
-        {id:1,
-          userId: uid,
-          consigneeName: this.form.name,
-          consigneeTel: this.form.telNumber,
-          consigneeAddress: this.form.address
-        }
-      this.axios.post('http://localhost:8181/userAddress/add',add).then(function (response) {
-        if(response.data)
-          alert("插入地址成功！")
-      })
-      this.visible = false;
-    },
-    updateAddress(uid)
+    hasShipped()
     {
-      let _this = this
-      var update =
+      var newOrder =
         {
-          id: this.addId,
-          userId: uid,
-          consigneeName: this.form.name,
-          consigneeTel: this.form.telNumber,
-          consigneeAddress: this.form.address
+          id: this.order.id,
+          goodsId: this.order.goodsId,
+          buyerId: this.order.buyerId,
+          actualPayAmount: this.order.actualPayAmount,
+          buyerAddress: this.order.buyerAddress,
+          buyerPhone: this.order.buyerPhone,
+          buyerName: this.order.buyerName,
+          hasPaid: this.order.hasPaid,
+          hasShipped: 1,
+          hasConfirmed: this.order.hasConfirmed
         }
-      this.axios.put('http://localhost:8181/userAddress/update',update).then(function (response) {
-        if(response.data)
-          alert("更新地址成功！")
-        location.reload()
-      })
-      this.visible = false;
-    },
-    chooseAddress(object)
-    {
-      this.form.name = object.consigneeName
-      this.form.telNumber = object.consigneeTel
-      this.form.address = object.consigneeAddress
-      this.addId = object.id
-    },
-    removeAddress(id)
-    {
-      this.axios.delete('http://localhost:8181/userAddress/delete/'+id).then(function (response) {
-        if(response.data)
-          alert("删除成功！")
-        else
-          alert("删除失败！")
-        location.reload()
-      })
-    },
-    onClose() {
-      this.visible = false;
-    },
-    addOrder()
-    {
-      var myOrder =
-        {
-          id: 0,
-          goodsId: this.gid,
-          buyerId: this.uid,
-          actualPayAmount: this.price,
-          buyerAddress: this.form.address,
-          buyerPhone: this.form.telNumber,
-          buyerName: this.form.name
+      //  alert(this.courierNumber)
+        if(this.courierNumber.length==0){
+          alert('未输入订单号')
+          return
         }
-      if(this.form.name.length==0||this.form.telNumber.length==0||this.form.address.length==0)
-      {
-        alert("姓名，地址和电话不能为空！" +
-          "请重新填写！")
-        return
-      }
+        let _this = this
+      this.axios.put('http://localhost:8181/omOrder/update/',newOrder).then(function (response){
+        var newShipped =
+          {
+            orderId: _this.order.id,
+            shippedId:_this.courierNumber
 
-      this.axios.post('http://localhost:8181/omOrder/add',myOrder).then(function (response){
-        if(response.data)
-          alert("创建订单成功！")
-        alert("正在转向结算页面...")
+          }
+        _this.axios.post('http://localhost:8181/shippedGoods/add/',newShipped).then(function (response){
+          if(response.data)
+            alert("发货成功！")
+        })
+
       })
+
     }
-  },
+  }
 };
 
 

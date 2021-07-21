@@ -123,15 +123,16 @@ export default {
   },
   //获取已发布的商品
   methods: {
-    showDeleteConfirm(Gid){
+    showDeleteConfirm(id){
+      let _this = this
       this.$confirm({
         title: '确定要取消交易吗？',
         okText: '确定',
         okType: 'danger',
         cancelText: '取消',
         onOk(){
-          //alert("删除"+Gid)
-          axios.delete('http://localhost:8181/omOrder/delete/'+Gid).then(res =>{
+          //alert(_this.oid)
+          _this.axios.delete('http://localhost:8181/omOrder/delete/'+id).then(res =>{
             if (res){
               alert('删除成功！')
               location.reload()
@@ -156,7 +157,7 @@ export default {
 
       //勾选的编号存放砸selectedRowKeys中
       alert("您要出售：" + record.name)
-      this.$router.push('/visitor/user/order/'+record.name+'/'+record.buyerAddress+'/'+record.buyerPhone+'/'+record.buyerName)
+      this.$router.push('/visitor/user/order/'+record.id)
 
     }
 

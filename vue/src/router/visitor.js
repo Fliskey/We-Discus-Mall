@@ -62,7 +62,7 @@ export default [
         component: ()=> import('@/views/user/sellOut')
       },
       {
-        path: 'user/order/:name/:add/:pho/:na',
+        path: 'user/order/:id',
         component: ()=> import('@/views/user/order')
       }
     ]
