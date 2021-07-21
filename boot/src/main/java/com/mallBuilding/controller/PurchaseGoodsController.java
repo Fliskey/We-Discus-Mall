@@ -46,7 +46,6 @@ public class PurchaseGoodsController {
         {
             return this.purchaseGoodsService.save(purchaseGoods);
         }
-
     }
 
     @GetMapping("/findByUserId/{id}")
