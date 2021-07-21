@@ -110,7 +110,8 @@
           description: ''
         },
         likeQuantity: '',
-        isSame: 0
+        isSame: 0,
+        userName:'',
       }
     },
     mounted () {
@@ -123,6 +124,9 @@
       axios.get('http://localhost:8181/gmGoods/find/'+Gid).then(function (response){
         console.log(response)
         _this.gooditem = response.data
+        axios.get('http://localhost:8181/umUser/findName/'+_this.gooditem.userId).then(function (response){
+          _this.userName = response.data
+        })
       // alert("正确的"+response.data.userId)
       })
       axios.get('http://localhost:8181/wantGoods/countLike/'+Gid).then(function (response){

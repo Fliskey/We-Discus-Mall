@@ -150,7 +150,7 @@
         await this.axios.get('http://localhost:8181/gmGoods/selectPage/'+ this.pagination.pageNo + '/' + this.pagination.pageSize).then(res => {
           // console.log(this.pageSize)
           console.log(res)
-          _this.data = res.data.records;
+          _this.data = res.data.records
           _this.pagination.pageNo= res.data.current
           _this.pagination.pageSize =res.data.size
           _this.pagination.total = res.data.total
