@@ -151,12 +151,12 @@ export default {
         _this.pagination.total = res.data.length
         _this.num = res.data.length
       })
-      for (let i=0; i<this.num; i++){
-        // await axios.get('http://localhost:8181/wantGoods/countLike/'+_this.data[i].id).then(function (response){
-        //   console.log("测试预定数量接口")
-        //   console.log(response)
-        //   _this.likeQuantity.push(response.data)
-        // })
+      //alert(this.num)
+      for (var i=0; i<this.num; i++){
+
+        let I = i
+        //alert(_this.data[i].userId)
+
         await this.axios.get('http://localhost:8181/umUser/findName/'+_this.data[i].userId).then(res=>{
           console.log(_this.data[i].userId+"\n")
           _this.userName.push(res.data)
