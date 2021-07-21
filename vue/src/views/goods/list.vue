@@ -151,10 +151,11 @@ export default {
         //alert(_this.data[0].userId)
         //this.loading = false
       })
-     // alert(this.num)
+      //alert(this.num)
       for (var i=0; i<this.num; i++){
+
         let I = i
-        //alert(_this.data[0].userId)
+        //alert(_this.data[i].userId)
         await this.axios.get('http://localhost:8181/umUser/findName/'+_this.data[i].userId).then(res=>{
           //_this.userName.setItem(_this.data[i].userId,res.data)
           //alert(res.data)
