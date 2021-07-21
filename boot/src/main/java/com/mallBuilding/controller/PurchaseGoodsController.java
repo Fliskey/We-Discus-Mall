@@ -36,7 +36,7 @@ public class PurchaseGoodsController {
     @PostMapping("/add")
     public boolean add(@RequestBody PurchaseGoods purchaseGoods){
         PurchaseGoods p = this.purchaseGoodsDao.findQuantityById(purchaseGoods.getUserId(),purchaseGoods.getGoodsId());
-        if(!p.equals(null))
+        if(p != null)
         {
             p.setQuantity(p.getQuantity()+1);
             this.purchaseGoodsService.updateById(p);
