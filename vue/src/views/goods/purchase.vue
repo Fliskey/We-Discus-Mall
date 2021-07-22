@@ -249,10 +249,23 @@
           let __this = _this
           //alert(_this.uid+response.data[i].id)
           _this.axios.get('http://localhost:8181/purchaseGoods/findQuantity/'+_this.uid+'/'+response.data[i].id).then(function (response) {
-            __this.quantity[I]  =response.data
-            __this.data[I].quantity = response.data
-            __this.price += res.data[I].price*response.data
-            __this.allPrice[I] = res.data[I].price*response.data
+            if(response.data==0)
+            {
+              __this.quantity[I]=1
+              __this.data[I].quantity=1
+              __this.price += res.data[I].price
+              __this.allPrice[I] = res.data[I].price
+            }
+            else
+            {
+              __this.quantity[I]  =response.data
+              __this.data[I].quantity = response.data
+              __this.price += res.data[I].price*response.data
+              __this.allPrice[I] = res.data[I].price*response.data
+            }
+
+
+
           })
         }
 
