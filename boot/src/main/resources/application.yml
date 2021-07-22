@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://mall.fliskey.top:3306/web_mall_sky
+    url: jdbc:mysql://my.fliskey.top:3306/web_mall_sky
     username: root
-    password: HuaWei@0706
+    password: Tencent@0720
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis-plus:
   configuration:

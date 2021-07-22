@@ -1,10 +1,11 @@
 <template>
   <a-form :form="form" :model="UmUser" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" @submit="handleSubmit">
-    <a-form-item label="编号">
+    <a-form-item label="会员号">
       <a-input
         v-decorator="['id', { rules: [{ required: true, message: 'Please input your note!' }] }]"
         placeholder="请输入编号"
         v-model='UmUser.id'
+        disabled="true"
         readOnly
       />
     </a-form-item>

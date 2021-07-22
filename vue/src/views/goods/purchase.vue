@@ -189,194 +189,272 @@
 
 
 <script>
-const data = [];
-const addressData = [];
-const ids = [];
-export default {
-  data() {
-    return {
-      form:
-        {
-          name: '',
-          telNumber: '',
-          address: ''
-        },
-      ids,
-      addId: '',
-      value: '',
-      visible: false,
-      createrName: '',
-      columns,
-      gid: '',
-      uid: '',
-      data,
-      addressData,
-      currentTime: new Date().getFullYear()+'/'+new Date().getMonth()+'/'+new Date().getDate()+
-        '/'+new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds(),
-      price: 0,
+  const data = [];
+  const addressData = [];
+  const ids = [];
+  const allPrice = [];
+  const quantity = [];
+  const trueQuantity = [];
+  export default {
+    data() {
+      return {
+        form:
+          {
+            name: '',
+            telNumber: '',
+            address: ''
+          },
+        ids,
+        addId: '',
+        value: '',
+        visible: false,
+        createrName: '',
+        columns,
+        gid: '',
+        uid: '',
+        data,
+        addressData,
+        trueQuantity,
+        quantity,
+        currentTime: new Date().getFullYear()+'/'+new Date().getMonth()+'/'+new Date().getDate()+
+          '/'+new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds(),
+        price: 0,
+        allPrice,
+        orderId: '',
 
-    };
-  },
-  mounted()
-  {
+      };
+    },
+    async mounted()
+    {
 
-    if(this.$cookies.isKey('vid') === false)
-      this.$router.push('login')
-    let id = this.$cookies.get('vid')
-    this.uid = id
-    let _this = this
-    this.axios.get('http://localhost:8181/umUser/findName/'+id).then(function (response){
-      _this.createrName = response.data
-    })
-    this.gid = this.$route.params.id
-    this.ids = this.gid.split(',')
-    this.loading = true
-    var i = 0
-    this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response){
+      if(this.$cookies.isKey('vid') === false)
+        this.$router.push('login')
+      let id = this.$cookies.get('vid')
+      this.uid = id
+      let _this = this
+      this.axios.get('http://localhost:8181/umUser/findName/'+id).then(function (response){
+        _this.createrName = response.data
+      })
+      this.gid = this.$route.params.id
+      this.ids = this.gid.split(',')
+      this.loading = true
+      var i = 0
+      await this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response){
         _this.data = response.data
         for(i;i<response.data.length;i++){
-          _this.price += response.data[i].price
+          // _this.price += response.data[i].price
+          // _this.allPrice[i] = response.data[i].price
+          let res = response
+          let I = i
+          let __this = _this
+          //alert(_this.uid+response.data[i].id)
+          _this.axios.get('http://localhost:8181/purchaseGoods/findQuantity/'+_this.uid+'/'+response.data[i].id).then(function (response) {
+            if(response.data==0)
+            {
+              __this.quantity[I]=1
+              __this.data[I].quantity=1
+              __this.price += res.data[I].price
+              __this.allPrice[I] = res.data[I].price
+            }
+            else
+            {
+              __this.quantity[I]  =response.data
+              __this.data[I].quantity = response.data
+              __this.price += res.data[I].price*response.data
+              __this.allPrice[I] = res.data[I].price*response.data
+            }
+
+
+
+          })
         }
 
 
-    })
-    this.axios.get('http://localhost:8181/userAddress/list'). then(function (response){
-      _this.addressData = response.data
-
-    })
-
-
-  },
-  methods: {
-    afterVisibleChange(val) {
-      console.log('visible', val);
-    },
-    showDrawer() {
-      this.visible = true;
-    },
-    addAddress(uid) {
-      let _this = this
-      var add =
-        {id:1,
-        userId: uid,
-        consigneeName: this.form.name,
-        consigneeTel: this.form.telNumber,
-        consigneeAddress: this.form.address
-        }
-      this.axios.post('http://localhost:8181/userAddress/add',add).then(function (response) {
-        if(response.data)
-          alert("插入地址成功！")
       })
-      this.visible = false;
-    },
-    updateAddress(uid)
-    {
-      let _this = this
-      var update =
-        {
-          id: this.addId,
-          userId: uid,
-          consigneeName: this.form.name,
-          consigneeTel: this.form.telNumber,
-          consigneeAddress: this.form.address
-        }
-      this.axios.put('http://localhost:8181/userAddress/update',update).then(function (response) {
-        if(response.data)
-          alert("更新地址成功！")
-        location.reload()
+      this.axios.get('http://localhost:8181/userAddress/listById/'+this.uid). then(function (response){
+        _this.addressData = response.data
+
       })
-      this.visible = false;
+
+
     },
-    chooseAddress(object)
-    {
-      this.form.name = object.consigneeName
-      this.form.telNumber = object.consigneeTel
-      this.form.address = object.consigneeAddress
-      this.addId = object.id
-    },
-    removeAddress(id)
-    {
-      this.axios.delete('http://localhost:8181/userAddress/delete/'+id).then(function (response) {
-        if(response.data)
-          alert("删除成功！")
-        else
-          alert("删除失败！")
-        location.reload()
-      })
-    },
-    onClose() {
-      this.visible = false;
-    },
-    addOrder()
-    {
-      let gid = this.gid
-      let aid = this.addId
-      var myOrder =
-        {
-          id: 0,
-          goodsId: this.gid,
-          buyerId: this.uid,
-          actualPayAmount: this.price,
-          buyerAddress: this.form.address,
-          buyerPhone: this.form.telNumber,
-          buyerName: this.form.name
-        }
-        if(this.form.name.length==0||this.form.telNumber.length==0||this.form.address.length==0)
-        {
-          alert("姓名，地址和电话不能为空！" +
-            "请重新填写！")
-          return
-        }
+    methods: {
+      afterVisibleChange(val) {
+        console.log('visible', val);
+      },
+      showDrawer() {
+        this.visible = true;
+      },
+      addAddress(uid) {
         let _this = this
-        this.axios.post('http://localhost:8181/omOrder/add',myOrder).then(function (response){
+        var add =
+          {id:1,
+            userId: uid,
+            consigneeName: this.form.name,
+            consigneeTel: this.form.telNumber,
+            consigneeAddress: this.form.address
+          }
+        this.axios.post('http://localhost:8181/userAddress/add',add).then(function (response) {
           if(response.data)
-            alert("创建订单成功！")
-            alert("正在转向结算页面...")
-            _this.$router.push('/visitor/goods/pay/'+gid+'/'+aid)
-        })
-    }
-  },
-};
+            alert("插入地址成功！")
 
-const columns = [
-  {
-    title: '图片',
-    dataIndex: 'imageUrl',
-    width: '20%',
-    key:'imageUrl',
-    align: 'center',
-    scopedSlots: {customRender: 'imageUrl'},
-  },
-  {
-    title: '名称',
-    dataIndex: 'name',
-    width: '15%',
-    align: 'center',
-    scopedSlots: { customRender: 'name' },
-  },
-  {
-    title: '类型',
-    dataIndex: 'type',
-    width: '15%',
-    align: 'center',
-    scopedSlots: { customRender: 'type' },
-  },
-  {
-    title: '数量',
-    dataIndex: 'quantity',
-    width: '15%',
-    align: 'center',
-    key:'quantity',
-    scopedSlots: { customRender: 'quantity' },
-  },
-  {
-    title: '单价',
-    dataIndex: 'price',
-    width: '10%',
-    align: 'center',
-    scopedSlots: { customRender: 'price' },
-  }
-];
+        })
+        this.visible = false;
+      },
+      updateAddress(uid)
+      {
+        let _this = this
+        var update =
+          {
+            id: this.addId,
+            userId: uid,
+            consigneeName: this.form.name,
+            consigneeTel: this.form.telNumber,
+            consigneeAddress: this.form.address
+          }
+        this.axios.put('http://localhost:8181/userAddress/update',update).then(function (response) {
+          if(response.data)
+            alert("更新地址成功！")
+          location.reload()
+        })
+        this.visible = false;
+      },
+      chooseAddress(object)
+      {
+        this.form.name = object.consigneeName
+        this.form.telNumber = object.consigneeTel
+        this.form.address = object.consigneeAddress
+        this.addId = object.id
+      },
+      removeAddress(id)
+      {
+        this.axios.delete('http://localhost:8181/userAddress/delete/'+id).then(function (response) {
+          if(response.data)
+            alert("删除成功！")
+          else
+            alert("删除失败！")
+          location.reload()
+        })
+      },
+      onClose() {
+        this.visible = false;
+      },
+      async addOrder()
+      {
+        let gid = this.gid
+        let aid = this.addId
+
+        var i = 0
+        var flag = 1
+        let _this = this
+
+        for(i;i<this.ids.length;i++)
+        {
+          let I = i
+          var myOrder =
+            {
+              id: 0,
+              goodsId: this.ids[i],
+              buyerId: this.uid,
+              actualPayAmount: this.allPrice[i],
+              buyerAddress: this.form.address,
+              buyerPhone: this.form.telNumber,
+              buyerName: this.form.name
+            }
+          if(this.form.name.length==0||this.form.telNumber.length==0||this.form.address.length==0)
+          {
+            alert("姓名，地址和电话不能为空！" +
+              "请重新填写！")
+            return
+          }
+          await this.axios.get('http://localhost:8181/gmGoods/findQuantity/'+this.ids[i]).then(function (response) {
+            _this.trueQuantity[I] = response.data
+            // alert(_this.trueQuantity[I]+"---"+_this.quantity[I])
+            if(_this.trueQuantity[I]<_this.quantity[I])
+            {
+              alert("当前购买物品" +
+                "数量超出库存，请减少购买数量！")
+              flag = 0
+            }
+
+          })
+          if(flag==0)
+            return
+
+          await this.axios.post('http://localhost:8181/omOrder/add',myOrder).then(function (response){
+            _this.orderId = response.data
+          })
+        }
+        await alert("创建订单成功！订单号为："+this.orderId)
+        await alert("正在转向结算页面...")
+        let oid = this.orderId
+
+        await this.reduceStock()
+        await this.$router.push('/visitor/goods/pay/'+gid+'/'+aid+'/'+oid)
+
+
+      },
+      async reduceStock()//库存减少
+      {
+        var i = 0
+        for(i;i<this.ids.length;i++)
+        {
+          //调后端接口，使库存减少
+          let _this = this
+          let I = i
+          await this.axios.get('http://localhost:8181/gmGoods/find/'+this.ids[i]).then(async function (response){
+            //alert(response.data.quantity)
+            response.data.quantity-=_this.quantity[I]
+            //alert(response.data.quantity)
+            await _this.axios.put('http://localhost:8181/gmGoods/update',response.data).then(function(res){
+              alert("更新库存成功！")
+
+            })
+          })
+        }
+      }
+    },
+  };
+
+  const columns = [
+    {
+      title: '图片',
+      dataIndex: 'imageUrl',
+      width: '20%',
+      key:'imageUrl',
+      align: 'center',
+      scopedSlots: {customRender: 'imageUrl'},
+    },
+    {
+      title: '名称',
+      dataIndex: 'name',
+      width: '15%',
+      align: 'center',
+      scopedSlots: { customRender: 'name' },
+    },
+    {
+      title: '类型',
+      dataIndex: 'type',
+      width: '15%',
+      align: 'center',
+      scopedSlots: { customRender: 'type' },
+    },
+    {
+      title: '数量',
+      dataIndex: 'quantity',
+      width: '15%',
+      align: 'center',
+      key:'quantity',
+      scopedSlots: { customRender: 'quantity' },
+    },
+    {
+      title: '单价',
+      dataIndex: 'price',
+      width: '10%',
+      align: 'center',
+      scopedSlots: { customRender: 'price' },
+    }
+  ];
 
 </script>
 
