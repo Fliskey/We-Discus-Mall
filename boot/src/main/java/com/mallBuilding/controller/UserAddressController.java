@@ -13,9 +13,6 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 /**
- * <p>
- *  前端控制器
- * </p>
  *
  * @author root
  * @since 2021-07-16
@@ -41,6 +38,14 @@ public class UserAddressController {
         return this.userAddressService.getById(id);
 
     }
+
+    @GetMapping("/listById/{id}")
+    public List<UserAddress> queryByUserId(@PathVariable("id") Integer id)
+    {
+        return this.userAddressDao.queryById(id);
+
+    }
+
 
     @PostMapping("/add")
     public boolean add(@RequestBody UserAddress userAddress){
