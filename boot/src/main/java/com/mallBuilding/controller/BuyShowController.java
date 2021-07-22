@@ -30,6 +30,12 @@ public class BuyShowController {
     {
         return this.omOrderDao.queryByBuyerId(buyerId, hasPayed,hasShipped, hasConfirmed);
     }
+    @GetMapping("/buylistSimple/{id}")
+    public List<BuyShow> listByBuyerId(@PathVariable("id") Integer buyerId)
+    {
+        return this.omOrderDao.queryByBuyerIdSimple(buyerId);
+    }
+
 
     @GetMapping("/confirm/{orderId}")
     public boolean update(@PathVariable("orderId") Integer id)
