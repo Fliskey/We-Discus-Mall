@@ -93,96 +93,100 @@
 </template>
 
 <script>
-export default {
-  name:'',
-  data(){
-    return {
-      pageUserId: '',
-      id:'',
-      gooditem:{
+  export default {
+    name: '',
+    data (){
+      return {
+        pageUserId: '',
         id: '',
-        userId:'',
-        name:'',
-        type:'',
-        quantity:'',
-        price:'',
-        imageUrl:'',
-        description:''
-      },
-      likeQuantity:'',
-      isSame:0,
-    }
-  },
-  mounted() {
-    if(this.$cookies.isKey('vid') === false)
-      this.$router.push('login')
-    this.pageUserId = this.$cookies.get('vid')
-    this.getParams()
-    let Gid = this.$route.params.id
-    let _this = this
-    axios.get('http://localhost:8181/gmGoods/find/'+Gid).then(function (response){
-      console.log(response)
-      _this.gooditem = response.data
-      // alert("正确的"+response.data.userId)
-    })
-    axios.get('http://localhost:8181/wantGoods/countLike/'+Gid).then(function (response){
-      console.log("测试预定数量接口")
-      console.log(response)
-      _this.likeQuantity = response.data
-    })
-
-  },
-  methods:{
-    insertTrolley(){
-      var myTrolley = {
-        id:0,
-        userId:this.pageUserId,
-        goodsId:this.id,
-        quantity:1
+        gooditem: {
+          id: '',
+          userId: '',
+          name: '',
+          type: '',
+          quantity: '',
+          price: '',
+          imageUrl: '',
+          description: ''
+        },
+        likeQuantity: '',
+        isSame: 0,
+        userName:'',
       }
       axios.post('http://localhost:8181/purchaseGoods/add',myTrolley).then(function (response){
 
       })
     },
-    getParams(){
-      //取到路由传过来的参数
-      //将数据放在当前组件的数据内
-      this.id = this.$route.params.id
-    },
-    insertToLike(){
-      console.log("当前浏览者的id是  "+this.pageUserId);
-      console.log("该商品发布者的id是  "+this.gooditem.userId);
-      if(this.pageUserId==this.gooditem.userId){
-        console.log("我预定我自己：error！")
-        alert("这个是您自己发布的商品哦，不可以预定哦~")
-        this.isSame = 1
-
-        return;
-      }
-      var mylike = {id:0,userId:this.pageUserId,goodsId:this.id}
-      //assert.notEqual(this.pageUserId, this.gooditem.userId, '预期二者不相等')
-      // alert("您已预定了"+mylike.goodsId)
-      axios.post('http://localhost:8181/wantGoods/add',mylike).then(function (response){
-         if (response.data){
-           alert("完成预定")
-         }
-         else
-           alert("您已经预定了该商品！")
+    mounted () {
+      if (this.$cookies.isKey('vid') === false)
+        this.$router.push('login')
+      this.pageUserId = this.$cookies.get('vid')
+      this.getParams()
+      let Gid = this.$route.params.id
+      let _this = this
+      axios.get('http://localhost:8181/gmGoods/find/'+Gid).then(function (response){
+        console.log(response)
+        _this.gooditem = response.data
+        axios.get('http://localhost:8181/umUser/findName/'+_this.gooditem.userId).then(function (response){
+          _this.userName = response.data
+        })
+      // alert("正确的"+response.data.userId)
       })
+      axios.get('http://localhost:8181/wantGoods/countLike/'+Gid).then(function (response){
+        console.log('测试预定数量接口')
+        console.log(response)
+        _this.likeQuantity = response.data
+      })
+
     },
-    buyNow(gid)
-    {
-      this.$router.push('/visitor/goods/purchase/'+gid)
+
+    methods: {
+      insertTrolley (){
+        var myTrolley = {
+          id: 0,
+          userId: this.pageUserId,
+          goodsId: this.id,
+          quantity: 1
+        }
+        axios.post('http://localhost:8181/purchaseGoods/add', myTrolley).then(function (response){
+        })
+      },
+      getParams (){
+        //取到路由传过来的参数
+        //将数据放在当前组件的数据内
+        this.id = this.$route.params.id
+      },
+      insertToLike (){
+        console.log('当前浏览者的id是  '+this.pageUserId)
+        console.log('该商品发布者的id是  '+this.gooditem.userId)
+        if (this.pageUserId===this.gooditem.userId){
+          console.log('我预定我自己：error！')
+          alert('这个是您自己发布的商品哦，不可以预定哦~')
+          this.isSame = 1
+
+          return
+        }
+        var mylike = {id: 0, userId: this.pageUserId, goodsId: this.id}
+        axios.post('http://localhost:8181/wantGoods/add', mylike).then(function (response){
+          if (response.data){
+            alert('完成预定')
+          }
+          else
+            alert('您已经预定了该商品！')
+        })
+      },
+      buyNow (gid)
+      {
+        this.$router.push('/visitor/goods/purchase/'+gid)
+      }
+    },
+
+    watch: {
+      //检测路由变化，只要变化了就调用获取路由组件参数方法将数据存储到本组件即可
+      '$route': 'getParams'
     }
 
-  },
-
-  watch:{
-    //检测路由变化，只要变化了就调用获取路由组件参数方法将数据存储到本组件即可
-    '$route':'getParams'
   }
-
-}
 </script>
 
 <style lang="less" scoped>

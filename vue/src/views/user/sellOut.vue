@@ -7,7 +7,7 @@
       <span slot="operation" slot-scope="text, record,index">
           <a-button type="primary" @click="toDeliverGoods(record)" style="margin-right: 1px"> 去发货 </a-button>
           <a-divider type="vertical"></a-divider>
-          <a-button margin type="danger" @click="showDeleteConfirm(record.id)">取消交易</a-button>
+          <a-button margin type="danger" @click="cancelOrder(record.id)">取消交易</a-button>
           <div class="editable-row-operations">
             <span v-if="record.editable">
               <a @click="() => save(record.key)">Save</a>
@@ -166,13 +166,8 @@ export default {
         else {
           _this.$router.push('/visitor/user/order/'+record.id)
         }
-
       })
-
-
     }
-
-
 
   },
 };

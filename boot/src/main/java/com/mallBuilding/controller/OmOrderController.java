@@ -7,7 +7,9 @@ import com.mallBuilding.entity.OmOrder;
 import com.mallBuilding.service.OmOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
+import java.net.SocketOption;
 import java.util.List;
 
 /**
@@ -40,8 +42,18 @@ public class OmOrderController {
     }
 
     @PostMapping("/add")
-    public boolean add(@RequestBody OmOrder omOrder){
-        return this.omOrderService.save(omOrder);
+    public Integer add(@RequestBody OmOrder omOrder){
+
+
+        this.omOrderService.save(omOrder);
+
+        return omOrder.getId();
+    }
+
+    @PutMapping("/updatePay/{id}")
+    public boolean updatePay(@PathVariable("id") Integer id)
+    {
+        return this.omOrderDao.updatePay(id);
     }
 
     @GetMapping("/delete/{gid}/{bid}")
@@ -54,6 +66,10 @@ public class OmOrderController {
     @PutMapping("/update")
     public boolean update (@RequestBody OmOrder omOrder){
         return  this.omOrderService.updateById(omOrder);
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable("id") Integer id)
+    {
+        return this.omOrderService.removeById(id);
     }
 
     @DeleteMapping("/delete/{id}")

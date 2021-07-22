@@ -1,14 +1,21 @@
 package com.mallBuilding.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mallBuilding.dao.GoodsDao;
 import com.mallBuilding.dao.PurchaseGoodsDao;
 import com.mallBuilding.entity.GmGoods;
 import com.mallBuilding.entity.PurchaseGoods;
+import com.mallBuilding.mapper.GmGoodsMapper;
 import com.mallBuilding.mapper.PurchaseGoodsMapper;
 import com.mallBuilding.service.PurchaseGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,9 +40,23 @@ public class PurchaseGoodsController {
     @Autowired
     private PurchaseGoodsMapper purchaseGoodsMapper;
 
+    @Autowired
+    private GoodsDao goodsDao;
+
+
     @PostMapping("/add")
     public boolean add(@RequestBody PurchaseGoods purchaseGoods){
-        return this.purchaseGoodsService.save(purchaseGoods);
+        PurchaseGoods p = this.purchaseGoodsDao.findQuantityById(purchaseGoods.getUserId(),purchaseGoods.getGoodsId());
+        if(p != null)
+        {
+            p.setQuantity(p.getQuantity()+1);
+            this.purchaseGoodsService.updateById(p);
+            return true;
+        }
+        else
+        {
+            return this.purchaseGoodsService.save(purchaseGoods);
+        }
     }
 
     @GetMapping("/findByUserId/{id}")

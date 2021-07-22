@@ -136,12 +136,6 @@ export default {
       this.selectedRowKeys = selectedRowKeys;
     },
     deleteShopping(gid, vid) {
-      // this.data.map((shopping,index) => {
-      //   if (shopping.id === id) {
-      //     this.data.splice(index, 1);
-      //   }
-      // });
-      // this.onSelectChange(this.selectedRowKeys);
       this.$confirm({
         title: '确定要删除' + gid + '吗？',
         okText: '确定',
@@ -185,21 +179,21 @@ export default {
       })
     },
     showDeleteConfirm(gid, vid) {
-      this.$confirm({
-        title: '确定要删除' + gid + '吗？',
-        okText: '确定',
-        okType: 'danger',
-        cancelText: '取消',
-        onOk() {
+      // this.$confirm({
+      //   title: '确定要删除' + gid + '吗？',
+      //   okText: '确定',
+      //   okType: 'danger',
+      //   cancelText: '取消',
+      //   onOk() {
           axios.get('http://localhost:8181/purchaseGoods/delete/' + vid + '/' + gid + '/').then(res => {
             //console.log(res)
             if (res) {
               alert('删除成功！' + vid + "：" + gid)
-              location.reload()
+              //location.reload()
             }
           })
-        }
-      })
+        // }
+      // })
     },
     createOrder() {
       //勾选的编号存放砸selectedRowKeys中

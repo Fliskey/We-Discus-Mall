@@ -3,6 +3,7 @@ package com.mallBuilding.dao;
 import com.mallBuilding.entity.GoodsAndBuyer;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,6 +17,10 @@ public interface OmOrderDao {
 
     @Delete("delete from om_order o where goods_id = #{gid} and buyer_id = #{bid}")
     Boolean deleteByUserId(Integer gid,Integer bid);
+  
+    @Update("update om_order set has_payed = 1 where id = #{id}")
+    public boolean updatePay(Integer id);
+
 
     @Select("select buyer_id from om_order where goods_id=#{gid}")
     Boolean selectByGood(Integer gid);
