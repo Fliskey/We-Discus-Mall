@@ -1,6 +1,7 @@
 .DS_Store
-vue/.idea/workspace.xml
-workspace.xml
-vue/.idea/workspace.xml
-vue/.idea/codeStyles/codeStyleConfig.xml
-vue/.idea/codeStyles/Project.xml
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+vue/package-lock.json
