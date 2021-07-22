@@ -18,7 +18,4 @@ public interface GoodsDao {
 
     @Select("select * from web_mall_sky.gm_goods where id=#{goodsId}")
     GmGoods queryGoodsByGoodsId(Integer goodsId);
-
-    @Select("select quantity from gm_goods where id = #{gid}")
-    public Integer findQuantityById(Integer id);
 }

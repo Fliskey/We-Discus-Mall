@@ -3,7 +3,6 @@ package com.mallBuilding.dao;
 import com.mallBuilding.entity.GoodsAndBuyer;
 import com.mallBuilding.entity.OmOrder;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,9 +13,4 @@ public interface OmOrderDao {
 
     @Select("select g.image_url,g.name,o.buyer_name,o.buyer_phone,o.buyer_address,o.actual_pay_amount from om_order o,gm_goods g where g.user_id = #{sellerId} and o.goods_id = g.id")
     public List<GoodsAndBuyer> queryBySellerId(Integer sellerId);
-
-    @Update("update om_order set has_payed = 1 where id = #{id}")
-    public boolean updatePay(Integer id);
-
-
 }
