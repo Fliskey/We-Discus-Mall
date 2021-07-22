@@ -35,6 +35,8 @@ public class GoodsAndBuyer implements Serializable {
 
     private BigDecimal actualPayAmount;
 
+    private Integer hasShipped;
+
 
 
 
