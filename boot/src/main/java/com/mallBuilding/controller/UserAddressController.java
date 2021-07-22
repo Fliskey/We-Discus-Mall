@@ -39,6 +39,14 @@ public class UserAddressController {
 
     }
 
+    @GetMapping("/listById/{id}")
+    public List<UserAddress> queryByUserId(@PathVariable("id") Integer id)
+    {
+        return this.userAddressDao.queryById(id);
+
+    }
+
+
     @PostMapping("/add")
     public boolean add(@RequestBody UserAddress userAddress){
         return this.userAddressService.save(userAddress);
