@@ -65,8 +65,8 @@
               </div>
             </div>
             <span slot="actions"><a-icon style="margin-right: 8px" type="eye" />1563</span>
-            <span slot="actions"><a-icon style="margin-right: 8px" type="star" />112</span>
-            <span slot="actions"><a-icon style="margin-right: 8px" type="message" />{{likeQuantity[n]}}</span>
+            <span slot="actions"><a-icon style="margin-right: 8px" type="star" />{{likeQuantity[n]}}</span>
+            <span slot="actions"><a-icon style="margin-right: 8px" type="message" /></span>
           </a-list-item>
         </div>
         <a-divider></a-divider>
@@ -152,34 +152,15 @@ export default {
         _this.num = res.data.length
       })
       for (let i=0; i<this.num; i++){
-        // await axios.get('http://localhost:8181/wantGoods/countLike/'+_this.data[i].id).then(function (response){
-        //   console.log("测试预定数量接口")
-        //   console.log(response)
-        //   _this.likeQuantity.push(response.data)
-        // })
+        await axios.get('http://localhost:8181/wantGoods/countLike/'+_this.data[i].id).then(function (response){
+          _this.likeQuantity.push(response.data)
+        })
         await this.axios.get('http://localhost:8181/umUser/findName/'+_this.data[i].userId).then(res=>{
           console.log(_this.data[i].userId+"\n")
           _this.userName.push(res.data)
           //_this.userName[i] = res.data
         })
       }
-    },
-
-    async getUserName(uid)
-    {
-      let name
-      let _this = this
-      await this.axios.get('http://localhost:8181/umUser/findName/'+uid).then(function (response) {
-        return response.data
-
-      })
-
-    },
-    change(uid)
-    {
-      this.getUserName(uid).then(res => {
-          console.log(res.data);
-        })
     },
     selectList(val) {
       if (val === 7) { // todo 此处没有做到对getList的复用 之后可以改进

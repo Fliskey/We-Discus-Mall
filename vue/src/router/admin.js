@@ -20,6 +20,10 @@ export default [
       {
         path: 'user/editMessage',
         component: () => import('@/views/admin/editMessage')
+      },
+      {
+        path: 'orderList',
+        component: () => import('@/views/admin/orderList')
       }
     ]
   }
