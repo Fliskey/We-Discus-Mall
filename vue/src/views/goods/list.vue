@@ -3,7 +3,7 @@
     <!-- <search-form /> -->
     <a-card :bordered="false">
       <a-row type='flex' align='middle' justify='space-between'>
-        <a-input-search class="search-ipt" style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
+        <a-input-search class="search-ipt" style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索"/>
         <a-select
           v-model="selected"
           placeholder='所有类别'
@@ -36,14 +36,14 @@
       <a-list itemLayout="vertical" :data-source="data" :pagination="pagination">
         <a-list-item v-for="(v,n) in data" :key="v.id">
           <router-link :to="'/visitor/goods/detail/'+v.id">
-            <a-list-item-meta >
-              <div slot="title">商品名：{{v.name}}&nbsp;&nbsp;&nbsp;&nbsp;价格：￥{{v.price}}</div>
+            <a-list-item-meta>
+              <div slot="title">商品名：{{ v.name }}&nbsp;&nbsp;&nbsp;&nbsp;价格：￥{{ v.price }}</div>
               <div slot="description">
-                <a-tag >
-                  {{v.type}}
+                <a-tag>
+                  {{ v.type }}
                 </a-tag>
-                <a-tag >全新</a-tag>
-                <a-tag >自提</a-tag>
+                <a-tag>全新</a-tag>
+                <a-tag>自提</a-tag>
               </div>
             </a-list-item-meta>
           </router-link>
@@ -51,13 +51,12 @@
             <a-row class="detail" type='flex' style="width: 4cm; height: 4cm">
               <img width='10%' height='120px' :src=v.imageUrl>
             </a-row>
-            <p>{{v.description}}</p>
+            <p>{{ v.description }}</p>
             <div class="author">
-              <a-avatar size="small" src="/img/user.png" />
-              <a>{{userName[n]}}</a>发布于
+              <a-avatar size="small" src="/img/user.png"/>
+              <a>{{ userName[n] }}</a>发布于
               <em>2018-08-05 22:23</em>
             </div>
-
             <span slot="actions"><a-icon style="margin-right: 8px" type="eye" />1563</span>
             <span slot="actions"><a-icon style="margin-right: 8px" type="star" />{{likeQuantity[n]}}</span>
             <span slot="actions"><a-icon style="margin-right: 8px" type="message" /></span>
@@ -70,6 +69,7 @@
 </template>
 
 <script>
+
   export default {
     name: 'ArticleList',
     created () {
@@ -250,39 +250,82 @@
           this.pagination.total = res.data.total
           // this.num = res.data.records.length
         })
+      },
+      selectList (val) {
+        if (val == 7) { // todo 此处没有做到对getList的复用 之后可以改进
+          this.loading = true
+          console.log('展示所有商品类型')
+          this.http.get('http://localhost:8181/gmGoods/list').then(res => {
+            console.log(res)
+            this.loading = false
+            this.data = res.data
+            return
+          })
+        } else {
+          this.loading = true
+          val = val - 1  //保留
+          this.http.get(`http://localhost:8181/gmGoods/queryGoodsByType/${this.lists[val].label}`).then(res => {
+            console.log(res)
+            this.loading = false
+            this.data = res.data
+            console.log(this.data[1])
+          })
+        }
+      },
+      priceSort (value) {
+        console.log(value)
+        console.log(this.data[1].price)
+        if (value == 'upSort') {
+          this.data.sort((a, b) => {
+            return a.price - b.price
+          })
+        } else if (value == 'downSort') {
+          this.data.sort((a, b) => {
+            return b.price - a.price
+          })
+        } else if (value == 'cancelSort') {
+          this.data.sort((a, b) => {
+            return a.id - b.id
+          })
+        }
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
-.extra{
+.extra {
   width: 272px;
   height: 1px;
 }
+
 .content {
   .detail {
     line-height: 22px;
     max-width: 720px;
-    flex-wrap:nowrap;
-    > img{
+    flex-wrap: nowrap;
+
+    > img {
       flex: 1;
       margin-right: 15px;
     }
-    > p{
-      max-height:110px;
+
+    > p {
+      max-height: 110px;
       overflow: hidden;
       text-overflow: ellipsis;
-      cursor:pointer;
+      cursor: pointer;
       display: -webkit-box;
       -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
     }
   }
+
   .author {
     color: #999;
     margin-top: 16px;
     line-height: 22px;
+
     & > :global(.ant-avatar) {
       vertical-align: top;
       margin-right: 8px;
@@ -291,9 +334,11 @@
       position: relative;
       top: 1px;
     }
-    & > a{
-      padding:0 10px;
+
+    & > a {
+      padding: 0 10px;
     }
+
     & > em {
       color: #666;
       font-style: normal;

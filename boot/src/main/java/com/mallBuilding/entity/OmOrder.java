@@ -30,6 +30,7 @@ import lombok.EqualsAndHashCode;
 
     private BigDecimal actualPayAmount;
 
+
     private String buyerAddress;
 
     private String buyerPhone;
@@ -42,5 +43,8 @@ import lombok.EqualsAndHashCode;
 
     private Integer hasConfirmed;
 
+    private Integer hasShipped;
+
+    private Integer hasConfirmed;
 
 }
