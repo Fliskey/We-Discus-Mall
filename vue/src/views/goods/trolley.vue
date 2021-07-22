@@ -55,12 +55,22 @@
       align: 'center',
       scopedSlots: {customRender: 'imageUrl'}
     },
-    {
-      title: '名称',
-      dataIndex: 'name',
-      width: '15%',
-      align: 'center',
-      scopedSlots: {customRender: 'name'}
+    deleteShopping(gid, vid) {
+      this.$confirm({
+        title: '确定要删除' + gid + '吗？',
+        okText: '确定',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk() {
+          axios.get('http://localhost:8181/purchaseGoods/delete/' + vid + '/' + gid + '/').then(res => {
+            //console.log(res)
+            if (res) {
+              alert('删除成功！')
+              location.reload()
+            }
+          })
+        }
+      })
     },
     {
       title: '类型',
@@ -85,14 +95,27 @@
       key: 'price',
       scopedSlots: {customRender: 'price'}
     },
-    {
-      title: '操作',
-      dataIndex: 'operation',
-      width: '25%',
-      align: 'center',
-      scopedSlots: {customRender: 'operation'}
-    }
-  ]
+    showDeleteConfirm(gid, vid) {
+      // this.$confirm({
+      //   title: '确定要删除' + gid + '吗？',
+      //   okText: '确定',
+      //   okType: 'danger',
+      //   cancelText: '取消',
+      //   onOk() {
+          axios.get('http://localhost:8181/purchaseGoods/delete/' + vid + '/' + gid + '/').then(res => {
+            //console.log(res)
+            if (res) {
+              alert('删除成功！' + vid + "：" + gid)
+              //location.reload()
+            }
+          })
+        // }
+      // })
+    },
+    createOrder() {
+      //勾选的编号存放砸selectedRowKeys中
+      alert("您要购买：" + this.selectedRowKeys)
+      this.$router.push('/visitor/goods/purchase/'+this.selectedRowKeys)
 
   const data = []
 

@@ -17,8 +17,8 @@ public class GenerateTest {
         dataSourceConfig.setDbType(DbType.MYSQL);
         dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
         dataSourceConfig.setUsername("root");
-        dataSourceConfig.setPassword("HuaWei@0706");
-        dataSourceConfig.setUrl("jdbc:mysql://mall.fliskey.top:3306/web_mall_sky");
+        dataSourceConfig.setPassword("Tencent@0720");
+        dataSourceConfig.setUrl("jdbc:mysql://my.fliskey.top:3306/web_mall_sky");
         autoGenerator.setDataSource(dataSourceConfig);
         //全局配置
         GlobalConfig globalConfig = new GlobalConfig();
@@ -38,7 +38,7 @@ public class GenerateTest {
         autoGenerator.setPackageInfo(packageConfig);
         //策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("om_order");
+        strategyConfig.setInclude("shipped_goods");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);

@@ -9,11 +9,11 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- *
+ * 
  * </p>
  *
  * @author root
- * @since 2021-07-18
+ * @since 2021-07-21
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
@@ -37,7 +37,11 @@ import lombok.EqualsAndHashCode;
 
     private String buyerName;
 
-    private boolean hasPayed;
+    private Boolean hasPayed;
+
+    private Integer hasShipped;
+
+    private Integer hasConfirmed;
 
     private Integer hasShipped;
 
