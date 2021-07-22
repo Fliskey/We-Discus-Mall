@@ -22,7 +22,7 @@
       <a-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(item, index) in list" :key="index" class="mt-3">
         <a-card :title="item.title" class="w-100">
           <div slot="extra">
-            <a-button type="danger" @click="onConfirmReceipt" :disabled="item.hasConfirmed==1">
+            <a-button type="danger" @click="onConfirmReceipt(item.id)" :disabled="item.hasConfirmed==1">
               {{ item.hasConfirmed == 1 ? '已收货' : '确认收货' }}
             </a-button>
           </div>
@@ -85,17 +85,19 @@
         })
       },
       // 确认收货
-      onConfirmReceipt () {
+      onConfirmReceipt (vid) {
         this.$confirm({
           title: '确定要确认收货吗?',
           content: '此操作将无法恢复',
           cancelText: '取消',
           okText: '确定',
-          onOk (vid) {
+          onOk () {
             // 发送后端请求
+            console.log('vid')
+            console.log(vid)
             axios.get('http://localhost:8181/buyShow/confirm/' + vid).then(res => {
               if (res) {
-                alert('删除成功！')
+                alert('收货成功！')
                 location.reload()
               }
             })

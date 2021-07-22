@@ -34,9 +34,10 @@ public class BuyShowController {
     }
 
     @GetMapping("/confirm/{orderId}")
-    public boolean update(@PathVariable("orderId") Integer id)
+    public boolean update(@PathVariable("orderId") String id)
     {
-        return this.omOrderDao.confirmBuyOrder(id);
+        Integer newId = Integer.valueOf(id);
+        return this.omOrderDao.confirmBuyOrder(newId);
     }
 
     @GetMapping("/buylistSimple/{id}") //简单的接口
