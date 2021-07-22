@@ -25,6 +25,8 @@ public class BuyShowController {
     @Autowired
     private OmOrderDao omOrderDao;
 
+
+    //牛逼的接口
     @GetMapping("/buylist/{id}/{hasPayed}/{hasShipped}/{hasConfirmed}")
     public List<BuyShow> listByBuyerId(@PathVariable("id") Integer buyerId,@PathVariable("hasPayed") Integer hasPayed,  @PathVariable("hasShipped") Integer hasShipped, @PathVariable("hasConfirmed") Integer hasConfirmed)
     {
@@ -42,6 +44,13 @@ public class BuyShowController {
     {
         return this.omOrderDao.confirmBuyOrder(id);
     }
+
+    @GetMapping("/buylistSimple/{id}") //简单的接口
+    public List<BuyShow> listByBuyerId(@PathVariable("id") Integer buyerId)
+    {
+        return this.omOrderDao.queryByBuyerIdSimple(buyerId);
+    }
+
 
 
 }

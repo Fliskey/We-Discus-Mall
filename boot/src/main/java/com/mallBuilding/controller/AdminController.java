@@ -89,5 +89,8 @@ public class AdminController {
         }
     }
 
+//    //实现模糊查询 用于管理员页面查询历史订单
+//    @GetMapping("/likeQueryName")
+
 }
 
