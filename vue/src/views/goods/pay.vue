@@ -157,23 +157,28 @@ export default {
     {
       //取消订单分两步，首先将订单删除，其次再将数量加回
       //删除订单
-      this.axios.delete('http://localhost:8181/omOrder/delete/'+this.oid).then(function (response) {
-        if(response.data)
-          alert("删除订单成功！")
-      })
+      var j = 0
+      for(j;j<this.ids.length;j++)
+      {
+        var k = this.oid-j
+        await this.axios.delete('http://localhost:8181/omOrder/delete/'+k).then(function (response) {
+
+        })
+      }
+      alert("删除订单成功！")
       //加回数量
       var i = 0
       for(i;i<this.ids.length;i++)
       {
-        //调后端接口，使库存减少
         let _this = this
         let I = i
         await this.axios.get('http://localhost:8181/gmGoods/find/'+this.ids[i]).then(async function (response){
           //alert(response.data.quantity)
           response.data.quantity+=_this.quantity[I]
-          //alert(response.data.quantity)
+          let __this = _this
           await _this.axios.put('http://localhost:8181/gmGoods/update',response.data).then(function(res){
-            alert("加回数量成功！")
+            //alert("加回数量成功！")
+            __this.$router.push('/visitor/goods/list')
 
           })
         })
