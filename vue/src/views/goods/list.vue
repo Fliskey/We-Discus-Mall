@@ -65,8 +65,8 @@
               </div>
             </div>
             <span slot="actions"><a-icon style="margin-right: 8px" type="eye" />1563</span>
-            <span slot="actions"><a-icon style="margin-right: 8px" type="star" />112</span>
-            <span slot="actions"><a-icon style="margin-right: 8px" type="message" />{{likeQuantity[n]}}</span>
+            <span slot="actions"><a-icon style="margin-right: 8px" type="star" />{{likeQuantity[n]}}</span>
+            <span slot="actions"><a-icon style="margin-right: 8px" type="message" /></span>
           </a-list-item>
         </div>
         <a-divider></a-divider>
@@ -76,7 +76,6 @@
 </template>
 
 <script>
-
   export default {
     name: 'ArticleList',
     created () {

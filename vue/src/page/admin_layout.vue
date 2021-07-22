@@ -15,6 +15,10 @@
           <a-icon type="user" />
           <span>订单管理</span>
         </a-menu-item>
+        <a-menu-item key="/admin/orderList">
+          <a-icon type="user" />
+          <span>历史订单</span>
+        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
