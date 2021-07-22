@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author root
@@ -43,8 +43,5 @@ import lombok.EqualsAndHashCode;
 
     private Integer hasConfirmed;
 
-    private Integer hasShipped;
-
-    private Integer hasConfirmed;
 
 }

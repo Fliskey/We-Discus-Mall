@@ -1,6 +1,7 @@
 package com.mallBuilding.dao;
 
 
+import com.mallBuilding.entity.UserAddress;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 

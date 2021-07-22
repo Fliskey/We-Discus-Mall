@@ -67,12 +67,8 @@ public class OmOrderController {
     }
 
     @PutMapping("/update")
-    public boolean update (@RequestBody OmOrder omOrder){
-        return  this.omOrderService.updateById(omOrder);
-    @DeleteMapping("/delete/{id}")
-    public boolean delete(@PathVariable("id") Integer id)
-    {
-        return this.omOrderService.removeById(id);
+    public boolean update (@RequestBody OmOrder omOrder) {
+        return this.omOrderService.updateById(omOrder);
     }
 
     @DeleteMapping("/delete/{id}")

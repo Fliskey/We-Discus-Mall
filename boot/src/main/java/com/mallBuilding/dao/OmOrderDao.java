@@ -21,11 +21,6 @@ public interface OmOrderDao {
                     + "where o1.goods_id = g.id and o1.buyer_id = #{buyerId} and o1.has_payed =#{hasPayed} and o1.has_shipped = #{hasShipped} and o1.has_confirmed = #{hasConfirmed};" })
     public List<BuyShow> queryByBuyerId(Integer buyerId, Integer hasPayed, Integer hasShipped, Integer hasConfirmed);
 
-    @Select({"select o1.id, o1.goods_id, buyer_id, g.image_url, g.name, g.type, g.price, o1.actual_pay_amount/g.price quantitySiOrder, o1.actual_pay_amount, o1.has_payed, o1.has_shipped, o1.has_confirmed\n" +
-            "from om_order o1, gm_goods g\n"+
-            "where o1.goods_id = g.id and o1.buyer_id = #{buyerId} and o1.has_payed =1"})
-    public List<BuyShow> queryByBuyerIdSimple(Integer buyerId);
-
     @Update("update om_order o set o.has_confirmed = 1 where id = #{id}")
     Boolean confirmBuyOrder(Integer id);
 
@@ -38,7 +33,7 @@ public interface OmOrderDao {
 
     @Delete("delete from om_order o where goods_id = #{gid} and buyer_id = #{bid}")
     Boolean deleteByUserId(Integer gid,Integer bid);
-  
+
     @Update("update om_order set has_payed = 1 where id = #{id}")
     public boolean updatePay(Integer id);
 
