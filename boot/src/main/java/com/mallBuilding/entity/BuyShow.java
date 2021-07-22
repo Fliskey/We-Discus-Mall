@@ -28,6 +28,8 @@ public class BuyShow implements Serializable {
 
     private String buyerId;
 
+    private String sellerId;
+
     private String imageUrl;
 
     private String name;

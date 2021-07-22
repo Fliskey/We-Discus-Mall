@@ -2,7 +2,9 @@ package com.mallBuilding.controller;
 
 
 import com.mallBuilding.dao.AdminDao;
+import com.mallBuilding.dao.OmOrderDao;
 import com.mallBuilding.entity.Admin;
+import com.mallBuilding.entity.BuyShow;
 import com.mallBuilding.entity.UmUser;
 import com.mallBuilding.mapper.AdminMapper;
 import com.mallBuilding.service.AdminService;
@@ -33,6 +35,9 @@ public class AdminController {
 
     @Autowired
     private AdminMapper adminMapper;
+
+    @Autowired
+    private OmOrderDao omOrderDao;
 
     @PostMapping("/telToId")
     public Integer telToId(@RequestBody String tel){
@@ -89,6 +94,11 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/adminOrderList") //简单的接口
+    public List<BuyShow> adminOrderListAll()
+    {
+        return this.omOrderDao.adminOrderAll();
+    }
 //    //实现模糊查询 用于管理员页面查询历史订单
 //    @GetMapping("/likeQueryName")
 
