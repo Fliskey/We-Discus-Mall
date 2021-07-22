@@ -110,9 +110,8 @@
           description: ''
         },
         likeQuantity: '',
-        isSame: 0
         isSame: 0,
-        userName:'',
+        userName: ''
       }
     },
     mounted () {
