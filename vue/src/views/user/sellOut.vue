@@ -154,10 +154,21 @@ export default {
     {
       //alert("现在就去发货吧！")
       //alert("发货人信息："+record.buyerName+" "+record.buyerAddress+" "+record.buyerPhone)
-
+      let _this = this
       //勾选的编号存放砸selectedRowKeys中
-      alert("您要出售：" + record.name)
-      this.$router.push('/visitor/user/order/'+record.id)
+      //alert("您要出售：" + record.name)
+      this.axios.get('http://localhost:8181/shippedGoods/hasShipped/'+record.id).then(function (response) {
+        if(!response.data)
+        {
+          alert("该商品已发货！")
+          return
+        }
+        else {
+          _this.$router.push('/visitor/user/order/'+record.id)
+        }
+
+      })
+
 
     }
 
