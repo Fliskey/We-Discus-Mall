@@ -40,4 +40,12 @@ public interface OmOrderDao {
 
     @Select("select buyer_id from om_order where goods_id=#{gid}")
     Boolean selectByGood(Integer gid);
+
+
+    @Select({
+            "select o1.id, o1.goods_id, buyer_id, g.user_id seller_id, g.image_url, g.name, g.type, g.price, o1.actual_pay_amount/g.price quantitySiOrder, o1.actual_pay_amount, o1.has_payed, o1.has_shipped, o1.has_confirmed\n"
+                    + "from om_order o1, gm_goods g\n"
+                    + "where o1.goods_id = g.id \n"
+                    + "order by o1.has_confirmed,o1.has_shipped;" })
+    public List<BuyShow> adminOrderAll();
 }
