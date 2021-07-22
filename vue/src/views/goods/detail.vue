@@ -113,6 +113,9 @@
         isSame: 0,
         userName:'',
       }
+      axios.post('http://localhost:8181/purchaseGoods/add',myTrolley).then(function (response){
+
+      })
     },
     mounted () {
       if (this.$cookies.isKey('vid') === false)
@@ -136,6 +139,7 @@
       })
 
     },
+
     methods: {
       insertTrolley (){
         var myTrolley = {
@@ -175,7 +179,6 @@
       {
         this.$router.push('/visitor/goods/purchase/'+gid)
       }
-
     },
 
     watch: {

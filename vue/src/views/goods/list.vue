@@ -31,39 +31,33 @@
             默认排序
           </a-select-option>
         </a-select>
-
       <a href='/#/visitor/goods/public'>立即发布闲置</a>
       </a-row>
-        <br/>
-      <a-list :grid="{ gutter:16, column: 2 }" itemLayout="vertical" :data-source="data" :pagination="pagination" bordered>
-        <div>
-          <a-list-item v-for="(v,n) in data" :key="v.id" style="height: 5cm; margin-top: 22px" bordered >
-            <div class="content">
-              <a-row class="detail" style="width: 12cm; height: 3.4cm">
-                <img width='120px' height='120px' style="float: left; border-radius: 7px" :src=v.imageUrl>
-                <router-link :to="'/visitor/goods/detail/'+v.id">
-                  <a-list-item-meta>
-                    <div slot="title" style="height: 2px;font-size: large">{{v.name}}
-                    <a-tag color="red" style="font-weight: normal">
-                      {{v.type}}
-                    </a-tag>
-                    <a-tag color="red" style="font-weight: normal">全新</a-tag>
-                    <a-tag color="red" style="font-weight: normal">自提</a-tag>
-                    </div>
-                  </a-list-item-meta>
-                </router-link>
-                <p style="
-                height: 40px">{{v.description}}</p>
-                <a-list-item-meta>
-                  <div slot="title" style="height: 0;color: #dc5c47">价格：￥{{v.price}}</div>
-                </a-list-item-meta>
-              </a-row>
-              <div class="author" style="width: 9cm; height: 18px">
-                <a-avatar size="small" src="/img/user.png"/>
-                <a>{{userName[n]}}</a>发布于
-                <em>2018-08-05 22:23</em>
+      <a-list itemLayout="vertical" :data-source="data" :pagination="pagination">
+        <a-list-item v-for="(v,n) in data" :key="v.id">
+          <router-link :to="'/visitor/goods/detail/'+v.id">
+            <a-list-item-meta >
+              <div slot="title">商品名：{{v.name}}&nbsp;&nbsp;&nbsp;&nbsp;价格：￥{{v.price}}</div>
+              <div slot="description">
+                <a-tag >
+                  {{v.type}}
+                </a-tag>
+                <a-tag >全新</a-tag>
+                <a-tag >自提</a-tag>
               </div>
+            </a-list-item-meta>
+          </router-link>
+          <div class="content">
+            <a-row class="detail" type='flex' style="width: 4cm; height: 4cm">
+              <img width='10%' height='120px' :src=v.imageUrl>
+            </a-row>
+            <p>{{v.description}}</p>
+            <div class="author">
+              <a-avatar size="small" src="/img/user.png" />
+              <a>{{userName[n]}}</a>发布于
+              <em>2018-08-05 22:23</em>
             </div>
+
             <span slot="actions"><a-icon style="margin-right: 8px" type="eye" />1563</span>
             <span slot="actions"><a-icon style="margin-right: 8px" type="star" />{{likeQuantity[n]}}</span>
             <span slot="actions"><a-icon style="margin-right: 8px" type="message" /></span>
@@ -262,11 +256,15 @@
 </script>
 
 <style lang="less" scoped>
+.extra{
+  width: 272px;
+  height: 1px;
+}
 .content {
   .detail {
-    line-height: 16px;
+    line-height: 22px;
     max-width: 720px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     > img{
       flex: 1;
       margin-right: 15px;
@@ -283,7 +281,7 @@
   }
   .author {
     color: #999;
-    margin-top: 2px;
+    margin-top: 16px;
     line-height: 22px;
     & > :global(.ant-avatar) {
       vertical-align: top;
@@ -291,7 +289,7 @@
       width: 20px;
       height: 20px;
       position: relative;
-      top: 0;
+      top: 1px;
     }
     & > a{
       padding:0 10px;

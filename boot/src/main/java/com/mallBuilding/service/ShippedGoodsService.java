@@ -1,6 +1,6 @@
 package com.mallBuilding.service;
 
-import com.mallBuilding.entity.OmOrder;
+import com.mallBuilding.entity.ShippedGoods;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author root
  * @since 2021-07-21
  */
-public interface OmOrderService extends IService<OmOrder> {
+public interface ShippedGoodsService extends IService<ShippedGoods> {
 
 }

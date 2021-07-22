@@ -155,7 +155,7 @@
           >
             <a-statistic
               title="状态"
-              value="正在创建订单"
+              value="支付中"
               :style="{
                 marginRight: '32px',
               }"
@@ -192,9 +192,6 @@
 const data = [];
 const addressData = [];
 const ids = [];
-const allPrice = [];
-const quantity = [];
-const trueQuantity = [];
 export default {
   data() {
     return {
@@ -214,8 +211,6 @@ export default {
       uid: '',
       data,
       addressData,
-      trueQuantity,
-      quantity,
       currentTime: new Date().getFullYear()+'/'+new Date().getMonth()+'/'+new Date().getDate()+
         '/'+new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds(),
       price: 0,
@@ -224,7 +219,7 @@ export default {
 
     };
   },
-  async mounted()
+  mounted()
   {
 
     if(this.$cookies.isKey('vid') === false)
@@ -239,21 +234,10 @@ export default {
     this.ids = this.gid.split(',')
     this.loading = true
     var i = 0
-    await this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response){
+    this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response){
         _this.data = response.data
         for(i;i<response.data.length;i++){
-          // _this.price += response.data[i].price
-          // _this.allPrice[i] = response.data[i].price
-          let res = response
-          let I = i
-          let __this = _this
-          //alert(_this.uid+response.data[i].id)
-          _this.axios.get('http://localhost:8181/purchaseGoods/findQuantity/'+_this.uid+'/'+response.data[i].id).then(function (response) {
-            __this.quantity[I]  =response.data
-            __this.data[I].quantity = response.data
-            __this.price += res.data[I].price*response.data
-            __this.allPrice[I] = res.data[I].price*response.data
-          })
+          _this.price += response.data[i].price
         }
 
 
@@ -326,8 +310,9 @@ export default {
     onClose() {
       this.visible = false;
     },
-    async addOrder()
+    addOrder()
     {
+
       let gid = this.gid
       let aid = this.addId
 
@@ -396,9 +381,11 @@ export default {
           await _this.axios.put('http://localhost:8181/gmGoods/update',response.data).then(function(res){
              alert("更新库存成功！")
 
-           })
+        this.axios.post('http://localhost:8181/omOrder/add',myOrder).then(function (response){
+          if(response.data)
+            alert("创建订单成功！")
+            alert("正在转向结算页面...")
         })
-      }
     }
   },
 };

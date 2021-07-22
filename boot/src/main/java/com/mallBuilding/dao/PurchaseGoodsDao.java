@@ -38,10 +38,7 @@ public interface PurchaseGoodsDao {
     @Update("update purchase_goods p set p.quantity = #{quantity} where user_id = #{uid} and goods_id = #{gid}")
     Boolean updateByUserId(Integer uid,Integer gid, Integer quantity);
 
-    @Select("select * from purchase_goods p where p.user_id = #{uid} and p.goods_id = #{gid}")
-    PurchaseGoods findQuantityById(Integer uid,Integer gid);//根据用户id和商品id查找购物车商品数量
-
-    @Select("select quantity from purchase_goods p where p.user_id = #{uid} and p.goods_id = #{gid}")
-    Integer findQuantity(Integer uid,Integer gid);
+    @Select("select id from purchase_goods p where p.user_id = #{uid} and p.goods_id = #{gid}")
+    int findId(Integer uid,Integer gid);//根据用户id和商品id查找购物车商品数量
 
 }

@@ -62,12 +62,6 @@ public class PurchaseGoodsController {
     @GetMapping("/findByUserId/{id}")
     public List<GmGoods> findByUserId(@PathVariable("id") Integer id) {return this.purchaseGoodsDao.queryGMGoodsByUserId(id);}
 
-    @GetMapping("/findQuantity/{uid}/{gid}")
-    public Integer findQuantity(@PathVariable("uid") Integer uid,@PathVariable("gid") Integer gid)
-    {
-        return this.purchaseGoodsDao.findQuantity(uid,gid);
-    }
-
 
     @GetMapping("/list")
     public List<PurchaseGoods> list()

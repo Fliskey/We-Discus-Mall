@@ -123,6 +123,24 @@ export default {
   },
   //获取已发布的商品
   methods: {
+    showDeleteConfirm(id){
+      let _this = this
+      this.$confirm({
+        title: '确定要取消交易吗？',
+        okText: '确定',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk(){
+          //alert(_this.oid)
+          _this.axios.delete('http://localhost:8181/omOrder/delete/'+id).then(res =>{
+            if (res){
+              alert('删除成功！')
+              location.reload()
+            }
+          })
+        }
+      })
+    },
     getList (vid) {
       this.loading = true
       let _this = this
@@ -134,15 +152,22 @@ export default {
     },
     toDeliverGoods(record)
     {
-      alert("现在就去发货吧！")
-      alert("发货人信息："+record.buyerName+" "+record.buyerAddress+" "+record.buyerPhone)
-    },
-    cancelOrder(object)
-    {
-
+      //alert("现在就去发货吧！")
+      //alert("发货人信息："+record.buyerName+" "+record.buyerAddress+" "+record.buyerPhone)
+      let _this = this
+      //勾选的编号存放砸selectedRowKeys中
+      //alert("您要出售：" + record.name)
+      this.axios.get('http://localhost:8181/shippedGoods/hasShipped/'+record.id).then(function (response) {
+        if(!response.data)
+        {
+          alert("该商品已发货！")
+          return
+        }
+        else {
+          _this.$router.push('/visitor/user/order/'+record.id)
+        }
+      })
     }
-
-
 
   },
 };

@@ -1,6 +1,6 @@
 package com.mallBuilding.mapper;
 
-import com.mallBuilding.entity.OmOrder;
+import com.mallBuilding.entity.ShippedGoods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author root
  * @since 2021-07-21
  */
-public interface OmOrderMapper extends BaseMapper<OmOrder> {
+public interface ShippedGoodsMapper extends BaseMapper<ShippedGoods> {
 
 }
