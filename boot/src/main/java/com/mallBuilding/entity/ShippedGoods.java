@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author root
@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 
       private Integer orderId;
 
-    private Integer shippedId;
+    private String shippedId;
 
 
 }
