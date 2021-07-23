@@ -22,9 +22,6 @@
       <a-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(item, index) in list" :key="index" class="mt-3">
         <a-card :title="item.title" class="w-100">
           <div slot="extra">
-            <a-button type="link" @click="onGoPay(item.goodsId)" v-if="item.hasPayed==0">
-              去付款
-            </a-button>
             <a-button type="danger" v-if="item.hasPayed==1" @click="onConfirmReceipt(item.id)" :disabled="item.hasConfirmed==1">
               {{ item.hasConfirmed == 1 ? '已收货' : '确认收货' }}
             </a-button>
@@ -107,12 +104,6 @@
           }
         })
       },
-
-      onGoPay(goodsId){
-        alert("跳转至付款页面")
-        this.$router.push('/visitor/goods/purchase/'+goodsId)
-      },
-
       priceSort (value) {
         console.log(value)
         console.log(this.list)

@@ -72,7 +72,15 @@ export default [
       {
         path: 'user/buyShow',
         component: ()=>import('@/views/user/buyShow' )
-      }
+      },
+      {
+        path: 'user/buyPayed',
+        component: ()=>import('@/views/user/buyPayed' )
+      },
+      {
+        path: 'user/buyUnPayed',
+        component: ()=>import('@/views/user/buyUnPayed' )
+      },
     ]
   }
 ]

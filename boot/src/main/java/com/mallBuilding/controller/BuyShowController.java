@@ -1,5 +1,6 @@
 package com.mallBuilding.controller;
 
+import com.mallBuilding.dao.AddressDao;
 import com.mallBuilding.dao.OmOrderDao;
 import com.mallBuilding.entity.BuyShow;
 import com.mallBuilding.entity.GoodsAndBuyer;
@@ -25,12 +26,14 @@ public class BuyShowController {
     @Autowired
     private OmOrderDao omOrderDao;
 
+    @Autowired
+    private AddressDao addressDao;
 
     //牛逼的接口
-    @GetMapping("/buylist/{id}/{hasPayed}/{hasShipped}/{hasConfirmed}")
-    public List<BuyShow> listByBuyerId(@PathVariable("id") Integer buyerId,@PathVariable("hasPayed") Integer hasPayed,  @PathVariable("hasShipped") Integer hasShipped, @PathVariable("hasConfirmed") Integer hasConfirmed)
+    @GetMapping("/buylist/{id}/{hasPayed}")
+    public List<BuyShow> listByBuyerId(@PathVariable("id") Integer buyerId,@PathVariable("hasPayed") Integer hasPayed)
     {
-        return this.omOrderDao.queryByBuyerId(buyerId, hasPayed,hasShipped, hasConfirmed);
+        return this.omOrderDao.queryByBuyerId(buyerId, hasPayed);
     }
 
     @GetMapping("/confirm/{orderId}")
@@ -44,6 +47,12 @@ public class BuyShowController {
     public List<BuyShow> listByBuyerId(@PathVariable("id") Integer buyerId)
     {
         return this.omOrderDao.queryByBuyerIdSimple(buyerId);
+    }
+
+    @GetMapping("/queryAddId/{name}/{phone}/{add}")
+    public Integer queryAddressId(@PathVariable("name") String name,@PathVariable("phone") String phone, @PathVariable("add") String add)
+    {
+            return this.addressDao.queryAddId(name,phone,add);
     }
 
 

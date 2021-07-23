@@ -25,9 +25,6 @@
             <a-button type="link" @click="onGoPay(item.goodsId)" v-if="item.hasPayed==0">
               去付款
             </a-button>
-            <a-button type="danger" v-if="item.hasPayed==1" @click="onConfirmReceipt(item.id)" :disabled="item.hasConfirmed==1">
-              {{ item.hasConfirmed == 1 ? '已收货' : '确认收货' }}
-            </a-button>
           </div>
           <p class="good-img-box">
             <img :src="item.imageUrl" alt="">
@@ -81,35 +78,16 @@
         // 发送后端请求 成功后将数组赋值给list
         this.loading = true
         let _this = this
-        axios.get('http://localhost:8181/buyShow/buylistSimple/' + vid).then(function (response) {
+        axios.get('http://localhost:8181/buyShow/buylist/' + vid + '/'+0).then(function (response) {
           _this.loading = false
           _this.list = response.data
           console.log(response.data)
         })
       },
-      // 确认收货
-      onConfirmReceipt (vid) {
-        this.$confirm({
-          title: '确定要确认收货吗?',
-          content: '此操作将无法恢复',
-          cancelText: '取消',
-          okText: '确定',
-          onOk () {
-            // 发送后端请求
-            console.log('vid')
-            console.log(vid)
-            axios.get('http://localhost:8181/buyShow/confirm/' + vid).then(res => {
-              if (res) {
-                alert('收货成功！')
-                location.reload()
-              }
-            })
-          }
-        })
-      },
 
       onGoPay(goodsId){
         alert("跳转至付款页面")
+        this.$router.push('http://localhost:8181/buyShow/queryAddId/')
         this.$router.push('/visitor/goods/purchase/'+goodsId)
       },
 
