@@ -63,17 +63,6 @@
                 <a>{{userName[n]}}</a>发布于
                 <em>2018-08-05 22:23</em>
               </div>
-            </a-list-item-meta>
-          </router-link>
-          <div class="content">
-            <a-row class="detail" type='flex' style="width: 4cm; height: 4cm">
-              <img width='10%' height='120px' :src=v.imageUrl>
-            </a-row>
-            <p>{{v.description}}</p>
-            <div class="author">
-              <a-avatar size="small" src="/img/user.png" />
-              <a>{{userName[n]}}</a>发布于
-              <em>2018-08-05 22:23</em>
             </div>
             <span slot="actions"><a-icon style="margin-right: 8px" type="eye" />1563</span>
             <span slot="actions"><a-icon style="margin-right: 8px" type="star" />{{likeQuantity[n]}}</span>
@@ -81,7 +70,6 @@
           </a-list-item>
         </div>
         <a-divider></a-divider>
-
       </a-list>
     </a-card>
   </div>
@@ -274,15 +262,11 @@
 </script>
 
 <style lang="less" scoped>
-.extra{
-  width: 272px;
-  height: 1px;
-}
 .content {
   .detail {
-    line-height: 22px;
+    line-height: 16px;
     max-width: 720px;
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
     > img{
       flex: 1;
       margin-right: 15px;
@@ -299,7 +283,7 @@
   }
   .author {
     color: #999;
-    margin-top: 16px;
+    margin-top: 2px;
     line-height: 22px;
     & > :global(.ant-avatar) {
       vertical-align: top;
@@ -307,7 +291,7 @@
       width: 20px;
       height: 20px;
       position: relative;
-      top: 1px;
+      top: 0;
     }
     & > a{
       padding:0 10px;
