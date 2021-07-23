@@ -12,7 +12,6 @@ import {
   Divider,
   Select,
   Steps,
-  Avatar
 } from "ant-design-vue";
 
 import Viser from 'viser-vue'
@@ -28,5 +27,5 @@ Vue.use(Drawer)
 Vue.use(Divider)
 Vue.use(Select)
 Vue.use(Steps)
-Vue.use(Avatar)
+
 

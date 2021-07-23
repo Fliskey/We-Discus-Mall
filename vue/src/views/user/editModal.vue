@@ -27,8 +27,8 @@
         rules: {}
       }
     },
-    mounted () {
-      if (this.$cookies.isKey('vid') === false)
+    mounted() {
+      if(this.$cookies.isKey('vid') === false)
         this.$router.push('login')
     },
     methods: {

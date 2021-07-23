@@ -1,33 +1,33 @@
 <template>
   <div :data-source="gooditem" :loading="loading">
     <div class="detail">
-      <a-page-header :title="gooditem.name" :sub-title="'商品单号'+id" @back="() => $router.go(-1)">
+      <a-page-header :title="gooditem.name" :sub-title="'商品单号'+id" @back="() => $router.go(-1)" >
         <template slot="tags">
           <a-tag color="blue">
-            {{ gooditem.type }}
+            {{gooditem.type}}
           </a-tag>
         </template>
         <template slot="extra">
 
-          <a-button @click='insertToLike'>
-            <a-icon type="star"/>
+          <a-button  @click='insertToLike' >
+            <a-icon type="star" />
             预定
           </a-button>
           <a-popover placement="bottom" trigger="click">
             <template slot="content">
-              <p>单号：{{ gooditem.id }}</p>
-              <p>商品：{{ gooditem.name }}</p>
+              <p>单号：{{gooditem.id}}</p>
+              <p>商品：{{gooditem.name}}</p>
             </template>
             <template slot="title">
               <span>该商品已加入购物车</span>
             </template>
             <a-button type="primary" key="1" @click="insertTrolley">
-              <a-icon type="shopping"/>
+              <a-icon type="shopping" />
               加入购物车
             </a-button>
           </a-popover>
-          <a-button type="primary" @click='buyNow(gooditem.id)'>
-            <a-icon type="shopping"/>
+          <a-button type="primary" @click='buyNow(gooditem.id)' >
+            <a-icon type="shopping" />
             立即购买
           </a-button>
 
@@ -42,13 +42,13 @@
                 <!--                <a>421421</a>-->
               </a-descriptions-item>
               <a-descriptions-item label="商品标题">
-                {{ gooditem.name }}
+                {{gooditem.name}}
               </a-descriptions-item>
               <a-descriptions-item label="商品类型">
-                {{ gooditem.type }}
+                {{gooditem.type}}
               </a-descriptions-item>
               <a-descriptions-item label="备注">
-                {{ gooditem.description }}
+                {{gooditem.description}}
               </a-descriptions-item>
             </a-descriptions>
           </div>
@@ -68,11 +68,11 @@
               }"
                 valueStyle="color:#faad14"
               />
-              <a-statistic title="单价" prefix="￥" :style="{marginRight: '64px'}" :value="gooditem.price"/>
-              <a-statistic title="数量" prefix="" :style="{marginRight: '64px'}" :value="gooditem.quantity"/>
+              <a-statistic title="单价" prefix="￥" :style="{marginRight: '64px'}" :value="gooditem.price" />
+              <a-statistic title="数量" prefix="" :style="{marginRight: '64px'}" :value="gooditem.quantity" />
               <a-statistic title="预订数量" :value="likeQuantity" style="margin-right: 50px">
                 <template #suffix>
-                  <a-icon type="like"/>
+                  <a-icon type="like" />
                 </template>
               </a-statistic>
             </div>
@@ -80,7 +80,7 @@
         </div>
       </a-page-header>
     </div>
-    <a-row class='img-box' type='flex'>
+    <a-row  class='img-box' type='flex'>
       <span>商品图片：</span>
       <a-row class='img' :gutter='[20]'>
         <a-col :span='6'><img width="10%" height="240px" :src=gooditem.imageUrl alt="加载失败"></a-col>
@@ -93,65 +93,21 @@
 </template>
 
 <script>
-  export default {
-    name: '',
-    data () {
-      return {
-        pageUserId: '',
+export default {
+  name:'',
+  data(){
+    return {
+      pageUserId: '',
+      id:'',
+      gooditem:{
         id: '',
-        gooditem: {
-          id: '',
-          userId: '',
-          name: '',
-          type: '',
-          quantity: '',
-          price: '',
-          imageUrl: '',
-          description: ''
-        },
-        likeQuantity: '',
-        isSame: 0,
-        userName: ''
-      }
-    },
-    mounted () {
-      if (this.$cookies.isKey('vid') === false)
-        this.$router.push('login')
-      this.pageUserId = this.$cookies.get('vid')
-      this.getParams()
-      let Gid = this.$route.params.id
-      let _this = this
-
-      axios.get('http://localhost:8181/gmGoods/find/'+Gid).then(function (response){
-        console.log(response)
-        _this.gooditem = response.data
-        axios.get('http://localhost:8181/umUser/findName/'+_this.gooditem.userId).then(function (response){
-          _this.userName = response.data
-        })
-      // alert("正确的"+response.data.userId)
-      })
-      axios.get('http://localhost:8181/wantGoods/countLike/'+Gid).then(function (response){
-        console.log('测试预定数量接口')
-        console.log(response)
-        _this.likeQuantity = response.data
-      })
-
-    },
-    methods: {
-      insertTrolley (){
-        var myTrolley = {
-          id: 0,
-          userId: this.pageUserId,
-          goodsId: this.id,
-          quantity: 1
-        }
-        axios.post('http://localhost:8181/purchaseGoods/add', myTrolley).then(function (response){
-        })
-      },
-      getParams (){
-        //取到路由传过来的参数
-        //将数据放在当前组件的数据内
-        this.id = this.$route.params.id
+        userId:'',
+        name:'',
+        type:'',
+        quantity:'',
+        price:'',
+        imageUrl:'',
+        description:''
       },
       likeQuantity:'',
       isSame:0,
@@ -230,88 +186,72 @@
 </script>
 
 <style lang="less" scoped>
-.img-box {
-  flex-wrap: nowrap;
-
-  .img {
-    flex: 1;
+.img-box{
+  flex-wrap:nowrap;
+  .img{
+    flex:1;
   }
-
-  img {
-    width: 100%;
+  img{
+    width:100%;
   }
 }
-
-.detail {
+.detail{
   border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-
-  .title {
+  padding-bottom:20px;
+  margin-bottom:30px;
+  .title{
     font-size: 20px;
     margin: 0 0 16px;
   }
-
-  &-item {
+  &-item{
     padding-bottom: 8px;
-    color: #999;
+    color:#999;
     line-height: 20px;
-
-    span {
-      color: #333;
+    span{
+      color:#333;
     }
   }
 
   .avatar {
-    margin: 0 24px 0 0;
+    margin:0 24px 0 0;
   }
-
-  .main {
+  .main{
     width: 100%;
-
-    .content {
+    .content{
       display: flex;
       flex-wrap: wrap;
       color: #666;
     }
-
-    .extra {
+    .extra{
       display: flex;
     }
   }
 }
-
-.head-info {
+.head-info{
   text-align: center;
   padding: 0 24px;
   align-self: center;
-
-  span {
+  span{
     color: #666;
     display: inline-block;
     font-size: 14px;
     margin-bottom: 4px;
   }
-
-  p {
+  p{
     color: #333;
     font-size: 24px;
     margin: 0;
   }
-
   tr:last-child td {
     padding-bottom: 0;
   }
-
   #components-page-header-demo-responsive .content {
     display: flex;
   }
-
   #components-page-header-demo-responsive .ant-statistic-content {
     font-size: 20px;
     line-height: 28px;
   }
-
   @media (max-width: 576px) {
     #components-page-header-demo-responsive .content {
       display: block;
