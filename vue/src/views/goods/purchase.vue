@@ -265,11 +265,8 @@
             }
 
 
-
           })
         }
-
-
       })
       this.axios.get('http://localhost:8181/userAddress/listById/'+this.uid). then(function (response){
         _this.addressData = response.data

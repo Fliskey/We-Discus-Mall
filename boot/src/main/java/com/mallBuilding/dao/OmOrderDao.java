@@ -4,7 +4,6 @@ import com.mallBuilding.entity.BuyShow;
 import com.mallBuilding.entity.GoodsAndBuyer;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
