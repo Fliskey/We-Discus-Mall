@@ -1,13 +1,8 @@
 package com.mallBuilding.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mallBuilding.dao.GoodsDao;
 import com.mallBuilding.entity.GmGoods;
-import com.mallBuilding.mapper.GmGoodsMapper;
 import com.mallBuilding.service.GmGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +25,6 @@ public class GmGoodsController {
 
     @Autowired
     private GmGoodsService gmGoodsService;
-
-    @Autowired
-    private GmGoodsMapper gmGoodsMapper;
 
     @Autowired
     private GoodsDao goodsDao;
@@ -62,18 +54,6 @@ public class GmGoodsController {
         return list;
     }
 
-
-    @GetMapping("/selectPage/{current}/{pageSize}")
-    public Page<GmGoods> selectPage(@PathVariable("current") Integer current, @PathVariable("pageSize") Integer pageSize) //@Param(Constants.WRAPPER) Wrapper<GmGoods> queryWrapper
-    {
-        LambdaQueryWrapper<GmGoods> gmGoodsLambdaQueryWrapper = Wrappers.lambdaQuery();
-
-        Page<GmGoods> goodsPage = new Page<>(current ,pageSize);
-        IPage<GmGoods> goodsIPage = gmGoodsMapper.selectPage(goodsPage , gmGoodsLambdaQueryWrapper);
-        return goodsPage;
-    }
-
-
     @GetMapping("/queryGoodsByType/{type}")
     public List<GmGoods> queryGoodsByType(@PathVariable("type") String type){
         List<GmGoods> lists = this.goodsDao.queryGoodsByType(type);
@@ -94,12 +74,6 @@ public class GmGoodsController {
     public boolean delete(@PathVariable("id") Integer id )
     {
         return this.gmGoodsService.removeById(id);
-    }
-
-    @GetMapping("/findQuantity/{id}")
-    public Integer findQuantity(@PathVariable("id") Integer id)
-    {
-        return this.goodsDao.findQuantityById(id);
     }
 
 

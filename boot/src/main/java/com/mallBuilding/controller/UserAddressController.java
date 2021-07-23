@@ -26,7 +26,6 @@ public class UserAddressController {
 
     @Autowired
     private UserAddressService userAddressService;
-
     @Autowired
     private UserAddressDao userAddressDao;
 

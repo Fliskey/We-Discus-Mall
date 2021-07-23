@@ -41,9 +41,4 @@ public interface PurchaseGoodsDao {
     @Select("select id from purchase_goods p where p.user_id = #{uid} and p.goods_id = #{gid}")
     int findId(Integer uid,Integer gid);//根据用户id和商品id查找购物车商品数量
 
-    @Select("select * from purchase_goods p where p.user_id = #{uid} and p.goods_id = #{gid}")
-    PurchaseGoods findQuantityById(Integer uid,Integer gid);//根据用户id和商品id查找购物车商品数量
-
-    @Select("select quantity from purchase_goods p where p.user_id = #{uid} and p.goods_id = #{gid}")
-    Integer findQuantity(Integer uid,Integer gid);
 }

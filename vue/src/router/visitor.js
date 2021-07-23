@@ -62,16 +62,8 @@ export default [
         component: ()=> import('@/views/user/sellOut')
       },
       {
-        path: 'user/order/:id',
-        component: ()=> import('@/views/user/order')
-      },
-      {
-        path: 'goods/pay/:gid/:aid/:oid',
+        path: 'goods/pay/:gid/:aid',
         component: ()=> import('@/views/goods/pay')
-      },
-      {
-        path: 'user/buyShow',
-        component: ()=>import('@/views/user/buyShow' )
       }
     ]
   }

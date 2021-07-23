@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author root
- * @since 2021-07-21
+ * @since 2021-07-18
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
@@ -30,18 +30,13 @@ import lombok.EqualsAndHashCode;
 
     private BigDecimal actualPayAmount;
 
-
     private String buyerAddress;
 
     private String buyerPhone;
 
     private String buyerName;
 
-    private Boolean hasPayed;
-
-    private Integer hasShipped;
-
-    private Integer hasConfirmed;
+    private boolean hasPayed;
 
 
 }
