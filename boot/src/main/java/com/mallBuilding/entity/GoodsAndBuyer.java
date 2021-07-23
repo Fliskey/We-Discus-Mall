@@ -21,6 +21,8 @@ public class GoodsAndBuyer implements Serializable {
 
     private static final long serialVersionUID=1L;
 
+    private Integer id;
+
     private String imageUrl;
 
     private String name;
@@ -32,6 +34,8 @@ public class GoodsAndBuyer implements Serializable {
     private String buyerAddress;
 
     private BigDecimal actualPayAmount;
+
+    private Integer hasShipped;
 
 
 

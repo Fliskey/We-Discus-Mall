@@ -84,7 +84,7 @@ import userModal from './editMessage'
 const columns = [
   {
     title: '编号',
-    dataIndex: 'id',
+    customRender: (text, record, index) => `${index + 1}`,
     width: '15%'
   },
   {
