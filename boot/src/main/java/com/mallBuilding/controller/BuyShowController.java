@@ -30,6 +30,9 @@ public class BuyShowController {
 
     @Autowired
     private AddressDao addressDao;
+    
+    @Autowired
+    private ShippedGoodsDao shippedGoodsDao;
 
 
     //牛逼的接口
