@@ -3,7 +3,7 @@
     <a-page-header title="购物车" sub-title="" @back="() => $router.go(-1)">
       <template slot="tags">
         <a-tag color="blue">
-          Running
+          Trolley
         </a-tag>
       </template>
       <template slot="extra">

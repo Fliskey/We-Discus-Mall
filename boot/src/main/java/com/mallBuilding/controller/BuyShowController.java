@@ -2,6 +2,7 @@ package com.mallBuilding.controller;
 
 import com.mallBuilding.dao.AddressDao;
 import com.mallBuilding.dao.OmOrderDao;
+import com.mallBuilding.dao.ShippedGoodsDao;
 import com.mallBuilding.entity.BuyShow;
 import com.mallBuilding.entity.GoodsAndBuyer;
 import com.mallBuilding.entity.OmOrder;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,7 @@ public class BuyShowController {
 
     @Autowired
     private AddressDao addressDao;
+
 
     //牛逼的接口
     @GetMapping("/buylist/{id}/{hasPayed}")
@@ -46,7 +49,18 @@ public class BuyShowController {
     @GetMapping("/buylistSimple/{id}") //简单的接口
     public List<BuyShow> listByBuyerId(@PathVariable("id") Integer buyerId)
     {
-        return this.omOrderDao.queryByBuyerIdSimple(buyerId);
+        List<BuyShow> list = this.omOrderDao.queryByBuyerIdSimple(buyerId);
+        for(int i = 0; i < list.size(); i++)
+        {
+
+            if(this.shippedGoodsDao.hasShipped(list.get(i).getId())!= null)
+            {
+                String si = this.shippedGoodsDao.hasShipped(list.get(i).getId()).getShippedId();
+                list.get(i).setShippedId(si);
+                //System.out.println("ljy"+list.get(i).getShippedId());
+            }
+        }
+        return list;
     }
 
     @GetMapping("/queryAddId/{buyerName}/{phone}/{add}")

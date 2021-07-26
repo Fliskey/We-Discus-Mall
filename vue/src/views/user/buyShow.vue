@@ -48,8 +48,12 @@
           </p>
           <p>
             <span class="item-label">货物状态</span>
-            <span> <a-tag :color='item.hasShipped==1 ? "cyan" :"blue"'>{{item.hasShipped == 1 ? '已发货':'未发货'}}</a-tag></span>
+            <span> <a-tag :color='item.hasShipped==1 ? "cyan" :"blue"'>
+              {{item.hasShipped == 1 ? '已发货':'未发货'}}
+            </a-tag>
+            </span>
           </p>
+          {{item.hasShipped == 1 ? '快递单号为：'+item.shippedId:''}}
         </a-card>
       </a-col>
     </a-row>

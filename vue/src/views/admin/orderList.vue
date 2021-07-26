@@ -6,6 +6,10 @@
       </a-button>
     </div>
     <a-table :columns="columns" :data-source="data" @change="handleChange">
+      <span slot="id" slot-scope="text,record,index"></span>
+      <span slot="buyerId" slot-scope="text,record,index"></span>
+      <span slot="sellerId" slot-scope="text,record,index"></span>
+      <span slot="name" slot-scope="text,record,index"></span>
       <span slot="State" slot-scope="State">
       <a-tag
         v-for="st in State"
@@ -75,7 +79,7 @@
     {
       title: '订单号',
       dataIndex: 'id',
-      width: '20%',
+      width: '10%',
       key: 'id',
       scopedSlots: {
         filterDropdown: 'filterDropdown',
@@ -97,16 +101,16 @@
     },
     {
       title: '买家ID',
-      dataIndex: 'BuyerId',
-      width: '20%',
-      key: 'BuyerId',
+      dataIndex: 'buyerId',
+      width: '10%',
+      key: 'buyerId',
       scopedSlots: {
         filterDropdown: 'filterDropdown',
         filterIcon: 'filterIcon',
         customRender: 'customRender',
       },
       onFilter: (value, record) =>
-        record.BuyerId
+        record.buyerId
           .toString()
           .toLowerCase()
           .includes(value.toLowerCase()),
@@ -120,16 +124,16 @@
     },
     {
       title: '卖家ID',
-      dataIndex: 'SellerId',
-      width: '20%',
-      key: 'SellerId',
+      dataIndex: 'sellerId',
+      width: '10%',
+      key: 'sellerId',
       scopedSlots: {
         filterDropdown: 'filterDropdown',
         filterIcon: 'filterIcon',
         customRender: 'customRender',
       },
       onFilter: (value, record) =>
-        record.SellerId
+        record.sellerId
           .toString()
           .toLowerCase()
           .includes(value.toLowerCase()),
@@ -140,8 +144,32 @@
           });
         }
       },
-    },{
-    title: '状态',
+    },
+    {
+      title: '商品名',
+      dataIndex: 'name',
+      width: '10%',
+      key: 'name',
+      scopedSlots: {
+        filterDropdown: 'filterDropdown',
+        filterIcon: 'filterIcon',
+        customRender: 'customRender',
+      },
+      onFilter: (value, record) =>
+        record.name
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()),
+      onFilterDropdownVisibleChange: visible => {
+        if (visible) {
+          setTimeout(() => {
+            this.searchInput.focus();
+          });
+        }
+      },
+    },
+    {
+      title: '状态',
       dataIndex: 'State',
       width: '40%',
       key: 'State',
@@ -166,29 +194,7 @@
     }
   ]
 
-  const data = [
-    {
-      key: '1',
-      id: '1',
-      BuyerId: '1',
-      SellerId: '1',
-      State: ['已付款'],
-    },
-    {
-      key: '2',
-      id: '2',
-      BuyerId: '2',
-      SellerId: '2',
-      State: ['已发货'],
-    },
-    {
-      key: '2',
-      id: '2',
-      BuyerId: '2',
-      SellerId: '2',
-      State: ['已收货'],
-    }
-  ];
+  const data = [];
 
   export default {
     data() {
@@ -197,7 +203,28 @@
         columns,
         filteredInfo: null,
         sortedInfo: null,
+        searchInput: null,
+        searchText: '',
+        searchedColumn: '',
       };
+    },
+    created(){
+      let _this = this
+      this.axios.get('http://localhost:8181/admin/adminOrderList').then(res => {
+        _this.data = res.data
+        console.log(_this.data)
+        _this.data.forEach((item) =>{
+          if (item.hasConfirmed === 1){
+            item.State=['已收货']
+          }else if (item.hasShipped === 1){
+            item.State=['已发货']
+          }else if (item.hasPayed === 1){
+            item.State=['已付款']
+          } else {
+            item.State=['未付款']
+          }
+        })
+      })
     },
     computed: {
     },
