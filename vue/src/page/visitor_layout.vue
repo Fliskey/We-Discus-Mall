@@ -23,10 +23,17 @@
           <a-icon type="user" />
           <span>我的发布</span>
         </a-menu-item>
-        <a-menu-item key="/visitor/user/buyShow">
-          <a-icon type="dollar" />
-          <span>我的购买</span>
-        </a-menu-item>
+<!--        <a-menu-item key="/visitor/user/buyShow">-->
+<!--          <a-icon type="dollar" />-->
+<!--          <span>我的购买</span>-->
+<!--        </a-menu-item>-->
+        <a-sub-menu key="sub0">
+          <span slot="title"><a-icon type="dollar" /><span>我的购买</span></span>
+          <a-menu-item-group key="g1">
+            <a-menu-item key="/visitor/user/buyUnPayed">未付款</a-menu-item>
+            <a-menu-item key="/visitor/user/buyPayed">已付款</a-menu-item>
+          </a-menu-item-group>
+        </a-sub-menu>
         <a-menu-item key="/visitor/user/sellOut">
           <a-icon type="shopping" />
           <span>我的卖出</span>

@@ -22,11 +22,8 @@
       <a-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(item, index) in list" :key="index" class="mt-3">
         <a-card :title="item.title" class="w-100">
           <div slot="extra">
-            <a-button type="link" @click="onGoPay(item.goodsId)" v-if="item.hasPayed==0">
+            <a-button type="link" @click="onGoPay(item)" v-if="item.hasPayed==0">
               去付款
-            </a-button>
-            <a-button type="danger" v-if="item.hasPayed==1" @click="onConfirmReceipt(item.id)" :disabled="item.hasConfirmed==1">
-              {{ item.hasConfirmed == 1 ? '已收货' : '确认收货' }}
             </a-button>
           </div>
           <p class="good-img-box">
@@ -48,12 +45,8 @@
           </p>
           <p>
             <span class="item-label">货物状态</span>
-            <span> <a-tag :color='item.hasShipped==1 ? "cyan" :"blue"'>
-              {{item.hasShipped == 1 ? '已发货':'未发货'}}
-            </a-tag>
-            </span>
+            <span> <a-tag :color='item.hasShipped==1 ? "cyan" :"blue"'>{{item.hasShipped == 1 ? '已发货':'未发货'}}</a-tag></span>
           </p>
-          {{item.hasShipped == 1 ? '快递单号为：'+item.shippedId:''}}
         </a-card>
       </a-col>
     </a-row>
@@ -66,7 +59,9 @@
     data () {
       return {
         list: [],
-        loading: false
+        loading: false,
+        aid: '',
+
       }
     },
     created () {
@@ -85,36 +80,24 @@
         // 发送后端请求 成功后将数组赋值给list
         this.loading = true
         let _this = this
-        axios.get('http://localhost:8181/buyShow/buylistSimple/' + vid).then(function (response) {
+        axios.get('http://localhost:8181/buyShow/buylist/' + vid + '/'+0).then(function (response) {
           _this.loading = false
           _this.list = response.data
           console.log(response.data)
         })
       },
-      // 确认收货
-      onConfirmReceipt (vid) {
-        this.$confirm({
-          title: '确定要确认收货吗?',
-          content: '此操作将无法恢复',
-          cancelText: '取消',
-          okText: '确定',
-          onOk () {
-            // 发送后端请求
-            console.log('vid')
-            console.log(vid)
-            axios.get('http://localhost:8181/buyShow/confirm/' + vid).then(res => {
-              if (res) {
-                alert('收货成功！')
-                location.reload()
-              }
-            })
-          }
-        })
-      },
 
-      onGoPay(goodsId){
+      async onGoPay(item){
         alert("跳转至付款页面")
-        this.$router.push('/visitor/goods/purchase/'+goodsId)
+        let _this = this
+        console.log("buyerName = ", item.buyerName)
+        console.log("buyerPhone = ", item.buyerPhone)
+        console.log("buyerAddress = ", item.buyerAddress)
+        await axios.get('http://localhost:8181/buyShow/queryAddId/' +item.buyerName+'/'+item.buyerPhone+'/'+item.buyerAddress).then(function (response) {
+          _this.aid= response.data
+        })
+        alert(item.goodsId+'/'+this.aid+'/'+item.id)
+        await this.$router.push('/visitor/goods/pay/'+item.goodsId+'/'+this.aid+'/'+item.id)
       },
 
       priceSort (value) {

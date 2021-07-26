@@ -7,12 +7,6 @@
         </a-tag>
       </template>
       <template slot="extra">
-        <!--        <a-button key="3">-->
-        <!--          Operation-->
-        <!--        </a-button>-->
-        <!--        <a-button key="2">-->
-        <!--          Operation-->
-        <!--        </a-button>-->
         <a-button key="1" type="primary" @click="createOrder">
           结算购物车
         </a-button>
