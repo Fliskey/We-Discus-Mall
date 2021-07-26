@@ -37,6 +37,8 @@ public class GoodsAndBuyer implements Serializable {
 
     private Integer hasShipped;
 
+    private Integer hasConfirmed;
+
 
 
 
