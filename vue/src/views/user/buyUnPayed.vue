@@ -22,7 +22,7 @@
       <a-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(item, index) in list" :key="index" class="mt-3">
         <a-card :title="item.title" class="w-100">
           <div slot="extra">
-            <a-button type="link" @click="onGoPay(item.goodsId)" v-if="item.hasPayed==0">
+            <a-button type="link" @click="onGoPay(item)" v-if="item.hasPayed==0">
               去付款
             </a-button>
           </div>
@@ -59,7 +59,9 @@
     data () {
       return {
         list: [],
-        loading: false
+        loading: false,
+        aid: '',
+
       }
     },
     created () {
@@ -85,10 +87,17 @@
         })
       },
 
-      onGoPay(goodsId){
+      async onGoPay(item){
         alert("跳转至付款页面")
-        this.$router.push('http://localhost:8181/buyShow/queryAddId/')
-        this.$router.push('/visitor/goods/purchase/'+goodsId)
+        let _this = this
+        console.log("buyerName = ", item.buyerName)
+        console.log("buyerPhone = ", item.buyerPhone)
+        console.log("buyerAddress = ", item.buyerAddress)
+        await axios.get('http://localhost:8181/buyShow/queryAddId/' +item.buyerName+'/'+item.buyerPhone+'/'+item.buyerAddress).then(function (response) {
+          _this.aid= response.data
+        })
+        alert(item.goodsId+'/'+this.aid+'/'+item.id)
+        await this.$router.push('/visitor/goods/pay/'+item.goodsId+'/'+this.aid+'/'+item.id)
       },
 
       priceSort (value) {

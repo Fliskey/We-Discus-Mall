@@ -16,7 +16,7 @@ public interface OmOrderDao {
     public List<GoodsAndBuyer> queryBySellerId(Integer sellerId);
 
     @Select({
-            "select o1.id, o1.goods_id, buyer_id, g.image_url, g.name, g.type, g.price, 20 quantitySiOrder, o1.actual_pay_amount, o1.has_payed, o1.has_shipped, o1.has_confirmed\n"
+            "select o1.id, o1.goods_id, buyer_id, o1.buyer_name, o1.buyer_phone, o1.buyer_address, g.image_url, g.name, g.type, g.price,  o1.actual_pay_amount/g.price quantitySiOrder, o1.actual_pay_amount, o1.has_payed, o1.has_shipped, o1.has_confirmed\n"
                     + "from om_order o1, gm_goods g\n"
                     + "where o1.goods_id = g.id and o1.buyer_id = #{buyerId} and o1.has_payed =#{hasPayed}\n"
                     + "order by o1.has_confirmed,o1.has_shipped, o1.has_payed;" })

@@ -49,10 +49,10 @@ public class BuyShowController {
         return this.omOrderDao.queryByBuyerIdSimple(buyerId);
     }
 
-    @GetMapping("/queryAddId/{name}/{phone}/{add}")
-    public Integer queryAddressId(@PathVariable("name") String name,@PathVariable("phone") String phone, @PathVariable("add") String add)
+    @GetMapping("/queryAddId/{buyerName}/{phone}/{add}")
+    public Integer queryAddressId(@PathVariable("buyerName") String buyerName, @PathVariable("phone") String phone, @PathVariable("add") String add)
     {
-            return this.addressDao.queryAddId(name,phone,add);
+            return this.addressDao.queryAddId(buyerName,phone,add)[0];
     }
 
 

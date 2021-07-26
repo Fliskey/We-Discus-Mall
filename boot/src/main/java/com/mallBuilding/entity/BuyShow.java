@@ -33,6 +33,7 @@ public class BuyShow implements Serializable {
     private String imageUrl;
 
     private String name;
+    private String buyerName;
 
     private String type;
 
@@ -40,6 +41,9 @@ public class BuyShow implements Serializable {
 
     private Integer quantitySiOrder;
 
+    private String buyerPhone;
+
+    private String buyerAddress;
     private String actualPayAmount;
 
     private Integer hasPayed;
