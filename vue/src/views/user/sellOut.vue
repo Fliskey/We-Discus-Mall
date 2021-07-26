@@ -5,14 +5,13 @@
         <img style="width:140px;height:120px" slot="imageUrl" :slot-scope="text" :src=text />
       </span>
       <span slot="operation" slot-scope="text, record,index">
-<!--        <a-button type="danger" @click="onConfirmReceipt" :disabled="item.hasConfirmed==1">-->
-        <!--              {{ item.hasConfirmed == 1 ? '已收货' : '确认收货' }}-->
-        <!--            </a-button>-->
           <a-button type="primary" @click="toDeliverGoods(record)"  :disabled="record.hasShipped==1" style="margin-right: 1px">
             {{record.hasShipped == 1?'已发货':'去发货'}}
           </a-button>
           <a-divider type="vertical"></a-divider>
-          <a-button margin type="danger" @click="showDeleteConfirm(record.id)">取消交易</a-button>
+          <a-button margin type="danger" :disabled="record.hasConfirmed==1" @click="showDeleteConfirm(record.id)">
+            {{record.hasConfirmed == 1?'已确认收货':'取消订单'}}
+          </a-button>
           <div class="editable-row-operations">
             <span v-if="record.editable">
               <a @click="() => save(record.key)">Save</a>
