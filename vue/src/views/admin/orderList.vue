@@ -210,6 +210,8 @@
     },
     created(){
       let _this = this
+      if(this.$cookies.isKey('aid') === false)
+        this.$router.push('login')
       this.axios.get('http://localhost:8181/admin/adminOrderList').then(res => {
         _this.data = res.data
         console.log(_this.data)
