@@ -34,6 +34,9 @@ public class BuyShowController {
     @Autowired
     private ShippedGoodsDao shippedGoodsDao;
 
+    @Autowired
+    private ShippedGoodsDao shippedGoodsDao;
+
 
     //牛逼的接口
     @GetMapping("/buylist/{id}/{hasPayed}")
