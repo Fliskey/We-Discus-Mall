@@ -88,7 +88,7 @@
       },
 
       async onGoPay(item){
-        alert("跳转至付款页面")
+        //alert("跳转至付款页面")
         let _this = this
         console.log("buyerName = ", item.buyerName)
         console.log("buyerPhone = ", item.buyerPhone)
@@ -96,7 +96,7 @@
         await axios.get('http://localhost:8181/buyShow/queryAddId/' +item.buyerName+'/'+item.buyerPhone+'/'+item.buyerAddress).then(function (response) {
           _this.aid= response.data
         })
-        alert(item.goodsId+'/'+this.aid+'/'+item.id)
+        //alert(item.goodsId+'/'+this.aid+'/'+item.id)
         await this.$router.push('/visitor/goods/pay/'+item.goodsId+'/'+this.aid+'/'+item.id)
       },
 

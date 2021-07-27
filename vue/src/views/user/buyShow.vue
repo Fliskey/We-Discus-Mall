@@ -53,7 +53,7 @@
             </a-tag>
             </span>
           </p>
-          {{item.hasShipped == 1 ? '快递单号为：'+item.shippedId:''}}
+
         </a-card>
       </a-col>
     </a-row>
