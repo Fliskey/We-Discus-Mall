@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.net.SocketOption;
 import java.util.List;
 
 /**
@@ -34,6 +35,12 @@ public class OmOrderController {
     public List<GoodsAndBuyer> listBySellerId(@PathVariable("id") Integer sellerId)
     {
         return this.omOrderDao.queryBySellerId(sellerId);
+    }
+
+    @GetMapping("/order/{id}")
+    public OmOrder omOrderById(@PathVariable("id") Integer id)
+    {   
+        return this.omOrderService.getById(id);
     }
 
     @PostMapping("/add")

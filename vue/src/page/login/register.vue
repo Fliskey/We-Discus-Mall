@@ -52,7 +52,7 @@
           callback(new Error('请输入密码！'))
         } else{
           if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/.test(value)) {
-            callback(new Error('密码格式不正确！'))
+            callback(new Error('密码格式不正确！(应为8-16位且包含字母和数字)'))
           } else {
             callback()
           }

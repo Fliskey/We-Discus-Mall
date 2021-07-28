@@ -3,16 +3,10 @@
     <a-page-header title="购物车" sub-title="" @back="() => $router.go(-1)">
       <template slot="tags">
         <a-tag color="blue">
-          Running
+          Trolley
         </a-tag>
       </template>
       <template slot="extra">
-        <!--        <a-button key="3">-->
-        <!--          Operation-->
-        <!--        </a-button>-->
-        <!--        <a-button key="2">-->
-        <!--          Operation-->
-        <!--        </a-button>-->
         <a-button key="1" type="primary" @click="createOrder">
           结算购物车
         </a-button>
@@ -207,6 +201,25 @@ export default {
       this.$router.push('/visitor/goods/purchase/'+this.selectedRowKeys)
 
 
+  export default {
+    data() {
+      this.cacheData = data.map(item => ({...item}));
+      return {
+        selectedRowKeys: [],
+        gmGoods:
+          {
+            name: '',
+            type: '',
+            quantity: '',
+            price: ''
+          },
+        data,
+        columns,
+        editingKey: '',
+        vid: '',
+        quantityValue: '',
+        quantityFlag: 0
+      };
     },
   },
   computed: {
@@ -230,9 +243,98 @@ export default {
             paymentAmount += item.quantity*item.price
           }
         })
-      })
-      paymentAmount = parseFloat(paymentAmount).toFixed(2)
-      return paymentAmount
+      },
+      getList(vid) {
+        this.loading = true
+        let _this = this
+        axios.get('http://localhost:8181/purchaseGoods/findByUserId/' + vid).then(function (response) {
+          _this.loading = false
+          _this.data = response.data
+          console.log(response.data)
+        })
+      },
+      //按钮修改数量
+      changeQuantity(value, gid, vid) {
+        axios.get('http://localhost:8181/purchaseGoods/update/' + vid + '/' + gid + '/' + value).then(function (response) {
+        })
+      },
+      showDeleteConfirm(gid, vid) {
+        this.$confirm({
+          title: '确定要删除' + gid + '吗？',
+          okText: '确定',
+          okType: 'danger',
+          cancelText: '取消',
+          onOk() {
+            axios.get('http://localhost:8181/purchaseGoods/delete/' + vid + '/' + gid + '/').then(res => {
+              //console.log(res)
+              if (res) {
+                alert('删除成功！' + vid + "：" + gid)
+                location.reload()
+              }
+            })
+          }
+        })
+      },
+      async createOrder() {
+        //勾选的编号存放砸selectedRowKeys中
+        //alert("您要购买：" + this.selectedRowKeys)
+        //alert(this.selectedRowKeys[0])
+
+        var i = 0
+        let _this = this
+        this.quantityFlag = 0
+        for(i;i<this.selectedRowKeys.length; i++)
+        {
+          //alert(i)
+          await this.axios.get('http://localhost:8181/gmGoods/findQuantity/' + this.selectedRowKeys[i]).then(async function (response) {
+            if(response.data==0)
+            {
+              // await _this.axios.get('http://localhost:8181/gmGoods/findName/' + this.selectedRowKeys[2]).then(function (res) {
+              //   alert("抱歉")
+              //   alert("抱歉！当前购买商品"+res.data+"库存为0，无法购买！")
+              // })
+              let I = i+1
+              alert("抱歉！第"+I+"个购买商品库存为0，无法购买！")
+              _this.quantityFlag=1
+
+            }
+          })
+        }
+
+        if(this.quantityFlag==0)
+        {
+          await this.$router.push('/visitor/goods/purchase/'+this.selectedRowKeys)
+        }
+
+
+
+      },
+    },
+    computed: {
+      //总价
+      totalPrice() {
+        let totalPrice = 0
+        console.log(this.data)
+        this.data.forEach((item) => {
+          console.log(item)
+          totalPrice += item.quantity * item.price
+        })
+        totalPrice = parseFloat(totalPrice).toFixed(2)
+        return totalPrice
+      },
+      //选中价格
+      paymentAmount() {
+        let paymentAmount = 0
+        this.data.forEach(item=>{
+          this.selectedRowKeys.forEach(selected =>{
+            if (item.id === selected){
+              paymentAmount += item.quantity*item.price
+            }
+          })
+        })
+        paymentAmount = parseFloat(paymentAmount).toFixed(2)
+        return paymentAmount
+      }
     }
   }
 }

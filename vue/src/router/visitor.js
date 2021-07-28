@@ -64,7 +64,19 @@ export default [
       {
         path: 'goods/pay/:gid/:aid',
         component: ()=> import('@/views/goods/pay')
-      }
+      },
+      {
+        path: 'user/buyShow',
+        component: ()=>import('@/views/user/buyShow' )
+      },
+      {
+        path: 'user/buyPayed',
+        component: ()=>import('@/views/user/buyPayed' )
+      },
+      {
+        path: 'user/buyUnPayed',
+        component: ()=>import('@/views/user/buyUnPayed' )
+      },
     ]
   }
 ]
