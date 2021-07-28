@@ -26,7 +26,11 @@
   </a-form-model>
 </template>
 
+
+
 <script>
+  import {notification} from 'ant-design-vue'
+
   export default {
     data () {
 
@@ -126,7 +130,6 @@
           ]
         },
       }
-
     },
     methods: {
       onSubmit(){
@@ -139,6 +142,13 @@
             return false;
           }
         })
+      },
+      openNotificationWithIcon(type) {
+        this.$notification[type]({
+          message: '该号码可能已经被注册！',
+          description:
+            '请使用一个未注册的电话号码.',
+        });
       },
       addNewUser(){
         //加盐哈希注册，By@Fliskey
@@ -163,6 +173,14 @@
               else
                 alert('注册失败！')
             })
+              .catch(function (error){
+                notification.open({
+                  message: '注册失败！',
+                  description: '该手机号码可能已经被注册，请更换一个！',
+                  icon: <a-icon type="close-circle" style="color:red"/>
+                })
+                console.log(error.response.status)
+              })
           })
         })
       },

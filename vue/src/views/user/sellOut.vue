@@ -4,14 +4,22 @@
       <span slot="imageUrl" slot-scope="text,record">
         <img style="width:140px;height:120px" slot="imageUrl" :slot-scope="text" :src=text />
       </span>
+
       <span slot="operation" slot-scope="text, record,index">
+
+        <a-button margin type="danger" :disabled="record.hasPayed==1">
+            {{record.hasPayed == 1?'已付款':'未付款'}}
+          </a-button>
+          <a-divider type="vertical"></a-divider>
           <a-button type="primary" @click="toDeliverGoods(record)"  :disabled="record.hasShipped==1" style="margin-right: 1px">
             {{record.hasShipped == 1?'已发货':'去发货'}}
           </a-button>
+
           <a-divider type="vertical"></a-divider>
           <a-button margin type="danger" :disabled="record.hasConfirmed==1" @click="showDeleteConfirm(record.id)">
             {{record.hasConfirmed == 1?'已确认收货':'取消订单'}}
           </a-button>
+
           <div class="editable-row-operations">
             <span v-if="record.editable">
               <a @click="() => save(record.key)">Save</a>
@@ -83,14 +91,14 @@
       scopedSlots: { customRender: 'buyerAddress' },
     },
     {
-      title: '已支付',
+      title: '需支付',
       dataIndex: 'actualPayAmount',
       width: '10%',
       align: 'center',
       scopedSlots: { customRender: 'actualPayAmount' },
     },
     {
-      title: '操作',
+      title: '状态',
       dataIndex: 'operation',
       width: '25%',
       align: 'center',

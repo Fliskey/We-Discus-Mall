@@ -46,8 +46,23 @@
           label="商品图片"
           :labelCol="{span: 7}"
           :wrapperCol="{span: 10}">
-          <a-textarea rows="4" placeholder="请输入商品图片url"
-                      block v-model='gmGoods.imageUrl'/>
+          <a-upload
+            name="file"
+            list-type="picture-card"
+            class="avatar-uploader"
+            :show-upload-list="false"
+            action="http://localhost:8181/file/upload"
+            :before-upload="beforeUpload"
+            @change="handleChange"
+          >
+            <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
+            <div v-else>
+              <a-icon :type="loading ? 'loading' : 'plus'" />
+              <div class="ant-upload-text">
+                Upload
+              </div>
+            </div>
+          </a-upload>
         </a-form-item>
         <a-form-item style="margin-top: 24px" :wrapperCol="{span: 10, offset: 7}">
           <a-button type="primary" @click='save' style="margin-left: 30%">立即发布</a-button>
@@ -120,6 +135,7 @@ export default {
   },
   methods: {
     save(){
+      let _this = this
       axios.post('http://localhost:8181/gmGoods/add',this.gmGoods).then(function (response) {
         if(response.data){
           alert('商品信息提交成功！')
@@ -131,6 +147,8 @@ export default {
 
     },
     handleChange(info) {
+      console.log(info.file.response)
+      this.gmGoods.imageUrl = info.file.response
       if (info.file.status === 'uploading') {
         this.loading = true;
         return;
