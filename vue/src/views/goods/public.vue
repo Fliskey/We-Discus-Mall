@@ -83,6 +83,7 @@ export default {
     }
   },
   created () {
+
     this.lists = [
       {
         label: '办公文具',

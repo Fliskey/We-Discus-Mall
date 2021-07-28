@@ -21,4 +21,7 @@ public interface GoodsDao {
 
     @Select("select quantity from gm_goods where id = #{gid}")
     public Integer findQuantityById(Integer id);
+
+    @Select("select name from gm_goods where id = #{gid}")
+    public String findName(Integer id);
 }

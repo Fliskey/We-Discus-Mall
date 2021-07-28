@@ -111,7 +111,8 @@
         columns,
         editingKey: '',
         vid: '',
-        quantityValue: ''
+        quantityValue: '',
+        quantityFlag: 0
       };
     },
     created() {
@@ -195,10 +196,37 @@
           }
         })
       },
-      createOrder() {
+      async createOrder() {
         //勾选的编号存放砸selectedRowKeys中
-        alert("您要购买：" + this.selectedRowKeys)
-        this.$router.push('/visitor/goods/purchase/'+this.selectedRowKeys)
+        //alert("您要购买：" + this.selectedRowKeys)
+        //alert(this.selectedRowKeys[0])
+
+        var i = 0
+        let _this = this
+        this.quantityFlag = 0
+        for(i;i<this.selectedRowKeys.length; i++)
+        {
+          //alert(i)
+          await this.axios.get('http://localhost:8181/gmGoods/findQuantity/' + this.selectedRowKeys[i]).then(async function (response) {
+            if(response.data==0)
+            {
+              // await _this.axios.get('http://localhost:8181/gmGoods/findName/' + this.selectedRowKeys[2]).then(function (res) {
+              //   alert("抱歉")
+              //   alert("抱歉！当前购买商品"+res.data+"库存为0，无法购买！")
+              // })
+              let I = i+1
+              alert("抱歉！第"+I+"个购买商品库存为0，无法购买！")
+              _this.quantityFlag=1
+
+            }
+          })
+        }
+
+        if(this.quantityFlag==0)
+        {
+          await this.$router.push('/visitor/goods/purchase/'+this.selectedRowKeys)
+        }
+
 
 
       },

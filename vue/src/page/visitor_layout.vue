@@ -194,6 +194,8 @@
     }
   }
 
+
+
   .content {
     .detail {
       line-height: 16px;
