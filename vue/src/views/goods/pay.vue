@@ -115,19 +115,28 @@ export default {
     var i = 0
     await this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response) {
       _this.data = response.data
-      for(i;i<response.data.length;i++){
-
-        let res = response
-        let I = i
-        let __this = _this
-        //alert(_this.uid+response.data[i].id)
-        _this.axios.get('http://localhost:8181/purchaseGoods/findQuantity/'+_this.uid+'/'+response.data[i].id).then(function (response) {
-          __this.quantity[I]  =response.data
-          __this.data[I].quantity = response.data
-          __this.price += res.data[I].price*response.data
-          __this.allPrice[I] = res.data[I].price*response.data
-        })
+      //alert(_this.ids.length)
+      if(_this.ids.length==1)
+      {
+        _this.price = response.data[0].price
       }
+      else
+      {
+        for(i;i<response.data.length;i++){
+
+          let res = response
+          let I = i
+          let __this = _this
+          //alert(_this.uid+response.data[i].id)
+          _this.axios.get('http://localhost:8181/purchaseGoods/findQuantity/'+_this.uid+'/'+response.data[i].id).then(function (response) {
+            __this.quantity[I]  =response.data
+            __this.data[I].quantity = response.data
+            __this.price += res.data[I].price*response.data
+            __this.allPrice[I] = res.data[I].price*response.data
+          })
+        }
+      }
+
     })
     this.axios.get('http://localhost:8181/userAddress/getAddress/'+this.aid). then(function (response){
       _this.addressData = response.data
