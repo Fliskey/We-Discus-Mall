@@ -109,6 +109,11 @@ public class GmGoodsController {
         return this.goodsDao.findName(id);
     }
 
+    @GetMapping("/findSelect/{content}")
+    public List<GmGoods> findSelect(@PathVariable("content") String content)
+    {
+        return this.goodsDao.findSelect(content);
+    }
 
 
 }
