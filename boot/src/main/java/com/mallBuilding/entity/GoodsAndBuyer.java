@@ -27,11 +27,15 @@ public class GoodsAndBuyer implements Serializable {
 
     private String name;
 
+    private Integer goodsId;
+
     private String buyerName;
 
     private String buyerPhone;
 
     private String buyerAddress;
+
+    private Integer quantity;
 
     private BigDecimal actualPayAmount;
 

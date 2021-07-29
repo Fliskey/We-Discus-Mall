@@ -97,7 +97,7 @@
           _this.aid= response.data
         })
         //alert(item.goodsId+'/'+this.aid+'/'+item.id)
-        await this.$router.push('/visitor/goods/pay/'+item.goodsId+'/'+this.aid+'/'+item.id)
+        await this.$router.push('/visitor/goods/pay/'+item.id)
       },
 
       priceSort (value) {

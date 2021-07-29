@@ -66,7 +66,7 @@ export default [
         component: ()=> import('@/views/user/order')
       },
       {
-        path: 'goods/pay/:gid/:aid/:oid',
+        path: 'goods/pay/:oid',
         component: ()=> import('@/views/goods/pay')
       },
       {

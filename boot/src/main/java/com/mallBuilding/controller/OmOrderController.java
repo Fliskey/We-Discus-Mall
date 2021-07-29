@@ -1,6 +1,8 @@
 package com.mallBuilding.controller;
 
+import com.mallBuilding.dao.GoodsDao;
 import com.mallBuilding.dao.OmOrderDao;
+import com.mallBuilding.entity.GmGoods;
 import com.mallBuilding.entity.GoodsAndBuyer;
 import com.mallBuilding.entity.OmOrder;
 import com.mallBuilding.entity.UmUser;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
 import java.net.SocketOption;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +36,9 @@ public class OmOrderController {
     @Autowired
     private OmOrderDao omOrderDao;
 
+    @Autowired
+    private GoodsDao goodsDao;
+
     @GetMapping("/list/{id}")
     public List<GoodsAndBuyer> listBySellerId(@PathVariable("id") Integer sellerId)
     {
@@ -40,7 +47,7 @@ public class OmOrderController {
 
     @GetMapping("/order/{id}")
     public OmOrder omOrderById(@PathVariable("id") Integer id)
-    {   
+    {
         return this.omOrderService.getById(id);
     }
 
@@ -76,6 +83,24 @@ public class OmOrderController {
     {
         Integer newId = Integer.valueOf(id);
         return this.omOrderService.removeById(newId);
+    }
+
+    @GetMapping("/findQuantity/{id}")
+    public BigDecimal findQuantity(@PathVariable("id") Integer id)
+    {
+        OmOrder o = this.omOrderService.getById(id);
+        return o.getActualPayAmount();
+    }
+
+    @GetMapping("/findList/{id}")
+    public List<GoodsAndBuyer> findByGoodsId(@PathVariable("id") Integer[] id)
+    {
+        List<GoodsAndBuyer> list = new ArrayList<>();
+        for(int i = 0; i < id.length; i++)
+        {
+            list.add(this.goodsDao.queryGoodsByOrderId(id[i]));
+        }
+        return list;
     }
 }
 
