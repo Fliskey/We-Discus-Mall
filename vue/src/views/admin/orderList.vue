@@ -1,20 +1,11 @@
 <template>
   <div>
-    <div class="table-operations">
-      <a-button @click="clearAll">
-        Clear filters and sorters
-      </a-button>
-    </div>
     <a-table :columns="columns" :data-source="data" @change="handleChange">
-      <span slot="id" slot-scope="text,record,index"></span>
-      <span slot="buyerId" slot-scope="text,record,index"></span>
-      <span slot="sellerId" slot-scope="text,record,index"></span>
-      <span slot="name" slot-scope="text,record,index"></span>
       <span slot="State" slot-scope="State">
       <a-tag
         v-for="st in State"
         :key="st"
-        :color="st.toString() === '已付款' ? 'volcano' : st==='已发货' ? 'geekblue' : 'green'"
+        :color="st.toString() === '未付款' ? 'volcano' : st==='已付款' ? 'geekblue' : 'green'"
       >
         {{st}}
       </a-tag>
@@ -123,6 +114,52 @@
       },
     },
     {
+      title: '买家姓名',
+      dataIndex: 'buyerName',
+      width: '10%',
+      key: 'buyerName',
+      scopedSlots: {
+        filterDropdown: 'filterDropdown',
+        filterIcon: 'filterIcon',
+        customRender: 'customRender',
+      },
+      onFilter: (value, record) =>
+        record.buyerName
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()),
+      onFilterDropdownVisibleChange: visible => {
+        if (visible) {
+          setTimeout(() => {
+            this.searchInput.focus();
+          });
+        }
+      },
+    },
+    {
+      title: '买家电话',
+      dataIndex: 'buyerPhone',
+      width: '10%',
+      key: 'buyerPhone',
+      scopedSlots: {
+        filterDropdown: 'filterDropdown',
+        filterIcon: 'filterIcon',
+        customRender: 'customRender',
+      },
+      onFilter: (value, record) =>
+        record.buyerPhone
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()),
+      onFilterDropdownVisibleChange: visible => {
+        if (visible) {
+          setTimeout(() => {
+            this.searchInput.focus();
+          });
+        }
+      },
+    },
+    {
       title: '卖家ID',
       dataIndex: 'sellerId',
       width: '10%',
@@ -171,7 +208,7 @@
     {
       title: '状态',
       dataIndex: 'State',
-      width: '40%',
+      width: '20%',
       key: 'State',
       filters: [
         {
@@ -183,8 +220,8 @@
           value: '已发货',
         },
         {
-          text: '已收货',
-          value: '已收货'
+          text: '未付款',
+          value: '未付款'
         }
       ],
       filterMultiple: false,
@@ -233,7 +270,8 @@
     methods: {
       handleSearch(selectedKeys, confirm, dataIndex) {
         confirm();
-        this.searchText = selectedKeys[0];
+        console.log(selectedKeys)
+        this.searchText = selectedKeys[100];
         this.searchedColumn = dataIndex;
       },
       handleReset(clearFilters) {
@@ -243,7 +281,6 @@
       handleChange(pagination, filters, sorter) {
         console.log('Various parameters', pagination, filters, sorter);
         this.filteredInfo = filters;
-        this.sortedInfo = sorter;
       },
       clearAll() {
         this.filteredInfo = null;
