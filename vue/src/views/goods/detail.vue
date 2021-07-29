@@ -139,6 +139,11 @@
     },
     methods: {
       insertTrolley (){
+        if(this.gooditem.quantity==0)
+        {
+          alert("当前商品已缺货！无法加入购物车！")
+          return
+        }
         var myTrolley = {
           id: 0,
           userId: this.pageUserId,
@@ -154,6 +159,11 @@
         this.id = this.$route.params.id
       },
       insertToLike (){
+        if(this.gooditem.quantity==0)
+        {
+          alert("当前商品已缺货！无法预定!")
+          return
+        }
         console.log('当前浏览者的id是  '+this.pageUserId)
         console.log('该商品发布者的id是  '+this.gooditem.userId)
         if (this.pageUserId===this.gooditem.userId){
@@ -174,7 +184,21 @@
       },
       buyNow (gid)
       {
+        if(this.gooditem.quantity==0)
+        {
+          alert("当前商品已缺货！无法购买！")
+          return
+        }
         this.$router.push('/visitor/goods/purchase/'+gid)
+
+      },
+      outOfStock()
+      {
+        if(this.gooditem.quantity==0)
+        {
+          alert("当前商品已缺货！")
+          return
+        }
       }
     },
 

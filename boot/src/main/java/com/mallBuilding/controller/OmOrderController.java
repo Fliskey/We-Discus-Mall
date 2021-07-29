@@ -40,7 +40,7 @@ public class OmOrderController {
 
     @GetMapping("/order/{id}")
     public OmOrder omOrderById(@PathVariable("id") Integer id)
-    {
+    {   
         return this.omOrderService.getById(id);
     }
 

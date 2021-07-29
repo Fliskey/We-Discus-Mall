@@ -385,7 +385,8 @@
             _this.orderId = response.data
           })
         }
-        await alert("创建订单成功！")
+
+        //await alert("创建订单成功！订单号为："+this.orderId)
         //await alert("正在转向结算页面...")
         let oid = this.orderId
 

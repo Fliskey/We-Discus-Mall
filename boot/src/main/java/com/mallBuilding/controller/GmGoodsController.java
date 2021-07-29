@@ -102,6 +102,13 @@ public class GmGoodsController {
         return this.goodsDao.findQuantityById(id);
     }
 
+    @GetMapping("/findName/{id}")
+    public String findName(@PathVariable("id") Integer id)
+    {
+
+        return this.goodsDao.findName(id);
+    }
+
 
 
 }

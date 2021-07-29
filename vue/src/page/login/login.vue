@@ -65,7 +65,7 @@
     },
     mounted() {
       if(this.$cookies.isKey('vid') === true)
-        this.$router.push('/visitor/center/info')
+        this.$router.push('/visitor/goods/list')
       if(this.$cookies.isKey('aid') === true)
         this.$router.push('/admin/list')
     },
@@ -115,7 +115,7 @@
                   alert('登录成功！')
                   _this.$cookies.set('vid',_this.umUser.id)
                   _this.$router.push({
-                    path: '/visitor/center/info'
+                    path: '/visitor/goods/list'
                   })
                 }
               })
