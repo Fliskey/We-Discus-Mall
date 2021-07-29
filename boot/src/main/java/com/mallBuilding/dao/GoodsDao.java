@@ -24,4 +24,7 @@ public interface GoodsDao {
 
     @Select("select name from gm_goods where id = #{gid}")
     public String findName(Integer id);
+
+    @Select("select * from web_mall_sky.gm_goods where name LIKE CONCAT('%',#{content},'%') or description LIKE CONCAT('%',#{content},'%')")
+    List<GmGoods> findSelect(String content);
 }

@@ -3,7 +3,7 @@
     <!-- <search-form /> -->
     <a-card :bordered="false">
       <a-row type='flex' align='middle' justify='space-between'>
-        <a-input-search class="search-ipt" style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
+        <a-input-search  @search="onSearch" class="search-ipt" style="width: 522px" placeholder="请输入查找内容..." size="large" enterButton="搜索" />
         <a-select
           v-model="selected"
           placeholder='所有类别'
@@ -255,6 +255,15 @@
           this.pagination.pageSize =res.data.size
           this.pagination.total = res.data.total
           // this.num = res.data.records.length
+        })
+      },
+      onSearch(value){
+        console.log(value);
+        this.loading = true
+        this.http.get(`http://localhost:8181/gmGoods/findSelect/`+value).then(res => {
+          console.log(res)
+          this.loading = false
+          this.data = res.data
         })
       }
     }
