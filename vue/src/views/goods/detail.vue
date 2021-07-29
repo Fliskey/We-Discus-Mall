@@ -38,9 +38,6 @@
               <a-descriptions-item label="创建人">
                 {{ this.userName }}
               </a-descriptions-item>
-              <a-descriptions-item label="创建时间">
-                <!--                <a>421421</a>-->
-              </a-descriptions-item>
               <a-descriptions-item label="商品标题">
                 {{ gooditem.name }}
               </a-descriptions-item>

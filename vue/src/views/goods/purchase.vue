@@ -195,6 +195,7 @@
   const allPrice = [];
   const quantity = [];
   const trueQuantity = [];
+  const orderId = [];
   export default {
     data() {
       return {
@@ -220,7 +221,8 @@
           '/'+new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds(),
         price: 0,
         allPrice,
-        orderId: '',
+        orderId,
+        oneOrder: ''
 
       };
     },
@@ -382,8 +384,14 @@
             return
 
           await this.axios.post('http://localhost:8181/omOrder/add',myOrder).then(function (response){
-            _this.orderId = response.data
+            _this.oneOrder = response.data
+            _this.orderId[_this.ids.length-1] = response.data
           })
+          var j = this.ids.length-2
+          for(j;j>=0;j--)
+          {
+            this.orderId[j] = this.orderId[this.ids.length-1]-this.ids.length+j+1
+          }
         }
 
         //await alert("创建订单成功！订单号为："+this.orderId)
@@ -391,7 +399,15 @@
         let oid = this.orderId
 
         await this.reduceStock()
-        await this.$router.push('/visitor/goods/pay/'+gid+'/'+aid+'/'+oid)
+        if(this.ids.length==1)
+        {
+          await this.$router.push('/visitor/goods/pay/'+oid[this.ids.length-1])
+        }
+        else
+        {
+          await this.$router.push('/visitor/goods/pay/'+oid)
+        }
+
 
 
       },

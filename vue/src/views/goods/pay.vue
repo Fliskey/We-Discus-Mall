@@ -46,9 +46,9 @@
 
           <a-card title="收货人信息" style="width: 100%; height: 100%">
             <div>
-              <p>收货人姓名：{{this.addressData.consigneeName}}</p>
-              <p>收货人电话：{{this.addressData.consigneeTel}}</p>
-              <p>收货人地址：{{this.addressData.consigneeAddress}}</p>
+              <p>收货人姓名：{{this.data[0].buyerName}}</p>
+              <p>收货人电话：{{this.data[0].buyerPhone}}</p>
+              <p>收货人地址：{{this.data[0].buyerAddress}}</p>
             </div>
           </a-card>
           <a-table :columns="columns" :data-source="data" :align="center">
@@ -107,41 +107,22 @@ export default {
       this.$router.push('login')
     let id = this.$cookies.get('vid')
     this.uid = id
-    this.gid = this.$route.params.gid
-    this.aid = this.$route.params.aid
     this.oid = this.$route.params.oid
-    this.ids = this.gid.split(',')
+    this.ids = this.oid.split(',')
+    //alert(this.ids)
     let _this = this
-    var i = 0
-    await this.axios.get('http://localhost:8181/gmGoods/findList/'+this.ids). then(function (response) {
+
+    await this.axios.get('http://localhost:8181/omOrder/findList/'+this.ids). then(function (response) {
       _this.data = response.data
-      //alert(_this.ids.length)
-      if(_this.ids.length==1)
+      var i = 0
+      for(i;i<_this.ids.length; i++)
       {
-        _this.price = response.data[0].price
+        _this.price+=_this.data[i].actualPayAmount
       }
-      else
-      {
-        for(i;i<response.data.length;i++){
-
-          let res = response
-          let I = i
-          let __this = _this
-          //alert(_this.uid+response.data[i].id)
-          _this.axios.get('http://localhost:8181/purchaseGoods/findQuantity/'+_this.uid+'/'+response.data[i].id).then(function (response) {
-            __this.quantity[I]  =response.data
-            __this.data[I].quantity = response.data
-            __this.price += res.data[I].price*response.data
-            __this.allPrice[I] = res.data[I].price*response.data
-          })
-        }
-      }
-
     })
-    this.axios.get('http://localhost:8181/userAddress/getAddress/'+this.aid). then(function (response){
-      _this.addressData = response.data
 
-    })
+
+
 
   },
   methods: {
@@ -149,13 +130,18 @@ export default {
     {
       this.visible = true;
     },
-    handleOk1(e) {
+    async handleOk1(e) {
       console.log(e);
       let _this = this
-      this.axios.put('http://localhost:8181/omOrder/updatePay/'+this.oid).then(function (response) {
-        alert("支付成功！")
-        _this.$router.push('/visitor/goods/list')
-      })
+      var i = 0
+      for(i; i < this.ids.length; i++)
+      {
+        await this.axios.put('http://localhost:8181/omOrder/updatePay/'+this.ids[i]).then(function (response) {
+          //alert(_this.ids[i])
+        })
+      }
+      alert("支付成功！")
+      this.$router.push('/visitor/goods/list')
       this.visible = false;
     },
     cancelPay()
@@ -169,7 +155,7 @@ export default {
       var j = 0
       for(j;j<this.ids.length;j++)
       {
-        var k = this.oid-j
+        var k = this.ids[this.ids.length-1]-j
         await this.axios.delete('http://localhost:8181/omOrder/delete/'+k).then(function (response) {
 
         })
@@ -181,7 +167,7 @@ export default {
       {
         let _this = this
         let I = i
-        await this.axios.get('http://localhost:8181/gmGoods/find/'+this.ids[i]).then(async function (response){
+        await this.axios.get('http://localhost:8181/gmGoods/find/'+this.data[i].goodsId).then(async function (response){
           //alert(response.data.quantity)
           response.data.quantity+=_this.quantity[I]
           let __this = _this
@@ -217,13 +203,6 @@ const columns = [
     scopedSlots: { customRender: 'name' },
   },
   {
-    title: '类型',
-    dataIndex: 'type',
-    width: '15%',
-    align: 'center',
-    scopedSlots: { customRender: 'type' },
-  },
-  {
     title: '数量',
     dataIndex: 'quantity',
     width: '15%',
@@ -232,8 +211,8 @@ const columns = [
     scopedSlots: { customRender: 'quantity' },
   },
   {
-    title: '单价',
-    dataIndex: 'price',
+    title: '总价',
+    dataIndex: 'actualPayAmount',
     width: '10%',
     align: 'center',
     scopedSlots: { customRender: 'price' },
